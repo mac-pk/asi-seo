@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { SeoService } from '../seo.service';
 import { ISearchProduct } from '../shared/models/SearchProduct/ISearchProduct';
 import { PagerService } from '../shared/services/pager.service';
-import { MatTableDataSource, MatDialog, MatPaginator } from '@angular/material';
 import { MyOrderByPipe } from '../shared/sort/sort.pipe';
 
 @Component({
@@ -14,8 +13,6 @@ export class SearchProductComponent implements OnInit {
 
   objmodel: ISearchProduct[] = [];
   displayedColumns = ['ID', 'PrimaryImageUrl', 'Name', 'PublishDate', 'Summary'];
-  dataSource: MatTableDataSource<ISearchProduct>;
-  @ViewChild(MatPaginator, null) paginator: MatPaginator;
 
   // pager object
   pager: any = {};
