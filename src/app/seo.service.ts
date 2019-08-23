@@ -43,6 +43,20 @@ export class SeoService {
     console.log(`SeoService: ${message}`);
   }
 
+  getGeoLocationWithExternal() {
+
+    const _configUrl = '../assets/json/searchproduct.json';
+    // this._httpClient.get(_configUrl)
+    //   .subscribe(data => {
+    //     this.appConfig = data;
+    //   });
+  
+    return this.http.get(_configUrl)
+      .pipe(map((response: Response) => {
+        return <any>response;
+      }));
+  }
+
   loginSeo (seo: SeoLogin): Observable<SeoLoginResponse> {
     return this.http.post(this.seoUrl, seo, this.httpOptions).pipe(
       tap((seo: SeoLogin) => this.log(`Login with username=${seo.Username}`)),

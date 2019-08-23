@@ -1,0 +1,224 @@
+<div class="row esp-sub-header pt-2">
+    <div class="col">
+        <figure>
+            <img src="assets/images/image.png">
+        </figure>
+    </div>
+    <div class="col text-right">
+
+        <button type="submit" class="btn btn-blue my-1 mr-2">
+            <i class="material-icons">
+                edit
+            </i>Bulk Edit</button>
+        <button class="btn btn-blue my-1 mr-2">
+            <i class="material-icons">
+                filter_list
+            </i>Sort By</button>
+        <select [(ngModel)]="customorder">
+            <!-- [(ngModel)]="drpSort" (change)="changeSort($event)" -->
+            <option value="UpdateDate">Last Updated</option>
+            <option value="Name">Product Name</option>
+            <option value="XID">Product Number</option>
+            <option value="StatusCode">Catalog</option>
+        </select>
+        <button type="submit" class="btn btn-blue my-1 pl-3">
+            <i class="material-icons">
+                email
+            </i>Email Supplier</button>
+
+    </div>
+    <div class="col pagination-cont">
+        <nav class="float-right mt-2 esp-pagination">
+            <ul class="pagination">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Page:</a>
+                </li>
+                <li class="page-item">
+                    <input type="number" value={{currPage}} (input)="onPagerChange($event.target.value)" class="form-control pagnation-input">
+                </li>
+
+                <li class="page-item disabled" style="width:90px;">
+                    <a class="page-link" href="#">Of {{totalPages}}</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" (click)="setPage(pager.currentPage - 1)">
+                        <i class="material-icons">
+                            keyboard_arrow_left
+                        </i>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" (click)="setPage(pager.currentPage + 1)">
+                        <i class="material-icons">
+                            keyboard_arrow_right
+                        </i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+</div>
+<div class="row h-100">
+    <div class="col side-nav-toolbar pt-2 ">
+        <a href="#" class="manage-product">
+            <i class="material-icons">
+                card_giftcard
+            </i>Manage Products</a>
+        <div class="clearfix"></div>
+
+        <div class="input-group  pt-2">
+            <input type="text" class="form-control" placeholder="Search Product" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-search pt-2" type="button">
+                    <i class="material-icons">
+                        search
+                    </i>
+                </button>
+            </div>
+        </div>
+        <div class="custom-control custom-checkbox my-1 mr-sm-2">
+            <input type="checkbox" class="custom-control-input" id="customControlInline3">
+            <label class="custom-control-label label-light" for="customControlInline">Exat match</label>
+        </div>
+        <div class="row">
+            <ul class="side-nav-list mt-2">
+                <li>
+                    <a href="#">Product Type</a>
+                </li>
+                <li>
+                    <a href="#">Seo Status</a>
+                </li>
+                <li>
+                    <a href="#">SEO Flag</a>
+                </li>
+                <li>
+                    <a href="#">Category</a>
+                    <ul class="side-sub-nav-list">
+                        <li>
+                            <a href="#">Mugs &nbsp; Steins (10)</a>
+                        </li>
+                        <li>
+                            <a href="#">Pens (4)</a>
+                        </li>
+                        <li>
+                            <a href="#">Glasses-Drinking (4)</a>
+                        </li>
+                        <li>
+                            <a href="#">Caps &nbsp; Hats (2)</a>
+                        </li>
+                        <li>
+                            <a href="#">Cheering Accessories (2)</a>
+                        </li>
+                        <li>
+                            <a href="#" class="see-all">See all
+                                <i class="material-icons">
+                                    add_circle
+                                </i>
+                            </a>
+                        </li>
+
+                    </ul>
+
+
+                </li>
+                <li>
+                    <a href="#">Product Color</a>
+                </li>
+                <li>
+                    <a href="#">Size</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <div class="col">
+        <div class="action-tool-bar px-2">
+            <div class="row">
+                <div class="col-8">
+                    <div class="custom-control custom-checkbox my-1 mr-sm-2">
+                        <input type="checkbox" [checked]=AllControls name="allcontrols" id="allcontrols" (change)="onFilterChange($event)" />
+                        <!-- <input type="checkbox" class="custom-control-input" id="customControlInline4"> -->
+                        <label class="custom-control-label label-black" for="customControlInline">Select All</label>
+                    </div>
+                </div>
+                <div class="col-2 pl-2">
+                    <label>SEO Status</label>
+                </div>
+                <div class="col-2">
+                    <label>Actions</label>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-12 result-box mt-2" *ngFor="let product of pagedItems | orderBy : customorder : reverse">
+            <div class="row">
+                <div class="col-8 pl-2 d-flex pt-3">
+                    <div class="select-all-box p-0">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" [(ngModel)]=product.CanBlkPblsh name="{{'chk_'+product.ID}}" id="{{'chk_'+product.ID}}" (change)="onSingleChange(product.CanBlkPblsh,product.ID)"
+                            />
+
+                        </div>
+                    </div>
+                    <div class="result-img">
+                        <img style="width:114px;height:126px;" src="{{product.PrimaryImageUrl}}">
+                    </div>
+                    <div class="result-content pl-2 ">
+                        <h6>{{product.Name}}</h6>
+                        <p>
+                            <span class="label-black">External Product ID:</span>{{product.XID}}</p>
+                        <p>
+                            <span class="label-black">Created on :</span> {{product.CreateDate | date}}</p>
+                        <p>
+                            <span class="label-black">Made active:</span> {{product.PublishDate | date}}</p>
+                        <p>
+                            <span class="label-black">Last updated by:</span> {{product.LastUpdatedBy}} on {{product.UpdateDate | date}}</p>
+
+                    </div>
+
+                </div>
+                <div class="col-2 d-flex align-content-center flex-wrap">
+                    <label>{{product.StatusCode}}</label>
+                </div>
+                <div class="col-2 d-flex align-content-center flex-wrap">
+                    <button type="submit" class="btn esp-btn-white my-1 mr-2">Start SEO</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-12">
+            <nav class="float-right mt-2 esp-pagination">
+                <ul class="pagination">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Page:</a>
+                    </li>
+                    <li class="page-item">
+                        <input type="number" value={{currPage}} (input)="onPagerChange($event.target.value)" class="form-control pagnation-input">
+                    </li>
+
+                    <li class="page-item disabled" style="width:90px;">
+                        <a class="page-link" href="#">Of {{totalPages}}</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" (click)="setPage(pager.currentPage - 1)">
+                            <i class="material-icons">
+                                keyboard_arrow_left
+                            </i>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" (click)="setPage(pager.currentPage + 1)">
+                            <i class="material-icons">
+                                keyboard_arrow_right
+                            </i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+    </div>
+</div>
