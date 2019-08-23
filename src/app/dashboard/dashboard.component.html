@@ -2,115 +2,138 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
+    <!-- Required meta tags
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="/dashboard.component.css">
     <!--Font-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
 
     <title>ESP Login</title>
 </head>
 
 <body>
-    <section class="container-fluid h-100">
-        <div class="row h-100">
-            <div class="col-12 col-lg-3 col-sm-12 login-cont border-right">
-                <div class="d-block text-center pb-5 mt-3">
-                    <img src="assets/image.png">
+    <form (ngSubmit)="loginAsiSeo()" #seoForm="ngForm">
+        <section class="container-fluid h-100">
+            <div class="row h-100">
+                <div class="col-12 col-lg-3 col-sm-12 login-cont border-right">
+                    <div class="d-block text-center pb-5 mt-3">
+                        <img src="assets/image.png">
+                    </div>
+                    <div
+                        *ngIf="error && error == 'Your login credentials are invalid. Please review the information and try again.'">
+                        <span class="error text-danger" id="loginMsg">
+                            <i class="fa fa-exclamation-circle"></i>&nbsp;<strong>
+                                Your login credentials are invalid.</strong> Please review the information and try
+                            again. If you need further assistance, visit our <a
+                                href="https://www.asicentral.com/asp/open/CustomerSupport/support.aspx?menu=top&amp;id=2379"
+                                target="_blank">Knowledge Base</a>.
+                        </span>
+                    </div>
+                    <div *ngIf="asiNumber.invalid && (asiNumber.dirty || asiNumber.touched)" class="error text-danger">
+                        <div *ngIf="asiNumber.errors.required">
+                            <i class="material-icons">info</i>
+                            ASI Number is required.
+                        </div>
+                    </div>
+                    <div *ngIf="username.invalid && (username.dirty || username.touched)" class="error text-danger">
+                        <div *ngIf="username.errors.required">
+                            <i class="material-icons">info</i>
+                            Username is required.
+                        </div>
+                    </div>
+                    <div *ngIf="password.invalid && (password.dirty || password.touched)" class="error text-danger">
+                        <div *ngIf="password.errors.required">
+                            <i class="material-icons">info</i>
+                            Password is required.
+                        </div>
+                    </div>
+                    <div class="col-12 p-0 p-sm-0 p-lg-3">
+                        <div class="form-group">
+                            <label>ASI Number</label>
+                            <input [(ngModel)]="loginSeo.Asi" #asiNumber="ngModel" required type="text"
+                                class="form-control" placeholder="ASI/" name="asiNumber">
+                        </div>
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input [(ngModel)]="loginSeo.Username" #username="ngModel" required type="text"
+                                class="form-control" placeholder="Username" name="username">
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input [(ngModel)]="loginSeo.Password" #password="ngModel" required type="password"
+                                class="form-control" name="password">
+                        </div>
+                        <div class="custom-control custom-checkbox my-1 mr-sm-2">
+                            <input type="checkbox" class="custom-control-input" id="customControlInline">
+                            <label class="custom-control-label label-light" for="customControlInline">Remember my
+                                preference</label>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-blue my-1" [disabled]="!seoForm.form.valid">Login</button>
+                        </div>
+                        <a href="" class="esp-link">Need a license?</a> <a class="esp-link">|</a><a href=""
+                            class="esp-link"> Trouble logging in?</a>
+                        <label class="label-light">Product Support (800) 546-1350</label>
+                    </div>
                 </div>
-                <div *ngIf="asiNumber.invalid && (asiNumber.dirty || asiNumber.touched)"
-                class="alert alert-danger">
-                  <div *ngIf="asiNumber.errors.required">
-                        <i class="fa fa-exclamation-circle"></i>
-                    ASI Number is required.
-                  </div>
+                <div class="col-12 col-sm-12 col-lg-6 bg-gray border-right">
+                    <h5 class="pb-2  pt-lg-5 pt-sm-1 pt-1 mt-lg-5 mt-1 mt-sm-1">Messages</h5>
+                    <div class="row border-bottom pb-3">
+                        <div class="col-12">
+
+                            <label class="date">12/12/2014</label>
+                            <p>Display your updates in 'Real-time' using ESP Updates. </p>
+                            <a href="">Learn more</a>
+                        </div>
+
+                    </div>
+                    <div class="row border-bottom pb-3">
+                        <div class="col-12">
+
+                            <label class="date">12/12/2014</label>
+                            <p>Display your updates in 'Real-time' using ESP Updates. </p>
+                            <a href="">Learn more</a>
+                        </div>
+
+                    </div>
+                    <div class="row border-bottom pb-3">
+                        <div class="col-12">
+
+                            <label class="date">12/12/2014</label>
+                            <p>Display your updates in 'Real-time' using ESP Updates. </p>
+                            <a href="">Learn more</a>
+                        </div>
+                    </div>
                 </div>
-                <div *ngIf="username.invalid && (username.dirty || username.touched)"
-                class="alert alert-danger">
-                  <div *ngIf="username.errors.required">
-                    <i class="fa fa-exclamation-circle"></i>
-                    Username is required.
-                  </div>
-                </div>   
-                <div *ngIf="password.invalid && (password.dirty || password.touched)"
-                class="alert alert-danger">
-                  <div *ngIf="password.errors.required">
-                    <i class="fa fa-exclamation-circle"></i>
-                    Password is required.
-                  </div>
-                </div>                               
-                <div class="col-12 p-0 p-sm-0 p-lg-3">
-                    <div class="form-group">
-                        <label>ASI Number</label>
-                        <input [(ngModel)]="loginSeo.Asi" #asiNumber="ngModel" required type="text" class="form-control" placeholder="ASI/">
-                    </div>
-                    <div class="form-group">
-                        <label>Username</label>
-                        <input [(ngModel)]="loginSeo.Username" #username="ngModel" required type="text" class="form-control" placeholder="Username">
-                    </div>
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input [(ngModel)]="loginSeo.Password" #password="ngModel" required type="password" class="form-control">
-                    </div>
-                    <div class="custom-control custom-checkbox my-1 mr-sm-2">
-                        <input type="checkbox" class="custom-control-input" id="customControlInline">
-                        <label class="custom-control-label label-light" for="customControlInline">Remember my preference</label>
-                    </div>
-                    <div class="form-group">
-                        <button (click)="loginAsiSeo()" type="submit" class="btn btn-blue my-1">Login</button>
-                    </div>
-                    <a href="" class="esp-link">Need a license?</a> <a class="esp-link">|</a><a href="" class="esp-link"> Trouble logging in?</a>
-                    <label class="label-light">Product Support (800) 546-1350</label>
+                <div class="col-12 col-lg-3 col-sm-12 bg-gray">
+                    <h5 class="pb-2  pt-lg-5 pt-sm-1 pt-1 mt-lg-5 mt-1 mt-sm-1">Popular Support Articles</h5>
                 </div>
             </div>
-            <div class="col-12 col-sm-12 col-lg-6 bg-gray border-right">
-                <h5 class="pb-2  pt-lg-5 pt-sm-1 pt-1 mt-lg-5 mt-1 mt-sm-1">Messages</h5>
-                <div class="row border-bottom pb-3">
-                    <div class="col-12">
+        </section>
+        <section class="esp-footer text-center pt-2">
+            <img src="assets/asiLogo-login.png" class="float-lg-left float-sm-left float-none ml-2">
+            <span> © 2019, The Advertising Specialty Institute®. All Rights Reserved.</span>
 
-                        <label class="date">12/12/2014</label>
-                        <p>Display your updates in 'Real-time' using ESP Updates. </p>
-                        <a href="">Learn more</a>
-                    </div>
-
-                </div>
-                  <div class="row border-bottom pb-3">
-                    <div class="col-12">
-
-                        <label class="date">12/12/2014</label>
-                        <p>Display your updates in 'Real-time' using ESP Updates. </p>
-                        <a href="">Learn more</a>
-                    </div>
-
-                </div>
-                  <div class="row border-bottom pb-3">
-                    <div class="col-12">
-
-                        <label class="date">12/12/2014</label>
-                        <p>Display your updates in 'Real-time' using ESP Updates. </p>
-                        <a href="">Learn more</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-lg-3 col-sm-12 bg-gray">
-            <h5 class="pb-2  pt-lg-5 pt-sm-1 pt-1 mt-lg-5 mt-1 mt-sm-1">Popular Support Articles</h5>
-            </div>
-        </div>
-    </section>
-    <section class="esp-footer text-center pt-2">
-        <img src="assets/asiLogo-login.png" class="float-lg-left float-sm-left float-none ml-2">
-        <span>  © 2019, The Advertising Specialty Institute®. All Rights Reserved.</span>
-    
-    </section>
+        </section>
+    </form>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

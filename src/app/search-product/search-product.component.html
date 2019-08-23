@@ -34,7 +34,8 @@
                     <a class="page-link" href="#" tabindex="-1">Page:</a>
                 </li>
                 <li class="page-item">
-                    <input type="number" value={{currPage}} (input)="onPagerChange($event.target.value)" class="form-control pagnation-input">
+                    <input type="number" value={{currPage}} (input)="onPagerChange($event.target.value)"
+                        class="form-control pagnation-input">
                 </li>
 
                 <li class="page-item disabled" style="width:90px;">
@@ -68,7 +69,8 @@
         <div class="clearfix"></div>
 
         <div class="input-group  pt-2">
-            <input type="text" class="form-control" placeholder="Search Product" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <input type="text" class="form-control" placeholder="Search Product" aria-label="Recipient's username"
+                aria-describedby="basic-addon2">
             <div class="input-group-append">
                 <button class="btn btn-search pt-2" type="button">
                     <i class="material-icons">
@@ -137,7 +139,8 @@
             <div class="row">
                 <div class="col-8">
                     <div class="custom-control custom-checkbox my-1 mr-sm-2">
-                        <input type="checkbox" [checked]=AllControls name="allcontrols" id="allcontrols" (change)="onFilterChange($event)" />
+                        <input type="checkbox" [checked]=AllControls name="allcontrols" id="allcontrols"
+                            (change)="onFilterChange($event)" />
                         <!-- <input type="checkbox" class="custom-control-input" id="customControlInline4"> -->
                         <label class="custom-control-label label-black" for="customControlInline">Select All</label>
                     </div>
@@ -157,8 +160,8 @@
                 <div class="col-8 pl-2 d-flex pt-3">
                     <div class="select-all-box p-0">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" [(ngModel)]=product.CanBlkPblsh name="{{'chk_'+product.ID}}" id="{{'chk_'+product.ID}}" (change)="onSingleChange(product.CanBlkPblsh,product.ID)"
-                            />
+                            <input type="checkbox" [(ngModel)]=product.CanBlkPblsh name="{{'chk_'+product.ID}}"
+                                id="{{'chk_'+product.ID}}" (change)="onSingleChange(product.CanBlkPblsh,product.ID)" />
 
                         </div>
                     </div>
@@ -174,7 +177,8 @@
                         <p>
                             <span class="label-black">Made active:</span> {{product.PublishDate | date}}</p>
                         <p>
-                            <span class="label-black">Last updated by:</span> {{product.LastUpdatedBy}} on {{product.UpdateDate | date}}</p>
+                            <span class="label-black">Last updated by:</span> {{product.LastUpdatedBy}} on
+                            {{product.UpdateDate | date}}</p>
 
                     </div>
 
@@ -196,7 +200,8 @@
                         <a class="page-link" href="#" tabindex="-1">Page:</a>
                     </li>
                     <li class="page-item">
-                        <input type="number" value={{currPage}} (input)="onPagerChange($event.target.value)" class="form-control pagnation-input">
+                        <input type="number" value={{currPage}} (input)="onPagerChange($event.target.value)"
+                            class="form-control pagnation-input">
                     </li>
 
                     <li class="page-item disabled" style="width:90px;">

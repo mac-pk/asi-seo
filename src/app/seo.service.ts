@@ -4,7 +4,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { SeoLogin, SeoLoginResponse } from './seo';
+import { ISeoLogin, ISeoLoginResponse } from './shared/models/login/ILogin';
+import { ISupplier } from './shared/models/searchSuppliers/ISearchSuppliers';
+import { SUPPLIERS } from './mock-seo';// remove later with api
 
 @Injectable({ providedIn: 'root' })
 export class SeoService {
@@ -13,6 +15,10 @@ export class SeoService {
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
+  httpOptionsNoAuth = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth':'True' })
   };
 
   constructor(
@@ -57,10 +63,14 @@ export class SeoService {
       }));
   }
 
-  loginSeo (seo: SeoLogin): Observable<SeoLoginResponse> {
+  loginSeo (seo: ISeoLogin): Observable<ISeoLoginResponse> {
     return this.http.post(this.seoUrl, seo, this.httpOptions).pipe(
-      tap((seo: SeoLogin) => this.log(`Login with username=${seo.Username}`)),
+      tap((seo: ISeoLogin) => this.log(`Login with username=${seo.Username}`)),
       catchError(this.handleError<any>('loginSeo'))
     );
+  }  
+
+  getSuppliers(): Observable<ISupplier[]> {
+    return of(SUPPLIERS);
   }  
 }

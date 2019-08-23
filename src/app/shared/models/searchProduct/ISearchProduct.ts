@@ -1,4 +1,3 @@
-
 export interface ISearchProduct{
     id: number;
     companyId: number;

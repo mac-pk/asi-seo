@@ -1,15 +1,4 @@
-export class SeoLogin{
-    Asi: string;
-    Username: string;
-    Password: string;
-}
-
-export class SeoLoginResponse{
-    AccessToken: string;
-    TokenExpirationTime: string;
-}
-
-export class Supplier{
+export interface ISupplier{
     CompanyId: number;
     AsiNumber: string;
     CompanyName : string;
