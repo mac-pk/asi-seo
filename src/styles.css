@@ -127,6 +127,10 @@ p{
   top: 5px;
   font-size: 22px;
 }
+.esp-header .logout-but{
+	background:none;
+	border:none;
+}
 .esp-pagination a{
    border:0px;
 }
