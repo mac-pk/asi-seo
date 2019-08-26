@@ -11,7 +11,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SearchSupplierComponent } from './search-supplier/search-supplier.component';
 import { SearchProductComponent } from './search-product/search-product.component';
 import { SeoService } from './seo.service';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth.interceptor';
@@ -28,8 +28,8 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
-
+    HttpClientModule,
+    NgbModule
   ],
   providers: [
     MyOrderByPipe,

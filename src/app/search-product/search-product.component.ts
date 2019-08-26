@@ -3,6 +3,7 @@ import { SeoService } from '../seo.service';
 import { ISearchProduct } from '../shared/models/SearchProduct/ISearchProduct';
 import { PagerService } from '../shared/services/pager.service';
 import { MyOrderByPipe } from '../shared/sort/sort.pipe';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-search-product',
@@ -12,7 +13,7 @@ import { MyOrderByPipe } from '../shared/sort/sort.pipe';
 export class SearchProductComponent implements OnInit {
 
   objmodel: ISearchProduct[] = [];
-  displayedColumns = ['ID', 'PrimaryImageUrl', 'Name', 'PublishDate', 'Summary'];
+  //displayedColumns = ['ID', 'PrimaryImageUrl', 'Name', 'PublishDate', 'Summary'];
 
   // pager object
   pager: any = {};
@@ -28,7 +29,8 @@ export class SearchProductComponent implements OnInit {
     private _SeoService: SeoService,
     private _Pager: PagerService,
     private orderPipe: MyOrderByPipe,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private modalService: NgbModal
 
   ) { }
 
@@ -46,7 +48,6 @@ export class SearchProductComponent implements OnInit {
   }
 
   setPage(page: number) {
-
     // get pager object from service
     this.pager = this._Pager.getPager(this.objmodel.length, page);
     this.totalPages = this.pager.totalPages;
@@ -54,12 +55,12 @@ export class SearchProductComponent implements OnInit {
 
     // get current page of items
     this.pagedItems = this.objmodel.slice(this.pager.startIndex, this.pager.endIndex + 1);
+    
     this.onSingleChange(true, 0);
   }
 
-  onPagerChange(pageValue: number) {
-
-    this.setPage(pageValue);
+  onPagerChange(pageValue: string) {
+    this.setPage(parseInt(pageValue));
   }
   onFilterChange(values: any) {
 
@@ -99,6 +100,10 @@ export class SearchProductComponent implements OnInit {
       }
       this.changeDetectorRef.markForCheck();
     }
+  }
+
+  openLg(content) {
+    this.modalService.open(content, { size: 'lg' });
   }
 
 }

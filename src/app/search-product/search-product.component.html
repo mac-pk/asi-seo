@@ -183,15 +183,28 @@
 
                 </div>
                 <div class="col-2 d-flex align-content-center flex-wrap">
-                    <label>{{product.StatusCode}}</label>
+                    <label>{{product.StatusCode === 'ACTV' ? 'Active' : 'Inactive'}}</label>
                 </div>
                 <div class="col-2 d-flex align-content-center flex-wrap">
-                    <button type="submit" class="btn esp-btn-white my-1 mr-2 p-1">Start SEO</button>
+                    <button type="submit" (click)="openLg(content)" class="btn esp-btn-white my-1 mr-2 p-1">Start SEO</button>
                 </div>
             </div>
 
         </div>
-
+        <ng-template #content let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title">Set Product Status</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>One fine body&hellip;</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+            </div>
+          </ng-template>
         <div class="col-12">
             <nav class="float-right mt-2 esp-pagination">
                 <ul class="pagination">
