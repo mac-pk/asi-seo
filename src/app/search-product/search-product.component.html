@@ -10,11 +10,11 @@
             <i class="material-icons">
                 edit
             </i>Bulk Edit</button>
-        <button class="btn btn-blue my-1 mr-2">
+        <!--<button class="btn btn-blue my-1 mr-2">
             <i class="material-icons">
                 filter_list
-            </i>Sort By</button>
-        <select [(ngModel)]="customorder">
+            </i>Sort By</button>-->
+        <select class="btn btn-blue my-1 mr-2 sort-select" [(ngModel)]="customorder">
             <!-- [(ngModel)]="drpSort" (change)="changeSort($event)" -->
             <option value="UpdateDate">Last Updated</option>
             <option value="Name">Product Name</option>
@@ -42,14 +42,14 @@
                     <a class="page-link" href="#">Of {{totalPages}}</a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" (click)="setPage(pager.currentPage - 1)">
+                    <a class="page-link arrows" (click)="setPage(pager.currentPage - 1)">
                         <i class="material-icons">
                             keyboard_arrow_left
                         </i>
                     </a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" (click)="setPage(pager.currentPage + 1)">
+                    <a class="page-link arrows" (click)="setPage(pager.currentPage + 1)">
                         <i class="material-icons">
                             keyboard_arrow_right
                         </i>
@@ -134,7 +134,7 @@
             </ul>
         </div>
     </div>
-    <div class="col">
+    <div class="col pb-5">
         <div class="action-tool-bar px-2">
             <div class="row">
                 <div class="col-8">
@@ -142,7 +142,7 @@
                         <input type="checkbox" [checked]=AllControls name="allcontrols" id="allcontrols"
                             (change)="onFilterChange($event)" />
                         <!-- <input type="checkbox" class="custom-control-input" id="customControlInline4"> -->
-                        <label class="custom-control-label label-black" for="customControlInline">Select All</label>
+                        <label class="label-black" for="customControlInline">Select All</label>
                     </div>
                 </div>
                 <div class="col-2 pl-2">
@@ -161,8 +161,7 @@
                     <div class="select-all-box p-0">
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" [(ngModel)]=product.CanBlkPblsh name="{{'chk_'+product.ID}}"
-                                id="{{'chk_'+product.ID}}" (change)="onSingleChange(product.CanBlkPblsh,product.ID)" />
-
+                                id="ID-01" (change)="onSingleChange(product.CanBlkPblsh,product.ID)" />
                         </div>
                     </div>
                     <div class="result-img">
@@ -187,7 +186,7 @@
                     <label>{{product.StatusCode}}</label>
                 </div>
                 <div class="col-2 d-flex align-content-center flex-wrap">
-                    <button type="submit" class="btn esp-btn-white my-1 mr-2">Start SEO</button>
+                    <button type="submit" class="btn esp-btn-white my-1 mr-2 p-1">Start SEO</button>
                 </div>
             </div>
 
@@ -208,14 +207,14 @@
                         <a class="page-link" href="#">Of {{totalPages}}</a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" (click)="setPage(pager.currentPage - 1)">
+                        <a class="page-link arrows" (click)="setPage(pager.currentPage - 1)">
                             <i class="material-icons">
                                 keyboard_arrow_left
                             </i>
                         </a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" (click)="setPage(pager.currentPage + 1)">
+                        <a class="page-link arrows" (click)="setPage(pager.currentPage + 1)">
                             <i class="material-icons">
                                 keyboard_arrow_right
                             </i>

@@ -5,6 +5,19 @@ body, html{
 h1, h2, h3, h4, h5, h6{
   font-family: 'Open Sans', sans-serif !important;
 }
+
+.alert, .alert-danger{
+ padding: 3px !important;
+    background-color: #fff !important;
+    border: 0 !important;
+        color: #b90a1a !important;
+    font-size: 13px;
+}
+.alert i{
+    position: relative;
+    top: 5px;
+    font-size: 18px;
+}
 .bg-gray{
    background-color: #f8fcff;
   font-family: 'Open Sans', sans-serif !important;
@@ -17,6 +30,9 @@ label{
 .form-control{
   font-size: 14px;
   min-height: 43px;
+}
+.form-control:focus{
+	box-shadow:none;
 }
 .label-light{
   color: #979393 !important;
@@ -57,6 +73,10 @@ height: 43px;
 font-weight: 400;
 font-size: 14px;
   border: 1px solid #004ACC;
+}
+.sort-select option{
+	background:#0067bc;
+	padding:3px 0;
 }
 .esp-link, a{
   color: #0E9AFF;
@@ -112,9 +132,14 @@ p{
 }
 .pagnation-input{
   min-height: 33px;
-  max-width: 45px;
+  max-width: 59px;
   margin-right: 10px;
+  padding-right:2px;
 }
+.page-link{
+	cursor:pointer;
+}
+
 .side-nav-toolbar{
   max-width: 314px;
   background: #F8F8F8;
@@ -202,7 +227,7 @@ height: 126px;
   font-size: 14px;
   
 }
-.esp-btn-white{
+.esp-btn-white, .page-link.arrows{
   background: linear-gradient(180deg, #FFFFFF 0%, #F0F0F0 100%);
 border: 1px solid #E1E1E3;
 box-sizing: border-box;
@@ -213,6 +238,13 @@ border-radius: 4px;
 .esp-btn-white:hover{
   
   
+}
+.page-link.arrows{
+	min-width: 20px;
+    padding: 4px 4px 3px 4px;
+	cursor:pointer;
+	color: #007bff !important;
+	margin-left:3px;
 }
 .pagination-cont{
   max-width:320px;
@@ -249,5 +281,9 @@ box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.09);
 .page-link:hover{
    background: none;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.custom-checkbox{
+	padding:0px;
+}
+.custom-checkbox input[type=checkbox]{
+	margin:0px 10px;
+}
