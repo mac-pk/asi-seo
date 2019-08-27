@@ -6,7 +6,7 @@ import { MyOrderByPipe } from './shared/sort/sort.pipe';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginComponent } from './login/login.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SearchSupplierComponent } from './search-supplier/search-supplier.component';
 import { SearchProductComponent } from './search-product/search-product.component';
@@ -19,7 +19,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
+    LoginComponent,
     SearchSupplierComponent,
     SearchProductComponent,
     MyOrderByPipe

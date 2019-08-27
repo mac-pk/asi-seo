@@ -70,7 +70,7 @@ export class SeoService {
     );
   }  
 
-  getSuppliers(): Observable<ISupplier[]> {
+  getSuppliers(searchText: string): Observable<ISupplier[]> {
     return of(SUPPLIERS);
   }  
 }

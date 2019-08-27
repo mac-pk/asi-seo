@@ -5,15 +5,16 @@ import { JsonPipe } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: [ './dashboard.component.css' ]
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: [ './login.component.css' ]
 })
-export class DashboardComponent implements OnInit {
+export class LoginComponent implements OnInit {
   loginSeo: ISeoLogin = {Asi: '68507', Username: 'na68507', Password: 'p@kistan123'};
   error = '';
 
   constructor(private seoService: SeoService, private router : Router) { }
+  showHead: boolean = false;
 
   ngOnInit() {
   }
