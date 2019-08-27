@@ -52,11 +52,17 @@ export class SeoService {
   getGeoLocationWithExternal() {
 
     const _configUrl = '../assets/json/searchproduct.json';
-    // this._httpClient.get(_configUrl)
-    //   .subscribe(data => {
-    //     this.appConfig = data;
-    //   });
+    
   
+    return this.http.get(_configUrl)
+      .pipe(map((response: Response) => {
+        return <any>response;
+      }));
+  }
+
+  getfacetSearch(companyId:number){
+    
+    const _configUrl = '../assets/json/facetSearch.json';
     return this.http.get(_configUrl)
       .pipe(map((response: Response) => {
         return <any>response;
