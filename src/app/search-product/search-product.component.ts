@@ -103,7 +103,7 @@ export class SearchProductComponent implements OnInit {
   }
 
   openLg(content) {
-    this.modalService.open(content, { size: 'lg' });
+    this.modalService.open(content, { size: 'md modal-dialog-centered' });
   }
 
 }

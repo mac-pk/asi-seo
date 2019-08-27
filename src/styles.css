@@ -229,7 +229,12 @@ height: 126px;
 .result-content p{
   margin-bottom: 0px;
   font-size: 14px;
+
   
+}
+.esp-btn-white{
+        height: 37px;
+    
 }
 .esp-btn-white, .page-link.arrows{
   background: linear-gradient(180deg, #FFFFFF 0%, #F0F0F0 100%);
@@ -238,6 +243,7 @@ box-sizing: border-box;
 border-radius: 4px;
   min-width: 92px;
   padding-top: 1px;
+    font-size: 14px;
 }
 .esp-btn-white:hover{
   
@@ -290,4 +296,16 @@ box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.09);
 }
 .custom-checkbox input[type=checkbox]{
 	margin:0px 10px;
+}
+.esp-modal-header{
+    background: #F8F8F8;
+    border: 1px solid #EBE9E9;
+        padding-bottom: 6px;
+    padding-top: 6px;
+    
+}
+.esp-modal-header h4{
+    
+    font-size: 18px;
+
 }
