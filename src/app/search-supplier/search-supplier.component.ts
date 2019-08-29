@@ -14,6 +14,7 @@ export class SearchSupplierComponent implements OnInit {
   suppliers: ISupplier[] = [];
   searchText: string = '';
   isSearchPerformed: boolean = false;
+  isLoading: boolean = false;
   pager: any = {};
   pagedItems: any[];
   totalPages: number;
@@ -29,24 +30,26 @@ export class SearchSupplierComponent implements OnInit {
 
   searchSuppliers(searchSupplierForm: NgForm): void {
     this.isSearchPerformed = false;
+    this.isLoading = true;
 
     if (searchSupplierForm.valid)
     {
       this.seoService.getSuppliers(this.searchText).subscribe(suppliers => {
         if (suppliers.length > 0) {
           this.suppliers = suppliers;
+          this.isLoading = false;
   
           // paging method
           this.setPage(1);
           //console.log(this.suppliers);
-  
         }
       });      
     }
     else
     {
       this.isSearchPerformed = true;
-      this.suppliers = null;
+      this.isLoading = false;
+      this.pagedItems = null;
     }
   }
 

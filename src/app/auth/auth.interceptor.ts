@@ -1,9 +1,8 @@
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpUserEvent, HttpEvent } from "@angular/common/http";
-import { Observable, of } from 'rxjs';
-//import { UserService } from "../shared/user.service";
-// import 'rxjs/add/operator/do';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse } from "@angular/common/http";
+import { Observable } from 'rxjs';
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -12,23 +11,28 @@ export class AuthInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         //if (req.headers.get('No-Auth') == "True")
-        return next.handle(req.clone());
+        //return next.handle(req.clone());
 
         if (localStorage.getItem('userToken') != null) {
             const clonedreq = req.clone({
                 headers: req.headers.set("Authorization", "Bearer " + localStorage.getItem('userToken'))
             });
-            // return next.handle(clonedreq)
-            //     .do(
-            //     succ => { },
-            //     err => {
-            //         if (err.status === 401)
-            //             this.router.navigateByUrl('/login');
-            //     }
-            //     );
+                const started = Date.now();
+                return next.handle(clonedreq).pipe(
+                    tap(event => {
+                      if (event instanceof HttpResponse) {
+                        const elapsed = Date.now() - started;
+                        console.log(`Request for ${req.urlWithParams} took ${elapsed} ms.`);
+                      }
+                    }, error => {
+                        if (error.status === 401)
+                        this.router.navigateByUrl('/login');
+                    })
+                  )                
         }
         else {
-            this.router.navigateByUrl('/login');
+            return next.handle(req.clone());
+            //this.router.navigateByUrl('/login');
         }
     }
 }

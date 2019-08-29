@@ -21,8 +21,12 @@ export class AppComponent {
     });
 }
 
-  ngOnInit() {
+ngOnInit() {
+  const timer = JSON.parse(localStorage.getItem('timer'));
+  if (timer && (Date.now() > timer)) {
+    this.logout();
   }
+}
   
   logout() {
     localStorage.removeItem('userToken');

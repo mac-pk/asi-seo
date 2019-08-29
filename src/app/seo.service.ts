@@ -2,16 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, map, tap, delay } from 'rxjs/operators';
 
 import { ISeoLogin, ISeoLoginResponse } from './shared/models/login/ILogin';
 import { ISupplier } from './shared/models/searchSuppliers/ISearchSuppliers';
 import { SUPPLIERS } from './mock-seo';// remove later with api
+import { environment } from '../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class SeoService {
 
-  private seoUrl = 'https://productservice.stage-asicentral.com/api/v4/Login';  // URL to web api
+  private loginUrl = environment.apiBaseUrl + 'api/v4/Login';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -28,19 +29,16 @@ export class SeoService {
    * Handle Http operation that failed.
    * Let the app continue.
    * @param operation - name of the operation that failed
-   * @param result - optional value to return as the observable result
    */
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T> (operation = 'operation') {
     return (error: any): Observable<T> => {
-
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
 
       // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
+      this.log(`${operation} failed: ${error.Message}`);
 
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
+      return of(error as T);
     };
   }
 
@@ -66,17 +64,17 @@ export class SeoService {
     return this.http.get(_configUrl)
       .pipe(map((response: Response) => {
         return <any>response;
-      }));
+      })).pipe(delay(1500));
   }
 
-  loginSeo (seo: ISeoLogin): Observable<ISeoLoginResponse> {
-    return this.http.post(this.seoUrl, seo, this.httpOptions).pipe(
+  loginSeo (seo: ISeoLogin): Observable<any> {
+    return this.http.post(this.loginUrl, seo, this.httpOptions).pipe(
       tap((seo: ISeoLogin) => this.log(`Login with username=${seo.Username}`)),
       catchError(this.handleError<any>('loginSeo'))
     );
   }  
 
   getSuppliers(searchText: string): Observable<ISupplier[]> {
-    return of(SUPPLIERS);
+    return of(SUPPLIERS).pipe(delay(1500));
   }  
 }

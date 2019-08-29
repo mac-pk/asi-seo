@@ -28,6 +28,7 @@ export class SearchProductComponent implements OnInit {
   customorder = "Name";
   reverse = false;
   searchtxt: '';
+  isLoading: boolean = false;
   showhideSearch = false;
 
   constructor(
@@ -40,6 +41,8 @@ export class SearchProductComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.isLoading = true;
+
     this._SeoService.getGeoLocationWithExternal().subscribe(data => {
       //console.log(data);
       if (data) {
@@ -47,8 +50,9 @@ export class SearchProductComponent implements OnInit {
         // paging method
         this.setPage(1);
         //console.log(this.objmodel);
-
       }
+
+      this.isLoading = false;
     });
 
     this._SeoService.getfacetSearch(9207).subscribe(searchData => {

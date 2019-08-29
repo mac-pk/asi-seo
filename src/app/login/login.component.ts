@@ -11,29 +11,48 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginSeo: ISeoLogin = {Asi: '68507', Username: 'na68507', Password: 'p@kistan123'};
-  error = '';
+  error: string = '';
+  isLoading: boolean = false;
+  showHead: boolean = false;
 
   constructor(private seoService: SeoService, private router : Router) { }
-  showHead: boolean = false;
 
   ngOnInit() {
   }
 
   loginAsiSeo(): void {
     this.error = '';
+    this.isLoading = true;
     this.seoService.loginSeo(this.loginSeo)
     .subscribe(
       data => {
-          localStorage.setItem('userToken', data.AccessToken);
-          this.router.navigate(['/searchSupplier']);
-          //console.log(data);
-      },
-      error => {
-        if (error && error.error && error.error.Message)
+        if (data.AccessToken)
         {
-          this.error = error.error.Message;
+          const time_to_login = Date.now() + 30000; //24 hours = 86400000 ms 
+          
+          localStorage.setItem('userToken', data.AccessToken);
+          localStorage.setItem('timer', JSON.stringify(time_to_login));
+          this.isLoading = false;
+          this.router.navigate(['/searchSupplier']);
         }
-        //console.log(error);
-      });  
+        else
+        {
+          if (data.error && data.error.ExceptionMessage)
+          {
+            this.error = data.error.ExceptionMessage;
+          }    
+          else if (data.error && data.error.error && data.error.error.Message)
+          {
+            this.error = data.error.error.Message;
+          }  
+          else
+          {
+            this.error = data.error.Message;
+          }
+        }
+
+          console.log(this.error);
+          this.isLoading = false; 
+      });   
   }
 }

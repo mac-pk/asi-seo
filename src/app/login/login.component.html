@@ -18,6 +18,9 @@
 
 <body>
     <form (ngSubmit)="loginAsiSeo()" #seoForm="ngForm">
+            <div *ngIf="isLoading" class="progress-img d-flex text-center">
+                    <img src="assets/images/esp-loader-genreal.gif" class="justify-content-center align-self-center mx-auto">             
+            </div>        
         <section class="container-fluid h-100">
             <div class="row h-100">
                 <div class="col-12 col-lg-3 col-sm-12 login-cont border-right">
@@ -27,13 +30,20 @@
                     <div
                         *ngIf="error && error == 'Your login credentials are invalid. Please review the information and try again.'">
                         <span class="error text-danger" id="loginMsg">
-                            <i class="fa fa-exclamation-circle"></i>&nbsp;<strong>
+                            <i class="material-icons">info</i>&nbsp;<strong>
                                 Your login credentials are invalid.</strong> Please review the information and try
                             again. If you need further assistance, visit our <a
                                 href="https://www.asicentral.com/asp/open/CustomerSupport/support.aspx?menu=top&amp;id=2379"
                                 target="_blank">Knowledge Base</a>.
                         </span>
                     </div>
+                    <div
+                        *ngIf="error && error == 'Input string was not in a correct format.'">
+                        <span class="error text-danger" id="loginMsg">
+                            <i class="material-icons">info</i>
+                            ASI Number is not valid
+                        </span>
+                    </div>                    
                     <div *ngIf="asiNumber.invalid && (asiNumber.dirty || asiNumber.touched)" class="error text-danger">
                         <div *ngIf="asiNumber.errors.required">
                             <i class="material-icons">info</i>
