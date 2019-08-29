@@ -38,7 +38,7 @@ export class SearchSupplierComponent implements OnInit {
   
           // paging method
           this.setPage(1);
-          console.log(this.suppliers);
+          //console.log(this.suppliers);
   
         }
       });      

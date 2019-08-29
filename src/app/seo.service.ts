@@ -46,7 +46,7 @@ export class SeoService {
 
   /** Log a SeoService message with the MessageService */
   private log(message: string) {
-    console.log(`SeoService: ${message}`);
+    //console.log(`SeoService: ${message}`);
   }
 
   getGeoLocationWithExternal() {

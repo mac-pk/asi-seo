@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         {
           this.error = error.error.Message;
         }
-        console.log(error);
+        //console.log(error);
       });  
   }
 }

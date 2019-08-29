@@ -1,6 +1,6 @@
 <div class="row esp-sub-header pt-2">
         <div class="col">
-            <figure><img src="assets/images/image.png"></figure>
+            <figure><img src="./assets/images/image.png"></figure>
         </div>
         <div class="col text-right">
         </div>

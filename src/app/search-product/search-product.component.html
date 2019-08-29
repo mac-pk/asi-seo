@@ -170,20 +170,20 @@
                     <div class="result-content pl-2 ">
                         <h6>{{product.Name}}</h6>
                         <p>
-                            <span class="label-black">External Product ID:</span>{{product.XID}}</p>
+                            <span class="label-black">External Product ID: </span>{{product.ExternalProductId}}</p>
                         <p>
-                            <span class="label-black">Created on :</span> {{product.CreateDate | date}}</p>
+                            <span class="label-black">Created on: </span>{{product.CreateDateUtc | date}}</p>
                         <p>
-                            <span class="label-black">Made active:</span> {{product.PublishDate | date}}</p>
+                            <span class="label-black">Made active: </span>{{product.PublishDateUtc | date}}</p>
                         <p>
-                            <span class="label-black">Last updated by:</span> {{product.LastUpdatedBy}} on
-                            {{product.UpdateDate | date}}</p>
+                            <span class="label-black">Last updated by: </span>{{product.LastUpdatedBy}} on
+                            {{product.LastUpdateDateUtc | date}}</p>
 
                     </div>
 
                 </div>
                 <div class="col-2 d-flex align-content-center flex-wrap">
-                    <label>{{product.StatusCode === 'ACTV' ? 'Active' : 'Inactive'}}</label>
+                    <label>{{ product.SEOStatus }}</label>
                 </div>
                 <div class="col-2 d-flex align-content-center flex-wrap">
                     <button type="submit" (click)="openLg(content)" class="btn esp-btn-white my-1 mr-2 p-1">Start SEO</button>

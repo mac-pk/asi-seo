@@ -36,12 +36,12 @@ export class SearchProductComponent implements OnInit {
 
   ngOnInit() {
     this._SeoService.getGeoLocationWithExternal().subscribe(data => {
-      if (data.length > 0) {
-        this.objmodel = data;
-
+      //console.log(data);
+      if (data) {
+        this.objmodel = data.Products;
         // paging method
         this.setPage(1);
-        console.log(this.objmodel);
+        //console.log(this.objmodel);
 
       }
     });
@@ -103,7 +103,8 @@ export class SearchProductComponent implements OnInit {
   }
 
   openLg(content) {
-    this.modalService.open(content, { size: 'md modal-dialog-centered' });
+    this.modalService.open(content);
+    //size: 'md modal-dialog-centered'
   }
 
 }
