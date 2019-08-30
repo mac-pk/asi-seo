@@ -1,22 +1,17 @@
 <div class="row esp-sub-header pt-2">
     <div *ngIf="isLoading" class="progress-img d-flex text-center">
-            <img src="assets/images/esp-loader-genreal.gif" class="justify-content-center align-self-center mx-auto">             
-    </div>   
+        <img src="./assets/images/esp-loader-genreal.gif" class="justify-content-center align-self-center mx-auto">
+    </div>
     <div class="col">
         <figure>
-            <img src="assets/images/image.png">
+            <img src="./assets/images/image.png">
         </figure>
     </div>
     <div class="col text-right">
 
         <button type="submit" class="btn btn-blue my-1 mr-2">
-            <i class="material-icons">
-                edit
+            <i class="material-icons">edit
             </i>Bulk Edit</button>
-        <!--<button class="btn btn-blue my-1 mr-2">
-            <i class="material-icons">
-                filter_list
-            </i>Sort By</button>-->
         <select class="btn btn-blue my-1 mr-2 sort-select" [(ngModel)]="customorder">
             <!-- [(ngModel)]="drpSort" (change)="changeSort($event)" -->
             <option value="UpdateDate">Last Updated</option>
@@ -25,8 +20,7 @@
             <option value="StatusCode">Catalog</option>
         </select>
         <button type="submit" class="btn btn-blue my-1 pl-3">
-            <i class="material-icons">
-                email
+            <i class="material-icons">email
             </i>Email Supplier</button>
 
     </div>
@@ -83,23 +77,25 @@
             </div>
         </div>
         <div>
-                <ul>
-                    <li *ngIf="showhideSearch"> 
-                       <p>{{searchtxt}}  <input style="width:12px;height:12px;" (click)="cancelSearch()" type="button"/> </p>
-                    </li>
-                    <li *ngFor="let selected of selectedFacetTerms"> 
-                            <p>{{selected.name}}  <input style="width:12px;height:12px;" (click)="cancelItem(selected)" type="button"/> </p>
-                    </li>
-                </ul>
+            <ul>
+                <li *ngIf="showhideSearch">
+                    <p>{{searchtxt}} <input style="width:12px;height:12px;" (click)="cancelSearch()" type="button" />
+                    </p>
+                </li>
+                <li *ngFor="let selected of selectedFacetTerms">
+                    <p>{{selected.name}} <input style="width:12px;height:12px;" (click)="cancelItem(selected)"
+                            type="button" /> </p>
+                </li>
+            </ul>
         </div>
-        <div class="custom-control custom-checkbox my-1 mr-sm-2">
-            <input type="checkbox">
-            <label >Exat match</label>
+        <div class="form-check my-1 mr-sm-2">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label label-light" for="exampleCheck1">Exact match</label>
         </div>
         <div class="row">
             <ul class="side-nav-list mt-2">
                 <!-- <li>
-                    <a>Product Type</a>
+                    <a href="#">Product Type</a>
                 </li>
                 <li>
                     <a href="#">Seo Status</a>
@@ -108,42 +104,20 @@
                     <a href="#">SEO Flag</a>
                 </li> -->
                 <li *ngFor="let search of objSearchFilter">
-                    <a href="#">{{search.name}}</a>
-                    <ul class="side-sub-nav-list">
-                        <!-- <li>
-                            <a href="#">Mugs &nbsp; Steins (10)</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{search.Facet}}</a>
+                    <ul class="side-sub-nav-list dropdown-menu">
+                        <li *ngFor="let facetTerm of search.Terms">
+                            <a (click)="facetTermClick(facetTerm)">{{facetTerm.Term}} ({{facetTerm.Count}})</a>
                         </li>
                         <li>
-                            <a href="#">Pens (4)</a>
-                        </li>
-                        <li>
-                            <a href="#">Glasses-Drinking (4)</a>
-                        </li>
-                        <li>
-                            <a href="#">Caps &nbsp; Hats (2)</a>
-                        </li> -->
-                        <li *ngFor="let facetTerm of search.facetTerms">
-                            <a (click)="facetTermClick(facetTerm)" >{{facetTerm.name}} ({{facetTerm.count}})</a>
-                        </li>
-                        <li>
-                            <a  class="see-all">See all
+                            <a class="see-all">See all
                                 <i class="material-icons">
                                     add_circle
                                 </i>
                             </a>
-                        </li> 
-
+                        </li>
                     </ul>
-
-
                 </li>
-                <!-- <li>
-                    <a href="#">Product Color</a>
-                </li>
-                <li>
-                    <a href="#">Size</a>
-                </li> -->
-
             </ul>
         </div>
     </div>
@@ -178,7 +152,8 @@
                         </div>
                     </div>
                     <div class="result-img">
-                        <img style="width:114px;height:126px;" src="{{product.PrimaryImageUrl != '' ? product.PrimaryImageUrl : 'assets/images/1.png'}}">
+                        <img style="width:114px;height:126px;"
+                            src="{{product.PrimaryImageUrl != '' ? product.PrimaryImageUrl : 'assets/images/1.png'}}">
                     </div>
                     <div class="result-content pl-2 ">
                         <h6>{{product.Name}}</h6>
@@ -199,46 +174,50 @@
                     <label>{{ product.SEOStatus }}</label>
                 </div>
                 <div class="col-2 d-flex align-content-center flex-wrap">
-                    <button type="submit" (click)="openLg(content)" class="btn esp-btn-white my-1 mr-2 p-1">Start SEO</button>
+                    <button type="submit" (click)="openLg(content)" class="btn esp-btn-white my-1 mr-2 p-1">Start
+                        SEO</button>
                 </div>
             </div>
 
         </div>
         <ng-template #content let-modal>
             <div class="modal-header esp-modal-header">
-              <h4 class="modal-title">Set Product Status</h4>
-              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                <span aria-hidden="true">&times;</span>
-              </button>
+                <h4 class="modal-title">Set Product Status</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
-              <label class="date">Apply bulk edit to:</label>
+                <label class="date">Apply bulk edit to:</label>
                 <div class="clearfix"></div>
                 <div class="form-check form-check-inline pr-3">
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-  <label class="form-check-label" for="exampleRadios1">
-    Default radio
-  </label>
-</div>
-<div class="form-check form-check-inline pr-3">
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-  <label class="form-check-label" for="exampleRadios2">
-    Second default radio
-  </label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" disabled>
-  <label class="form-check-label" for="exampleRadios3">
-    Disabled radio
-  </label>
-</div>
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
+                        value="option1" checked>
+                    <label class="form-check-label" for="exampleRadios1">
+                        Default radio
+                    </label>
+                </div>
+                <div class="form-check form-check-inline pr-3">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                        value="option2">
+                    <label class="form-check-label" for="exampleRadios2">
+                        Second default radio
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3"
+                        value="option3" disabled>
+                    <label class="form-check-label" for="exampleRadios3">
+                        Disabled radio
+                    </label>
+                </div>
             </div>
             <div class="modal-footer">
-              <button type="submit" class="btn esp-btn-white my-1 mr-2 p-1">Set Product SEO Status</button>
+                <button type="submit" class="btn esp-btn-white my-1 mr-2 p-1">Set Product SEO Status</button>
                 <button type="submit" class="btn esp-btn-white my-1 mr-2 p-1">Email</button>
                 <button type="submit" class="btn btn-blue my-1 mr-2 p-1">Approve SEO </button>
             </div>
-          </ng-template>
+        </ng-template>
         <div class="col-12">
             <nav class="float-right mt-2 esp-pagination">
                 <ul class="pagination">

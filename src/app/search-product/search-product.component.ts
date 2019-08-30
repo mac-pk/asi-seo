@@ -14,7 +14,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class SearchProductComponent implements OnInit {
 
-  objmodel: ISearchProduct[] = [];
+  products: ISearchProduct[] = [];
   objSearchFilter: ISearchFilter[] = [];
   selectedFacetTerms: IFacetTerms[] = [];
 
@@ -30,6 +30,7 @@ export class SearchProductComponent implements OnInit {
   searchtxt: '';
   isLoading: boolean = false;
   showhideSearch = false;
+  totalCount: number = 0;
 
   constructor(
     private _SeoService: SeoService,
@@ -43,10 +44,11 @@ export class SearchProductComponent implements OnInit {
   ngOnInit() {
     this.isLoading = true;
 
-    this._SeoService.getGeoLocationWithExternal().subscribe(data => {
-      //console.log(data);
+    this._SeoService.getSuplierProducts().subscribe(data => {
       if (data) {
-        this.objmodel = data.Products;
+        this.products = data.Products;
+        this.objSearchFilter = data.Filters;
+        this.totalCount = data.TotalCount;
         // paging method
         this.setPage(1);
         //console.log(this.objmodel);
@@ -54,24 +56,16 @@ export class SearchProductComponent implements OnInit {
 
       this.isLoading = false;
     });
-
-    this._SeoService.getfacetSearch(9207).subscribe(searchData => {
-      if (searchData.length > 0) {
-        this.objSearchFilter = searchData;
-
-        console.log(this.objSearchFilter);
-      }
-    });
   }
 
   setPage(page: number) {
     // get pager object from service
-    this.pager = this._Pager.getPager(this.objmodel.length, page);
+    this.pager = this._Pager.getPager(this.products.length, page);
     this.totalPages = this.pager.totalPages;
     this.currPage = this.pager.currentPage;
 
     // get current page of items
-    this.pagedItems = this.objmodel.slice(this.pager.startIndex, this.pager.endIndex + 1);
+    this.pagedItems = this.products.slice(this.pager.startIndex, this.pager.endIndex + 1);
 
     this.onSingleChange(true, 0);
   }
@@ -129,7 +123,7 @@ export class SearchProductComponent implements OnInit {
   }
   cancelItem(objFaceterm: IFacetTerms) {
     if (this.selectedFacetTerms && this.selectedFacetTerms.length > 0) {
-      if(this.selectedFacetTerms.some(element => element.name.includes(objFaceterm.name))){
+      if(this.selectedFacetTerms.some(element => element.Term.includes(objFaceterm.Term))){
        // this.data = this.selectedFacetTerm.filter(item => item !== data_item);
         this.selectedFacetTerms.splice(this.selectedFacetTerms.indexOf(objFaceterm), 1);
       }
@@ -137,7 +131,7 @@ export class SearchProductComponent implements OnInit {
   }
   facetTermClick(objFaceterm: IFacetTerms) {
     if (this.selectedFacetTerms && this.selectedFacetTerms.length > 0) {
-      if (this.selectedFacetTerms.some(element => element.name.includes(objFaceterm.name))){
+      if (this.selectedFacetTerms.some(element => element.Term.includes(objFaceterm.Term))){
 
       } else {
         this.selectedFacetTerms.push(objFaceterm);

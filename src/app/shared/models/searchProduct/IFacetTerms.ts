@@ -1,9 +1,5 @@
-export interface IFacetTerms{
-    id: number;
-    count: number;
-    filterType:string;
-    name:string;
-    parentId:number;
-    parentName:string;
-    term:string;
+export interface IFacetTerms {
+    Count: number;
+    Term: string;
+    ParentTerm: string;
 }

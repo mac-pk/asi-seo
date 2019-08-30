@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap, delay } from 'rxjs/operators';
-
 import { ISeoLogin, ISeoLoginResponse } from './shared/models/login/ILogin';
 import { ISupplier } from './shared/models/searchSuppliers/ISearchSuppliers';
 import { SUPPLIERS } from './mock-seo';// remove later with api
@@ -19,7 +17,7 @@ export class SeoService {
   };
 
   httpOptionsNoAuth = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth':'True' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' })
   };
 
   constructor(
@@ -30,7 +28,7 @@ export class SeoService {
    * Let the app continue.
    * @param operation - name of the operation that failed
    */
-  private handleError<T> (operation = 'operation') {
+  private handleError<T>(operation = 'operation') {
     return (error: any): Observable<T> => {
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
@@ -47,19 +45,13 @@ export class SeoService {
     //console.log(`SeoService: ${message}`);
   }
 
-  getGeoLocationWithExternal() {
+  getSuplierProducts(companyId: number = null): Observable<any>{
+    //const _configUrl = '../assets/json/searchproduct.json';
+    return this.http.get(environment.mockBaseUrl + "v2/5d67f1563300000ec7e65b5f");
+  };
 
-    const _configUrl = '../assets/json/searchproduct.json';
-    
-  
-    return this.http.get(_configUrl)
-      .pipe(map((response: Response) => {
-        return <any>response;
-      }));
-  }
+  getfacetSearch(companyId: number) {
 
-  getfacetSearch(companyId:number){
-    
     const _configUrl = '../assets/json/facetSearch.json';
     return this.http.get(_configUrl)
       .pipe(map((response: Response) => {
@@ -67,14 +59,14 @@ export class SeoService {
       })).pipe(delay(1500));
   }
 
-  loginSeo (seo: ISeoLogin): Observable<any> {
+  loginSeo(seo: ISeoLogin): Observable<any> {
     return this.http.post(this.loginUrl, seo, this.httpOptions).pipe(
       tap((seo: ISeoLogin) => this.log(`Login with username=${seo.Username}`)),
       catchError(this.handleError<any>('loginSeo'))
     );
-  }  
+  }
 
   getSuppliers(searchText: string): Observable<ISupplier[]> {
     return of(SUPPLIERS).pipe(delay(1500));
-  }  
+  }
 }
