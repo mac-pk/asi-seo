@@ -1,0 +1,37 @@
+<div>
+    <div class="modal-header esp-modal-header">
+        <h4 class="modal-title">Bulk Edit Options</h4>
+        <button type="button" class="close" aria-label="Close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <label class="date">Apply Bulk Edit To:</label>
+        <div class="clearfix"></div>
+        <div class="form-check form-check-inline pr-3">
+            <input class="form-check-input" type="radio" name="product-option" id="allProducts" value="AP"
+                checked>
+            <label class="form-check-label" for="exampleRadios1">
+                ALL Products (1000)
+            </label>
+        </div>
+        <div class="form-check form-check-inline pr-3">
+            <input class="form-check-input" type="radio" name="product-option" id="allfiltered" value="AFP">
+            <label class="form-check-label" for="exampleRadios2">
+                ALL Filtered Products (200)
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="product-option" id="selectedProducts" value="SP"
+                disabled>
+            <label class="form-check-label" for="exampleRadios3">
+                Selected Products (5)
+            </label>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn esp-btn-white my-1 mr-2 p-1">Set Product SEO Status</button>
+        <button type="submit" class="btn esp-btn-white my-1 mr-2 p-1">Email</button>
+        <button type="submit" class="btn btn-blue my-1 mr-2 p-1">Approve SEO </button>
+    </div>
+</div>

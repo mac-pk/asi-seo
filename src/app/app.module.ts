@@ -1,9 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'
-
 import { MyOrderByPipe } from './shared/sort/sort.pipe';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -12,9 +10,9 @@ import { SearchSupplierComponent } from './search-supplier/search-supplier.compo
 import { SearchProductComponent } from './search-product/search-product.component';
 import { SeoService } from './seo.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { BulkEditModalComponent } from './modals/bulk-edit-modal/bulk-edit-modal.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +20,8 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     LoginComponent,
     SearchSupplierComponent,
     SearchProductComponent,
-    MyOrderByPipe
+    MyOrderByPipe,
+    BulkEditModalComponent
   ],
   imports: [
     BrowserModule,
@@ -39,9 +38,11 @@ import { AuthInterceptor } from './auth/auth.interceptor';
       provide : HTTP_INTERCEPTORS,
       useClass : AuthInterceptor,
       multi : true
-    }
+    },
+    BulkEditModalComponent
   ]
   ,
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [BulkEditModalComponent]
 })
 export class AppModule { }

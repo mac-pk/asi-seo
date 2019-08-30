@@ -6,6 +6,8 @@ import { ISearchFilter } from '../shared/models/SearchProduct/ISearchFilter';
 import { PagerService } from '../shared/services/pager.service';
 import { MyOrderByPipe } from '../shared/sort/sort.pipe';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BulkEditModalComponent } from '../modals/bulk-edit-modal/bulk-edit-modal.component';
+
 
 @Component({
   selector: 'app-search-product',
@@ -37,8 +39,7 @@ export class SearchProductComponent implements OnInit {
     private _Pager: PagerService,
     private orderPipe: MyOrderByPipe,
     private changeDetectorRef: ChangeDetectorRef,
-    private modalService: NgbModal
-
+    private modalService: NgbModal,
   ) { }
 
   ngOnInit() {
@@ -91,7 +92,6 @@ export class SearchProductComponent implements OnInit {
   }
 
   onSingleChange(modl: any, id: any) {
-
     if (this.pagedItems.length > 0) {
       if (modl) {
         let chkAllControls = true;
@@ -123,15 +123,15 @@ export class SearchProductComponent implements OnInit {
   }
   cancelItem(objFaceterm: IFacetTerms) {
     if (this.selectedFacetTerms && this.selectedFacetTerms.length > 0) {
-      if(this.selectedFacetTerms.some(element => element.Term.includes(objFaceterm.Term))){
-       // this.data = this.selectedFacetTerm.filter(item => item !== data_item);
+      if (this.selectedFacetTerms.some(element => element.Term.includes(objFaceterm.Term))) {
+        // this.data = this.selectedFacetTerm.filter(item => item !== data_item);
         this.selectedFacetTerms.splice(this.selectedFacetTerms.indexOf(objFaceterm), 1);
       }
     }
   }
   facetTermClick(objFaceterm: IFacetTerms) {
     if (this.selectedFacetTerms && this.selectedFacetTerms.length > 0) {
-      if (this.selectedFacetTerms.some(element => element.Term.includes(objFaceterm.Term))){
+      if (this.selectedFacetTerms.some(element => element.Term.includes(objFaceterm.Term))) {
 
       } else {
         this.selectedFacetTerms.push(objFaceterm);
@@ -141,9 +141,8 @@ export class SearchProductComponent implements OnInit {
     }
   }
 
-  openLg(content) {
-    this.modalService.open(content);
-    //size: 'md modal-dialog-centered'
+  openBulkEdit() {
+    this.modalService.open(BulkEditModalComponent, { backdrop: 'static', size: 'lg' });
   }
 
 }
