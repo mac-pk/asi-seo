@@ -59,53 +59,67 @@
 </div>
 <div class="row h-100">
     <div class="col side-nav-toolbar pt-2 ">
-        <a href="#" class="manage-product">
+        <a class="manage-product">
             <i class="material-icons">
                 card_giftcard
             </i>Manage Products</a>
         <div class="clearfix"></div>
 
         <div class="input-group  pt-2">
-            <input type="text" class="form-control" [(ngModel)]="mdlsearch" placeholder="Search Product" aria-label="Recipient's username"
-                aria-describedby="basic-addon2">
+            <input type="text" class="form-control" [(ngModel)]="mdlsearch" placeholder="Search Product"
+                aria-describedby="btnSearch">
             <div class="input-group-append">
-                <button class="btn btn-search pt-2" (click)=searchClick(mdlsearch) type="button">
+                <button class="btn btn-search pt-2" id="btnSearch" (click)=searchClick(mdlsearch) type="button">
                     <i class="material-icons">
                         search
                     </i>
                 </button>
             </div>
         </div>
-        <div>
-            <ul>
-                <li *ngIf="showhideSearch">
-                    <p>{{searchtxt}} <input style="width:12px;height:12px;" (click)="cancelSearch()" type="button" />
-                    </p>
-                </li>
-                <li *ngFor="let selected of selectedFacetTerms">
-                    <p>{{selected.name}} <input style="width:12px;height:12px;" (click)="cancelItem(selected)"
-                            type="button" /> </p>
-                </li>
-            </ul>
-        </div>
         <div class="form-check my-1 mr-sm-2">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label label-light" for="exampleCheck1">Exact match</label>
+            <input type="checkbox" class="form-check-input" [(ngModel)]="isExactMatch" id="cbxExactMatch">
+            <label class="form-check-label label-light" for="cbxExactMatch">Exact match</label>
         </div>
         <div class="row">
             <ul class="side-nav-list mt-2">
-                <!-- <li>
-                    <a href="#">Product Type</a>
+                <li [hidden]="selectedFacetTerms.length == 0 && !showhideSearch">
+                    <a>Your Search Terms</a>
+                    <ul class="side-sub-nav-list">
+                        <li *ngIf="showhideSearch">
+                            <a>{{searchtxt}} <input style="width:12px;height:12px;" (click)="cancelSearch()"
+                                    type="button" />
+                            </a>
+                        </li>
+                        <li *ngFor="let selected of selectedFacetTerms">
+                            <a>{{selected.Term}} <input style="width:12px;height:12px;" (click)="cancelItem(selected)"
+                                    type="button" /> </a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="#">Seo Status</a>
+                    <a href=".seo-status" data-toggle="collapse">Seo Status</a>
+                    <ul class="side-sub-nav-list collapse seo-status">
+                        <li><a href="" (click)="applyFilter('Ready')">Ready</a></li>
+                        <li><a href="" (click)="applyFilter('Ready')">In Progress</a></li>
+                        <li><a href="" (click)="applyFilter('Ready')">SEO Done</a></li>
+                        <li><a href="" (click)="applyFilter('Ready')">Needs Approval</a></li>
+                        <li><a href="" (click)="applyFilter('Ready')">Approved</a></li>
+                        <li><a href="" (click)="applyFilter('Ready')">Revisions</a></li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="#">SEO Flag</a>
-                </li> -->
+                    <a href=".seo-flag" data-toggle="collapse">SEO Flag</a>
+                    <ul class="side-sub-nav-list collapse seo-flag">
+                        <li><a href="#">Yes</a></li>
+                        <li><a href="#">No</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="">Product Type</a>
+                </li>
                 <li *ngFor="let search of objSearchFilter">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{search.Facet}}</a>
-                    <ul class="side-sub-nav-list dropdown-menu">
+                    <a href="#{{getFilterId(search.Facet)}}" data-toggle="collapse">{{search.Facet}}</a>
+                    <ul class="side-sub-nav-list collapse" id="{{getFilterId(search.Facet)}}">
                         <li *ngFor="let facetTerm of search.Terms">
                             <a (click)="facetTermClick(facetTerm)">{{facetTerm.Term}} ({{facetTerm.Count}})</a>
                         </li>
@@ -174,7 +188,7 @@
                     <label>{{ product.SEOStatus }}</label>
                 </div>
                 <div class="col-2 d-flex align-content-center flex-wrap">
-                    <button type="submit"  class="btn esp-btn-white my-1 mr-2 p-1">Start
+                    <button type="submit" class="btn esp-btn-white my-1 mr-2 p-1">Start
                         SEO</button>
                 </div>
             </div>

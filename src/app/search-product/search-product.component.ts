@@ -29,10 +29,12 @@ export class SearchProductComponent implements OnInit {
   AllControls: boolean = false;
   customorder = "Name";
   reverse = false;
+  mdlsearch: '';
   searchtxt: '';
   isLoading: boolean = false;
   showhideSearch = false;
   totalCount: number = 0;
+  isExactMatch: boolean = false;
 
   constructor(
     private _SeoService: SeoService,
@@ -116,10 +118,12 @@ export class SearchProductComponent implements OnInit {
   searchClick(arg: any) {
     this.showhideSearch = true;
     this.searchtxt = arg;
+    this.mdlsearch = '';
   }
   cancelSearch() {
     this.showhideSearch = false;
     this.searchtxt = '';
+    this.mdlsearch = '';
   }
   cancelItem(objFaceterm: IFacetTerms) {
     if (this.selectedFacetTerms && this.selectedFacetTerms.length > 0) {
@@ -145,4 +149,11 @@ export class SearchProductComponent implements OnInit {
     this.modalService.open(BulkEditModalComponent, { backdrop: 'static', size: 'lg' });
   }
 
+  getFilterId(filter: string): string {
+    return filter.replace(/\s/g, "_");
+  }
+
+  applyFilter(filterBy: string): void {
+    
+  }
 }
