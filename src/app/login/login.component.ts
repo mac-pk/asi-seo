@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ISeoLogin } from '../shared/models/login/ILogin';
 import { SeoService } from '../seo.service';
-import { JsonPipe } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,14 +9,22 @@ import { Router } from '@angular/router';
   styleUrls: [ './login.component.css' ]
 })
 export class LoginComponent implements OnInit {
-  loginSeo: ISeoLogin = {Asi: '68507', Username: 'na68507', Password: 'p@kistan123'};
+  loginSeo: ISeoLogin = {Asi: '', Username: '', Password: ''};
+  //loginSeo: ISeoLogin = {Asi: '68507', Username: 'na68507', Password: 'p@kistan123'};
   error: string = '';
   isLoading: boolean = false;
   showHead: boolean = false;
+  rememberPreference: boolean = false;
 
   constructor(private seoService: SeoService, private router : Router) { }
 
   ngOnInit() {
+    if (localStorage.getItem('asiNumber') != null)
+    {
+      this.rememberPreference = true;
+      this.loginSeo.Asi = localStorage.getItem('asiNumber');
+      this.loginSeo.Username = localStorage.getItem('username');
+    }
   }
 
   loginAsiSeo(): void {
@@ -30,6 +37,17 @@ export class LoginComponent implements OnInit {
         {
           const time_to_login = Date.now() + 30000; //24 hours = 86400000 ms 
           
+          if (this.rememberPreference)
+          {
+            localStorage.setItem('asiNumber', this.loginSeo.Asi);
+            localStorage.setItem('username', this.loginSeo.Username);
+          }
+          else
+          {
+            localStorage.removeItem('asiNumber');
+            localStorage.removeItem('username');
+          }
+
           localStorage.setItem('userToken', data.AccessToken);
           localStorage.setItem('timer', JSON.stringify(time_to_login));
           this.isLoading = false;

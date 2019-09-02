@@ -13,6 +13,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { BulkEditModalComponent } from './modals/bulk-edit-modal/bulk-edit-modal.component';
+import { PageComponent } from './shared/page/page.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { BulkEditModalComponent } from './modals/bulk-edit-modal/bulk-edit-modal
     SearchSupplierComponent,
     SearchProductComponent,
     MyOrderByPipe,
-    BulkEditModalComponent
+    BulkEditModalComponent,
+    PageComponent
   ],
   imports: [
     BrowserModule,

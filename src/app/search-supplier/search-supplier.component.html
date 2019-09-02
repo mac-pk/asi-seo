@@ -7,38 +7,10 @@
         </div>
         <div class="col text-right">
         </div>
-        <div class="col pagination-cont" *ngIf='pagedItems && pagedItems.length > 0'>
-            <nav class="float-right mt-2 esp-pagination">
-                <ul class="pagination">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">Page:</a>
-                    </li>
-                    <li class="page-item">
-                        <input type="number" value={{currPage}} (input)="onPagerChange($event.target.value)"
-                            class="form-control pagnation-input">
-                    </li>
-    
-                    <li class="page-item disabled" style="width:90px;">
-                        <a class="page-link" href="#">Of {{totalPages}}</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link arrows" (click)="setPage(pager.currentPage - 1)">
-                            <i class="material-icons">
-                                keyboard_arrow_left
-                            </i>
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link arrows" (click)="setPage(pager.currentPage + 1)">
-                            <i class="material-icons">
-                                keyboard_arrow_right
-                            </i>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-
+        <app-page *ngIf='pagedItems && pagedItems.length > 0' 
+            [currentList]='suppliers'
+            (pagedList)="onPagerChange($event)"
+            ></app-page>
     </div>
     <div class="row h-100">
 
@@ -125,38 +97,10 @@
                     </div>
                 </div>
                 </div>
-                <div class="col-12" *ngIf='pagedItems && pagedItems.length > 0'>
-                    <nav class="float-right mt-2 esp-pagination">
-                        <ul class="pagination">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1">Page:</a>
-                            </li>
-                            <li class="page-item">
-                                <input type="number" value={{currPage}} (input)="onPagerChange($event.target.value)"
-                                    class="form-control pagnation-input">
-                            </li>
-        
-                            <li class="page-item disabled" style="width:90px;">
-                                <a class="page-link" href="#">Of {{totalPages}}</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link arrows" (click)="setPage(pager.currentPage - 1)">
-                                    <i class="material-icons">
-                                        keyboard_arrow_left
-                                    </i>
-                                </a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link arrows" (click)="setPage(pager.currentPage + 1)">
-                                    <i class="material-icons">
-                                        keyboard_arrow_right
-                                    </i>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-
+                <app-page *ngIf='pagedItems && pagedItems.length > 0' 
+                        [currentList]='suppliers'
+                        (pagedList)="onPagerChange($event)">
+                </app-page>   
             </div>
         </div>
     </div>
