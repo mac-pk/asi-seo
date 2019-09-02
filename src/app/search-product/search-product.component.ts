@@ -3,6 +3,7 @@ import { SeoService } from '../seo.service';
 import { ISearchProduct } from '../shared/models/SearchProduct/ISearchProduct';
 import { IFacetTerms } from '../shared/models/SearchProduct/IFacetTerms';
 import { ISearchFilter } from '../shared/models/SearchProduct/ISearchFilter';
+import { EnumSeoStatus } from '../shared/models/searchProduct/EnumSeoStatus';
 import { PagerService } from '../shared/services/pager.service';
 import { MyOrderByPipe } from '../shared/sort/sort.pipe';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -19,6 +20,7 @@ export class SearchProductComponent implements OnInit {
   products: ISearchProduct[] = [];
   objSearchFilter: ISearchFilter[] = [];
   selectedFacetTerms: IFacetTerms[] = [];
+  filtersShouAll: any = [];
 
   // pager object
   pager: any = {};
@@ -35,6 +37,7 @@ export class SearchProductComponent implements OnInit {
   showhideSearch = false;
   totalCount: number = 0;
   isExactMatch: boolean = false;
+  showAll_seoStatus: boolean = false;
 
   constructor(
     private _SeoService: SeoService,
@@ -154,6 +157,37 @@ export class SearchProductComponent implements OnInit {
   }
 
   applyFilter(filterBy: string): void {
-    
+
+  }
+
+  seeAll(parent: string): void {
+    var obj = this.filtersShouAll.find(x => x.name == this.getFilterId(parent))
+    if (obj) {
+      obj.value = true;
+    }
+    else {
+      this.filtersShouAll.push({ name: this.getFilterId(parent), value: true })
+    }
+    console.log(this.filtersShouAll);
+  }
+
+  seeLess(parent: string): void {
+    var obj = this.filtersShouAll.find(x => x.name == this.getFilterId(parent))
+    if (obj) {
+      obj.value = false;
+    }
+    else {
+      this.filtersShouAll.push({ name: this.getFilterId(parent), value: false })
+    }
+    console.log(this.filtersShouAll);
+  }
+
+  isShowAll(filter: string): boolean {
+    var obj = this.filtersShouAll.find(x => x.name == this.getFilterId(filter))
+    if (obj) {
+      return obj.value;
+    }
+    console.log(obj);
+    return false;
   }
 }

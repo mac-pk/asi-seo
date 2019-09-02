@@ -102,9 +102,18 @@
                         <li><a href="" (click)="applyFilter('Ready')">Ready</a></li>
                         <li><a href="" (click)="applyFilter('Ready')">In Progress</a></li>
                         <li><a href="" (click)="applyFilter('Ready')">SEO Done</a></li>
-                        <li><a href="" (click)="applyFilter('Ready')">Needs Approval</a></li>
-                        <li><a href="" (click)="applyFilter('Ready')">Approved</a></li>
-                        <li><a href="" (click)="applyFilter('Ready')">Revisions</a></li>
+                        <li [hidden]="!showAll_seoStatus"><a (click)="applyFilter('Ready')">Needs Approval</a></li>
+                        <li [hidden]="!showAll_seoStatus"><a (click)="applyFilter('Ready')">Approved</a></li>
+                        <li [hidden]="!showAll_seoStatus"><a (click)="applyFilter('Ready')">Revisions</a></li>
+                        <li [hidden]="showAll_seoStatus">
+                                <a class="see-all" (click)="seeAll('Ready')">See All
+                                    <i class="material-icons">
+                                        add_circle
+                                    </i>
+                                </a>
+                            </li>
+                        <!-- <li ><a >See All</a></li> -->
+                        <li [hidden]="!showAll_seoStatus"><a (click)="seeLess('Ready')">See Less</a></li>
                     </ul>
                 </li>
                 <li>
@@ -120,16 +129,23 @@
                 <li *ngFor="let search of objSearchFilter">
                     <a href="#{{getFilterId(search.Facet)}}" data-toggle="collapse">{{search.Facet}}</a>
                     <ul class="side-sub-nav-list collapse" id="{{getFilterId(search.Facet)}}">
-                        <li *ngFor="let facetTerm of search.Terms">
+                        <li *ngFor="let facetTerm of search.Terms; let i = index" [hidden]="i > 0 && !isShowAll(search.Facet)">
                             <a (click)="facetTermClick(facetTerm)">{{facetTerm.Term}} ({{facetTerm.Count}})</a>
                         </li>
-                        <li>
-                            <a class="see-all">See all
+                        <li [hidden]="isShowAll(search.Facet)">
+                            <a class="see-all" (click)="seeAll(search.Facet)">See All
                                 <i class="material-icons">
                                     add_circle
                                 </i>
                             </a>
                         </li>
+                        <li [hidden]="!isShowAll(search.Facet)">
+                                <a class="see-all" (click)="seeLess(search.Facet)">See Less
+                                    <i class="material-icons">
+                                        remove_circle
+                                    </i>
+                                </a>
+                            </li>
                     </ul>
                 </li>
             </ul>
