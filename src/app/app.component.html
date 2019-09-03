@@ -1,16 +1,19 @@
 <section class="container-fluid h-100">
     <div class="row esp-header" *ngIf="showHead">
         <div class="col-12 text-right main-nav">
+            <button class="float-left esp-breadcrumb"><i class="material-icons">
+menu
+</i></button>
             <a href="">My Account</a>
             <a href="">EIT Dashboard</a>
 
             <a href="" class="dropdown" id="dropdownMenuButton" data-toggle="dropdown"><i class="material-icons">
                     account_circle
                 </i>Hello James
-                <div class="dropdown-menu">
+            </a>
+            <div class="dropdown-menu">
                     <button class="logout-but" (click)="logout()"> Logout</button>
                 </div>
-            </a>
         </div>
     </div>
     <router-outlet></router-outlet>

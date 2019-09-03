@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
     <!--Font-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
@@ -17,18 +17,17 @@
 </head>
 
 <body>
-    <form (ngSubmit)="loginAsiSeo()" #seoForm="ngForm">
-            <div *ngIf="isLoading" class="progress-img d-flex text-center">
-                    <img src="assets/images/esp-loader-genreal.gif" class="justify-content-center align-self-center mx-auto">             
-            </div>        
+    <form (ngSubmit)="loginAsiSeo()" #seoForm="ngForm" class="h-100">
+        <div *ngIf="isLoading" class="progress-img d-flex text-center">
+            <img src="assets/images/esp-loader-genreal.gif" class="justify-content-center align-self-center mx-auto">
+        </div>
         <section class="container-fluid h-100">
             <div class="row h-100">
                 <div class="col-12 col-lg-3 col-sm-12 login-cont border-right">
                     <div class="d-block text-center pb-5 mt-3">
                         <img src="./assets/image.png">
                     </div>
-                    <div
-                        *ngIf="error && error == 'Your login credentials are invalid. Please review the information and try again.'">
+                    <div *ngIf="error && error == 'Your login credentials are invalid. Please review the information and try again.'">
                         <span class="error text-danger" id="loginMsg">
                             <i class="material-icons">info</i>&nbsp;<strong>
                                 Your login credentials are invalid.</strong> Please review the information and try
@@ -37,57 +36,68 @@
                                 target="_blank">Knowledge Base</a>.
                         </span>
                     </div>
-                    <div
-                        *ngIf="error && error == 'Input string was not in a correct format.'">
+                    <div *ngIf="error && error == 'Input string was not in a correct format.'">
                         <span class="error text-danger" id="loginMsg">
                             <i class="material-icons">info</i>
                             ASI Number is not valid
                         </span>
-                    </div>                    
-                    <div *ngIf="asiNumber.invalid && (asiNumber.dirty || asiNumber.touched)" class="error text-danger">
-                        <div *ngIf="asiNumber.errors.required">
-                            <i class="material-icons">info</i>
-                            ASI Number is required.
-                        </div>
                     </div>
-                    <div *ngIf="username.invalid && (username.dirty || username.touched)" class="error text-danger">
-                        <div *ngIf="username.errors.required">
-                            <i class="material-icons">info</i>
-                            Username is required.
-                        </div>
-                    </div>
-                    <div *ngIf="password.invalid && (password.dirty || password.touched)" class="error text-danger">
-                        <div *ngIf="password.errors.required">
-                            <i class="material-icons">info</i>
-                            Password is required.
-                        </div>
-                    </div>
-                    <div class="col-12 p-0 p-sm-0 p-lg-3">
+
+
+
+                    <div class="col-12 p-0 p-sm-0 p-lg-3 esp-login-form">
+
+
+
+
+
                         <div class="form-group">
                             <label>ASI Number</label>
-                            <input [(ngModel)]="loginSeo.Asi" #asiNumber="ngModel" required type="text"
-                                class="form-control" placeholder="ASI/" name="asiNumber">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">ASI/</div>
+                                </div>
+
+                                <input [(ngModel)]="loginSeo.Asi" #asiNumber="ngModel" required type="text" class="form-control" placeholder="" name="asiNumber">
+                            </div>
+   <div *ngIf="asiNumber.invalid && (asiNumber.dirty || asiNumber.touched)" class="error text-danger">
+                            <div *ngIf="asiNumber.errors.required">
+                                <i class="material-icons">info</i> ASI Number is required.
+                            </div>
                         </div>
+                        </div>
+                     
+
                         <div class="form-group">
                             <label>Username</label>
-                            <input [(ngModel)]="loginSeo.Username" #username="ngModel" required type="text"
-                                class="form-control" placeholder="Username" name="username">
+                            <input [(ngModel)]="loginSeo.Username" #username="ngModel" required type="text" class="form-control" placeholder="Username"
+                                name="username">
+                                   <div *ngIf="username.invalid && (username.dirty || username.touched)" class="error text-danger">
+                            <div *ngIf="username.errors.required">
+                                <i class="material-icons">info</i> Username is required.
+                            </div>
                         </div>
+                        </div>
+                     
                         <div class="form-group">
                             <label>Password</label>
-                            <input [(ngModel)]="loginSeo.Password" #password="ngModel" required type="password"
-                                class="form-control" name="password">
+                            <input [(ngModel)]="loginSeo.Password" #password="ngModel" required type="password" class="form-control" name="password">
+                                 <div *ngIf="password.invalid && (password.dirty || password.touched)" class="error text-danger">
+                            <div *ngIf="password.errors.required">
+                                <i class="material-icons">info</i> Password is required.
+                            </div>
                         </div>
+                        </div>
+                   
                         <div class="custom-control custom-checkbox my-1 mr-sm-2">
                             <input [(ngModel)]="rememberPreference" name="rememberPreference" type="checkbox" class="custom-control-input" id="rememberPreference">
                             <label class="custom-control-label label-light" for="rememberPreference">Remember my
                                 preference</label>
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-blue my-1" [disabled]="!seoForm.form.valid">Login</button>
+                            <button class="btn-blue my-1" [disabled]="!seoForm.form.valid">Login</button>
                         </div>
-                        <a href="" class="esp-link">Need a license?</a> <a class="esp-link">|</a><a href=""
-                            class="esp-link"> Trouble logging in?</a>
+                        <a href="" class="esp-link">Need a license?</a> <a class="esp-link">|</a><a href="" class="esp-link"> Trouble logging in?</a>
                         <label class="label-light">Product Support (800) 546-1350</label>
                     </div>
                 </div>
@@ -134,14 +144,11 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 </body>
 
