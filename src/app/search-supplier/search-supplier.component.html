@@ -21,7 +21,7 @@
                     <h5 class="pt-2">Search for members</h5>
                     <p>Search by name or ASI number</p>
                     <div class="input-group  pt-2">
-                        <input type="text" class="form-control" [(ngModel)]="searchText" required
+                        <input type="text" class="form-control" [(ngModel)]="searchText" required autocomplete="off"
                         placeholder="Search Suppliers" #searchSupplierText="ngModel" name="searchSupplierText">
                         <div class="input-group-append">
                             <button class="btn btn-search pt-2" type="submit"><i class="material-icons">
@@ -29,13 +29,14 @@
                                 </i></button>
                         </div>
                     </div>
-                     <div *ngIf="isSearchPerformed && searchSupplierText.invalid && (searchSupplierText.dirty || searchSupplierText.touched)" class="error text-danger">
+                <!-- <input type="text" digitOnly/> -->
+                <!-- <div *ngIf="isSearchPerformed && searchSupplierText.invalid && (searchSupplierText.dirty || searchSupplierText.touched)" class="error text-danger">
                     <div *ngIf="pagedItems == null">
                         <i class="material-icons">info</i>
                         0 results returned
                     </div>
-                </div>
-                <div *ngIf="isSearchPerformed && searchSupplierText.invalid && (searchSupplierText.dirty || searchSupplierText.touched)" class="error text-danger">
+                </div> -->
+                <div *ngIf="isSearchPerformed && searchSupplierText.invalid" class="error text-danger">
                         <div *ngIf="searchSupplierText.errors.required">
                             <i class="material-icons">info</i>
                             Provide an ASI number or company name to search

@@ -14,6 +14,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { BulkEditModalComponent } from './modals/bulk-edit-modal/bulk-edit-modal.component';
 import { PageComponent } from './shared/page/page.component';
+import { DigitOnlyDirective } from './shared/digit-only/digit-only.directive';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { PageComponent } from './shared/page/page.component';
     SearchProductComponent,
     MyOrderByPipe,
     BulkEditModalComponent,
-    PageComponent
+    PageComponent,
+    DigitOnlyDirective
   ],
   imports: [
     BrowserModule,
@@ -46,5 +48,7 @@ import { PageComponent } from './shared/page/page.component';
   ,
   bootstrap: [AppComponent],
   entryComponents: [BulkEditModalComponent]
+  ,
+  exports: [DigitOnlyDirective]
 })
 export class AppModule { }

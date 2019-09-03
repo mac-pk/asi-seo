@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
       data => {
         if (data.AccessToken)
         {
-          const time_to_login = Date.now() + 30000; //24 hours = 86400000 ms 
+          const time_to_login = Date.now() + 86400000; //24 hours = 86400000 ms 
           
           if (this.rememberPreference)
           {
