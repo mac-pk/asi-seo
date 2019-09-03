@@ -22,7 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
                     tap(event => {
                       if (event instanceof HttpResponse) {
                         const elapsed = Date.now() - started;
-                        console.log(`Request for ${req.urlWithParams} took ${elapsed} ms.`);
+                        //console.log(`Request for ${req.urlWithParams} took ${elapsed} ms.`);
                       }
                     }, error => {
                         if (error.status === 401)

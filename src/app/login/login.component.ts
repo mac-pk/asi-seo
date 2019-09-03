@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit {
           }
         }
 
-          console.log(this.error);
+          //console.log(this.error);
           this.isLoading = false; 
       });   
   }

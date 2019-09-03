@@ -38,6 +38,7 @@ export class SearchProductComponent implements OnInit {
   totalCount: number = 0;
   isExactMatch: boolean = false;
   showAll_seoStatus: boolean = false;
+  seoStausEnum = EnumSeoStatus;
 
   constructor(
     private _SeoService: SeoService,
@@ -160,26 +161,15 @@ export class SearchProductComponent implements OnInit {
 
   }
 
-  seeAll(parent: string): void {
+  see(parent: string, showAll: boolean): void {
     var obj = this.filtersShouAll.find(x => x.name == this.getFilterId(parent))
     if (obj) {
-      obj.value = true;
+      if (showAll) obj.value = true;
+      else obj.value = false;
     }
     else {
-      this.filtersShouAll.push({ name: this.getFilterId(parent), value: true })
+      this.filtersShouAll.push({ name: this.getFilterId(parent), value: showAll ? true : false })
     }
-    console.log(this.filtersShouAll);
-  }
-
-  seeLess(parent: string): void {
-    var obj = this.filtersShouAll.find(x => x.name == this.getFilterId(parent))
-    if (obj) {
-      obj.value = false;
-    }
-    else {
-      this.filtersShouAll.push({ name: this.getFilterId(parent), value: false })
-    }
-    console.log(this.filtersShouAll);
   }
 
   isShowAll(filter: string): boolean {
@@ -187,7 +177,6 @@ export class SearchProductComponent implements OnInit {
     if (obj) {
       return obj.value;
     }
-    console.log(obj);
     return false;
   }
 }

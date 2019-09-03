@@ -32,7 +32,7 @@ export class SearchSupplierComponent implements OnInit {
           this.suppliers = suppliers;
           this.isLoading = false;
           this.pagedItems = this.suppliers;
-          console.log(JSON.stringify(this.pagedItems));
+          //console.log(JSON.stringify(this.pagedItems));
         }
       });      
     }
