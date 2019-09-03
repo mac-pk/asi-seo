@@ -5,7 +5,7 @@
                     <a class="page-link" href="#" tabindex="-1">Page:</a>
                 </li>
                 <li class="page-item">
-                    <input type="text" value={{currPage}} (input)="onPagerChange($event.target.value)"
+                    <input type="text" [(ngModel)]="currPage" (keyup.enter)="onPagerChange($event.target.value)"
                         class="form-control pagnation-input" digitOnly >
                 </li>
 
@@ -13,7 +13,7 @@
                     <a class="page-link" href="#">Of {{totalPages}}</a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link arrows" (click)="setPage(pager.currentPage - 1)">
+                    <a class="page-link arrows" (click)="setPage(pager.currentPage - 1)" >
                         <i class="material-icons">
                             keyboard_arrow_left
                         </i>

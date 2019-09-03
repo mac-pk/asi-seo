@@ -28,6 +28,11 @@ export class PageComponent implements OnInit {
   }
 
   onPagerChange(pageValue: number) {
+    if (pageValue < 1)
+    {
+      this.currPage = 1;
+    }
+
     this.setPage(pageValue);
   }   
 
