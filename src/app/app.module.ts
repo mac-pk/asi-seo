@@ -47,8 +47,7 @@ import { DigitOnlyDirective } from './shared/digit-only/digit-only.directive';
   ]
   ,
   bootstrap: [AppComponent],
-  entryComponents: [BulkEditModalComponent]
-  ,
+  entryComponents: [BulkEditModalComponent],
   exports: [DigitOnlyDirective]
 })
 export class AppModule { }
