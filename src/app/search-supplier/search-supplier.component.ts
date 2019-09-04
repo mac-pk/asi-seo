@@ -16,28 +16,26 @@ export class SearchSupplierComponent implements OnInit {
   isLoading: boolean = false;
   pagedItems: any[];
 
-  constructor(private seoService: SeoService, 
-    private router : Router) { }
+  constructor(private seoService: SeoService,
+    private router: Router) { }
 
-    ngOnInit() { }
+  ngOnInit() { }
 
   searchSuppliers(searchSupplierForm: NgForm): void {
     this.isSearchPerformed = false;
     this.isLoading = true;
 
-    if (searchSupplierForm.valid)
-    {
-      this.seoService.getSuppliers(this.searchText).subscribe(suppliers => {
+    if (searchSupplierForm.valid) {
+      this.seoService.getSuppliers(this.searchText, 0).subscribe(suppliers => {
         if (suppliers.length > 0) {
           this.suppliers = suppliers;
           this.isLoading = false;
           this.pagedItems = this.suppliers;
           //console.log(JSON.stringify(this.pagedItems));
         }
-      });      
+      });
     }
-    else
-    {
+    else {
       this.isSearchPerformed = true;
       this.isLoading = false;
       this.pagedItems = null;
@@ -46,9 +44,9 @@ export class SearchSupplierComponent implements OnInit {
 
   viewProducts(): void {
     this.router.navigate(['/searchProduct']);
-  }  
+  }
 
   onPagerChange(pagedList: any[]) {
     this.pagedItems = pagedList;
-  }  
+  }
 }

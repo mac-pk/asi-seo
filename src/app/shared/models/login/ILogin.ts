@@ -1,10 +1,10 @@
-export interface ISeoLogin{
+export interface ISeoLogin {
     Asi: string;
     Username: string;
     Password: string;
 }
 
-export interface ISeoLoginResponse{
+export interface ISeoLoginResponse {
     AccessToken: string;
     TokenExpirationTime: string;
 }

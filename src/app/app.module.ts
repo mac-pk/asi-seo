@@ -39,9 +39,9 @@ import { DigitOnlyDirective } from './shared/digit-only/digit-only.directive';
     SeoService,
     AuthGuard,
     {
-      provide : HTTP_INTERCEPTORS,
-      useClass : AuthInterceptor,
-      multi : true
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
     },
     BulkEditModalComponent
   ]

@@ -19,7 +19,7 @@ export class DigitOnlyDirective {
     'Copy',
     'Paste'
   ];
-  @Input() decimal? = false;
+  @Input() decimal?= false;
   inputElement: HTMLElement;
 
   constructor(public el: ElementRef) {

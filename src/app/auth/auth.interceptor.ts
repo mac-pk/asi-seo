@@ -17,18 +17,18 @@ export class AuthInterceptor implements HttpInterceptor {
             const clonedreq = req.clone({
                 headers: req.headers.set("Authorization", "Bearer " + localStorage.getItem('userToken'))
             });
-                const started = Date.now();
-                return next.handle(clonedreq).pipe(
-                    tap(event => {
-                      if (event instanceof HttpResponse) {
+            const started = Date.now();
+            return next.handle(clonedreq).pipe(
+                tap(event => {
+                    if (event instanceof HttpResponse) {
                         const elapsed = Date.now() - started;
                         //console.log(`Request for ${req.urlWithParams} took ${elapsed} ms.`);
-                      }
-                    }, error => {
-                        if (error.status === 401)
+                    }
+                }, error => {
+                    if (error.status === 401)
                         this.router.navigateByUrl('/login');
-                    })
-                  )                
+                })
+            )
         }
         else {
             return next.handle(req.clone());

@@ -9,8 +9,8 @@ import { Router, NavigationStart } from '@angular/router';
 export class AppComponent {
   showHead: boolean = false;
 
-  constructor(private router : Router) {
-   router.events.forEach((event) => {
+  constructor(private router: Router) {
+    router.events.forEach((event) => {
       if (event instanceof NavigationStart) {
         if ((event['url'] == '/login') || (event['url'] == '/')) {
           this.showHead = false;
@@ -19,15 +19,15 @@ export class AppComponent {
         }
       }
     });
-}
-
-ngOnInit() {
-  const timer = JSON.parse(localStorage.getItem('timer'));
-  if (timer && (Date.now() > timer)) {
-    this.logout();
   }
-}
-  
+
+  ngOnInit() {
+    const timer = JSON.parse(localStorage.getItem('timer'));
+    if (timer && (Date.now() > timer)) {
+      this.logout();
+    }
+  }
+
   logout() {
     localStorage.removeItem('userToken');
     this.router.navigate(['/login']);

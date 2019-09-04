@@ -7,7 +7,9 @@
     </div>
     <div class="col text-right">
     </div>
-    <app-page *ngIf='pagedItems && pagedItems.length > 0' [currentList]='suppliers' (pagedList)="onPagerChange($event)">
+    <app-page *ngIf='pagedItems && pagedItems.length > 0' 
+        [currentList]='suppliers' 
+        (pagedList)="onPagerChange($event)">
     </app-page>
 </div>
 <div class="row h-100">

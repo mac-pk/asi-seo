@@ -4,7 +4,6 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap, delay } from 'rxjs/operators';
 import { ISeoLogin, ISeoLoginResponse } from './shared/models/login/ILogin';
 import { ISupplier } from './shared/models/searchSuppliers/ISearchSuppliers';
-import { SUPPLIERS } from './mock-seo';// remove later with api
 import { environment } from '../environments/environment';
 
 @Injectable({ providedIn: 'root' })
@@ -14,10 +13,6 @@ export class SeoService {
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
-
-  httpOptionsNoAuth = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json', 'No-Auth': 'True' })
   };
 
   constructor(
@@ -45,7 +40,7 @@ export class SeoService {
     //console.log(`SeoService: ${message}`);
   }
 
-  getSuplierProducts(companyId: number = null): Observable<any>{
+  getSuplierProducts(companyId: number = null): Observable<any> {
     //const _configUrl = '../assets/json/searchproduct.json';
     return this.http.get(environment.mockBaseUrl + "v2/5d67f1563300000ec7e65b5f");
   };
@@ -66,7 +61,10 @@ export class SeoService {
     );
   }
 
-  getSuppliers(searchText: string): Observable<ISupplier[]> {
-    return of(SUPPLIERS).pipe(delay(1500));
+  getSuppliers(searchText: string, offset: number): Observable<ISupplier[]> {
+    //return of(SUPPLIERS);//.pipe(delay(1500));
+    return this.http.get(environment.mockBaseUrl + "v2/5d6f8f5531000071006606f6").pipe(
+      tap(() => this.log(`Search for Supplier=${searchText}`)),
+      catchError(this.handleError<any>('getSuppliers'))).pipe(delay(1000));
   }
 }

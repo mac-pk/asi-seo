@@ -6,21 +6,20 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: [ './login.component.css' ]
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginSeo: ISeoLogin = {Asi: '', Username: '', Password: ''};
+  loginSeo: ISeoLogin = { Asi: '', Username: '', Password: '' };
   //loginSeo: ISeoLogin = {Asi: '68507', Username: 'na68507', Password: 'p@kistan123'};
   error: string = '';
   isLoading: boolean = false;
   showHead: boolean = false;
   rememberPreference: boolean = false;
 
-  constructor(private seoService: SeoService, private router : Router) { }
+  constructor(private seoService: SeoService, private router: Router) { }
 
   ngOnInit() {
-    if (localStorage.getItem('asiNumber') != null)
-    {
+    if (localStorage.getItem('asiNumber') != null) {
       this.rememberPreference = true;
       this.loginSeo.Asi = localStorage.getItem('asiNumber');
       this.loginSeo.Username = localStorage.getItem('username');
@@ -31,46 +30,39 @@ export class LoginComponent implements OnInit {
     this.error = '';
     this.isLoading = true;
     this.seoService.loginSeo(this.loginSeo)
-    .subscribe(
-      data => {
-        if (data.AccessToken)
-        {
-          const time_to_login = Date.now() + 86400000; //24 hours = 86400000 ms 
-          
-          if (this.rememberPreference)
-          {
-            localStorage.setItem('asiNumber', this.loginSeo.Asi);
-            localStorage.setItem('username', this.loginSeo.Username);
-          }
-          else
-          {
-            localStorage.removeItem('asiNumber');
-            localStorage.removeItem('username');
-          }
+      .subscribe(
+        data => {
+          if (data.AccessToken) {
+            const time_to_login = Date.now() + 86400000; //24 hours = 86400000 ms 
 
-          localStorage.setItem('userToken', data.AccessToken);
-          localStorage.setItem('timer', JSON.stringify(time_to_login));
-          this.isLoading = false;
-          this.router.navigate(['/searchSupplier']);
-        }
-        else
-        {
-          if (data.error && data.error.ExceptionMessage)
-          {
-            this.error = data.error.ExceptionMessage;
-          }    
-          else if (data.error && data.error.error && data.error.error.Message)
-          {
-            this.error = data.error.error.Message;
-          }  
-          else
-          {
-            this.error = data.error.Message;
+            if (this.rememberPreference) {
+              localStorage.setItem('asiNumber', this.loginSeo.Asi);
+              localStorage.setItem('username', this.loginSeo.Username);
+            }
+            else {
+              localStorage.removeItem('asiNumber');
+              localStorage.removeItem('username');
+            }
+
+            localStorage.setItem('userToken', data.AccessToken);
+            localStorage.setItem('timer', JSON.stringify(time_to_login));
+            this.isLoading = false;
+            this.router.navigate(['/searchSupplier']);
           }
-        }
+          else {
+            if (data.error && data.error.ExceptionMessage) {
+              this.error = data.error.ExceptionMessage;
+            }
+            else if (data.error && data.error.error && data.error.error.Message) {
+              this.error = data.error.error.Message;
+            }
+            else {
+              this.error = data.error.Message;
+            }
+          }
 
           //console.log(this.error);
-          this.isLoading = false; 
-      });   
+          this.isLoading = false;
+        });
   }
 }
