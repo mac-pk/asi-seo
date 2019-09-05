@@ -42,7 +42,7 @@ export class SeoService {
 
   getSuplierProducts(companyId: number = null): Observable<any> {
     //const _configUrl = '../assets/json/searchproduct.json';
-    return this.http.get(environment.mockBaseUrl + "v2/5d67f1563300000ec7e65b5f");
+    return this.http.get(environment.mockBaseUrl + "v2/5d6fba903100000d006608ac");
   };
 
   getfacetSearch(companyId: number) {

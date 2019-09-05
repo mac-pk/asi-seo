@@ -42,8 +42,8 @@ export class SearchSupplierComponent implements OnInit {
     }
   }
 
-  viewProducts(): void {
-    this.router.navigate(['/searchProduct']);
+  viewProducts(companyId): void {
+    this.router.navigate(['/searchProduct'], { queryParams: { id: companyId } });
   }
 
   onPagerChange(pagedList: any[]) {

@@ -133,7 +133,7 @@
                     <a href="#{{getFilterId(search.Facet)}}" data-toggle="collapse">{{search.Facet}}</a>
                     <ul class="side-sub-nav-list collapse" id="{{getFilterId(search.Facet)}}">
                         <li *ngFor="let facetTerm of search.Terms; let i = index"
-                            [hidden]="i > 0 && !isShowAll(search.Facet)">
+                            [hidden]="i >= 5  && !isShowAll(search.Facet)">
                             <a (click)="facetTermClick(facetTerm)">{{facetTerm.Term}} ({{facetTerm.Count}})</a>
                         </li>
                         <li [hidden]="isShowAll(search.Facet)">
@@ -160,10 +160,9 @@
             <div class="row">
                 <div class="col-8">
                     <div class="custom-control custom-checkbox my-1 mr-sm-2">
-                        <input type="checkbox" [checked]=AllControls name="allcontrols" id="allcontrols"
-                            (change)="onFilterChange($event)" />
-                        <!-- <input type="checkbox" class="custom-control-input" id="customControlInline4"> -->
-                        <label class="label-black" for="customControlInline">Select All</label>
+                        <input type="checkbox" name="selectAll" id="selectAll"
+                            (change)="onSelectAllProducts($event)" [(ngModel)]="isSelectAll" />
+                        <label class="label-black" for="selectAll">Select All</label>
                     </div>
                 </div>
                 <div class="col-2 pl-2">
@@ -181,8 +180,7 @@
                 <div class="col-8 pl-2 d-flex pt-3">
                     <div class="select-all-box p-0">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" [(ngModel)]=product.CanBlkPblsh name="{{'chk_'+product.ID}}"
-                                id="ID-01" (change)="onSingleChange(product.CanBlkPblsh,product.ID)" />
+                            <input type="checkbox" [(ngModel)]="product.IsSelected" />
                         </div>
                     </div>
                     <div class="result-img">
@@ -205,7 +203,7 @@
 
                 </div>
                 <div class="col-2 d-flex align-content-center flex-wrap">
-                    <label>{{ product.SEOStatus }}</label>
+                    <label>{{ seoStausEnum[product.SEOStatus] }}</label>
                 </div>
                 <div class="col-2 d-flex align-content-center flex-wrap">
                     <button type="submit" class="btn esp-btn-white my-1 mr-2 p-1">Start

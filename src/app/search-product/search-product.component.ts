@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { SeoService } from '../seo.service';
 import { ISearchProduct } from '../shared/models/SearchProduct/ISearchProduct';
 import { IFacetTerms } from '../shared/models/SearchProduct/IFacetTerms';
@@ -8,6 +9,7 @@ import { PagerService } from '../shared/services/pager.service';
 import { MyOrderByPipe } from '../shared/sort/sort.pipe';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BulkEditModalComponent } from '../modals/bulk-edit-modal/bulk-edit-modal.component';
+import { filter } from 'rxjs/operators';
 
 
 @Component({
@@ -39,6 +41,8 @@ export class SearchProductComponent implements OnInit {
   isExactMatch: boolean = false;
   showAll_seoStatus: boolean = false;
   seoStausEnum = EnumSeoStatus;
+  isSelectAll: boolean = false;
+  companyId: number;
 
   constructor(
     private _SeoService: SeoService,
@@ -46,22 +50,51 @@ export class SearchProductComponent implements OnInit {
     private orderPipe: MyOrderByPipe,
     private changeDetectorRef: ChangeDetectorRef,
     private modalService: NgbModal,
-  ) { }
+    private activeRoute: ActivatedRoute,
+    private router: Router
+  ) {
+    this.activeRoute.queryParams.subscribe(params => {
+      this.companyId = params['id'];
+      if (!this.companyId)
+        this.router.navigate(['/searchSupplier']);
+    });
+  }
 
   ngOnInit() {
-    this.isLoading = true;
+    if (this.companyId) {
+      this.getSupplierProducts(this.companyId);
+    }
+  }
 
-    this._SeoService.getSuplierProducts().subscribe(data => {
+  loadProducts(products: any[]) {
+    if (products.length) {
+      this.products = products.map((product) => new ISearchProduct(product));
+    }
+
+    //   //console.log(this.products);
+    //   // paging method
+    this.setPage(1);
+    //   //console.log(this.objmodel);
+    // });
+  }
+
+  loadFilters(filters: any[]) {
+    if (filter.length) {
+      this.objSearchFilter = filters;
+    }
+  }
+
+  getSupplierProducts(companyId: number, searchText: string = '', filters: any[] = []) {
+    this.showLoader(true);
+
+    this._SeoService.getSuplierProducts(companyId).subscribe(data => {
       if (data) {
-        this.products = data.Products;
-        this.objSearchFilter = data.Filters;
+        this.loadProducts(data.Products);
+        this.loadFilters(data.Filters);
         this.totalCount = data.TotalCount;
-        // paging method
-        this.setPage(1);
-        //console.log(this.objmodel);
       }
 
-      this.isLoading = false;
+      this.showLoader(false);
     });
   }
 
@@ -74,55 +107,22 @@ export class SearchProductComponent implements OnInit {
     // get current page of items
     this.pagedItems = this.products.slice(this.pager.startIndex, this.pager.endIndex + 1);
 
-    this.onSingleChange(true, 0);
+    //this.onSingleChange(true, 0);
   }
 
   onPagerChange(pageValue: string) {
     this.setPage(parseInt(pageValue));
   }
-  onFilterChange(values: any) {
-
-    if (this.pagedItems.length > 0) {
-      if (values.currentTarget.checked) {
-        for (let chkObj of this.pagedItems) {
-          chkObj.CanBlkPblsh = true;
-        }
-      }
-      else {
-        for (let chkObj of this.pagedItems) {
-          chkObj.CanBlkPblsh = false;
-        }
-
-      }
-    }
-  }
-
-  onSingleChange(modl: any, id: any) {
-    if (this.pagedItems.length > 0) {
-      if (modl) {
-        let chkAllControls = true;
-        for (let chkObj of this.pagedItems) {
-          if (chkAllControls) {
-            if (chkObj.CanBlkPblsh) {
-              this.AllControls = true;
-            } else {
-              this.AllControls = false;
-              chkAllControls = false;
-            }
-          }
-        }
-      }
-      else {
-        this.AllControls = false;
-      }
-      this.changeDetectorRef.markForCheck();
-    }
+  onSelectAllProducts(event) {
+    this.pagedItems.forEach((x) => x.IsSelected = this.isSelectAll);
   }
 
   searchClick(arg: any) {
-    this.showhideSearch = true;
-    this.searchtxt = arg;
-    this.mdlsearch = '';
+    if (arg) {
+      this.showhideSearch = true;
+      this.searchtxt = arg;
+      this.mdlsearch = '';
+    }
   }
   cancelSearch() {
     this.showhideSearch = false;
@@ -178,5 +178,9 @@ export class SearchProductComponent implements OnInit {
       return obj.value;
     }
     return false;
+  }
+
+  showLoader(show: boolean): void {
+    this.isLoading = show;
   }
 }
