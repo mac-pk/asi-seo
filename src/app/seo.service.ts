@@ -43,19 +43,14 @@ export class SeoService {
     //console.log(`SeoService: ${message}`);
   }
 
-  getSuplierProducts(companyId: number = null): Observable<any> {
-    //const _configUrl = '../assets/json/searchproduct.json';
-    return this.http.get(environment.mockBaseUrl + "v2/5d6fba903100000d006608ac");
+  getSuplierProducts(companyId: number, searchText: string, offset: number = 0, limit: number = 10): Observable<any> {
+    let params = new HttpParams()
+    .set("companyid", companyId.toString())
+    .set("offset", offset.toString())
+    .set("limit", limit.toString())
+    .set("searchterm", searchText);
+    return this.http.get(environment.apiBaseUrl + "SEOproducts", { params });
   };
-
-  getfacetSearch(companyId: number) {
-
-    const _configUrl = '../assets/json/facetSearch.json';
-    return this.http.get(_configUrl)
-      .pipe(map((response: Response) => {
-        return <any>response;
-      })).pipe(delay(1500));
-  }
 
   loginSeo(seo: ISeoLogin): Observable<any> {
     return this.http.post(this.loginUrl, seo, this.httpOptions).pipe(

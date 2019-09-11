@@ -10,8 +10,8 @@ export class PageComponent implements OnInit {
   pager: any = {};
   totalPages: number;
   currPage: number;
-  @Input() currentList: any[];
-  @Output() pagedList = new EventEmitter<any[]>();
+  @Input() totalCount: number;
+  @Output() navigate = new EventEmitter();
 
   constructor(private _Pager: PagerService) { }
 
@@ -20,19 +20,18 @@ export class PageComponent implements OnInit {
   }
 
   setPage(page: number) {
-    this.pager = this._Pager.getPager(this.currentList.length, page);
+    this.pager = this._Pager.getPager(this.totalCount, page);
     this.totalPages = this.pager.totalPages;
     this.currPage = this.pager.currentPage;
-    this.pagedList.emit(this.currentList.slice(this.pager.startIndex, this.pager.endIndex + 1));
-    //console.log(JSON.stringify(this.currentList));
   }
 
-  onPagerChange(pageValue: number) {
+  pageNavigate(pageValue: number) {
     if (pageValue < 1) {
       this.currPage = 1;
     }
 
     this.setPage(pageValue);
+    this.navigate.emit(this.pager);
   }
 
 }

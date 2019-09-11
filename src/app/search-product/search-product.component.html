@@ -24,40 +24,8 @@
             </i>Email Supplier</button>
 
     </div>
-    <app-page *ngIf='products && products.length > 0' [currentList]='products' (pagedList)="onPagerChange($event)">
+    <app-page *ngIf='products && products.length > 0' [totalCount]='totalCount' (navigate)="navigatePage($event)">
     </app-page>
-    <!-- <div class="col pagination-cont">
-        <nav class="float-right mt-2 esp-pagination">
-            <ul class="pagination">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Page:</a>
-                </li>
-                <li class="page-item">
-                    <input type="number" value={{currPage}} (input)="onPagerChange($event.target.value)"
-                        class="form-control pagnation-input">
-                </li>
-
-                <li class="page-item disabled" style="width:90px;">
-                    <a class="page-link" href="#">Of {{totalPages}}</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link arrows" (click)="setPage(pager.currentPage - 1)">
-                        <i class="material-icons">
-                            keyboard_arrow_left
-                        </i>
-                    </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link arrows" (click)="setPage(pager.currentPage + 1)">
-                        <i class="material-icons">
-                            keyboard_arrow_right
-                        </i>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div> -->
-
 </div>
 <div class="row h-100">
     <div class="col side-nav-toolbar pt-2 ">
@@ -168,7 +136,7 @@
             </div>
 
         </div>
-        <div class="col-12 result-box mt-2" *ngFor="let product of pagedItems | orderBy : customorder : reverse">
+        <div class="col-12 result-box mt-2" *ngFor="let product of products | orderBy : customorder : reverse">
             <div class="row">
                 <div class="col-8 pl-2 d-flex pt-3">
                     <div class="select-all-box p-0">
@@ -205,7 +173,7 @@
             </div>
 
         </div>
-        <div class="col-12">
+        <!-- <div class="col-12">
             <nav class="float-right mt-2 esp-pagination">
                 <ul class="pagination">
                     <li class="page-item disabled">
@@ -235,7 +203,11 @@
                     </li>
                 </ul>
             </nav>
+        </div> -->
+        <div class="col-12">
+            <app-page *ngIf='products && products.length > 0' [totalCount]='totalCount'
+                (navigate)="navigatePage($event)">
+            </app-page>
         </div>
-
     </div>
 </div>

@@ -69,27 +69,19 @@ export class SearchProductComponent implements OnInit {
   loadProducts(products: any[]) {
     if (products.length) {
       this.products = products.map((product) => new SearchProduct(product));
-      console.log(this.products);
     }
-
-    //   //console.log(this.products);
-    //   // paging method
-    this.setPage(1);
-    //   //console.log(this.objmodel);
-    // });
   }
 
   loadFilters(filters: any[]) {
     if (filter.length) {
       this.objSearchFilter = filters.map((x) => new SearchFilter(x.Facet, x.Terms));
-      console.log(this.objSearchFilter);
     }
   }
 
-  getSupplierProducts(companyId: number, searchText: string = '', filters: any[] = []) {
+  getSupplierProducts(companyId: number, offset: number = 0, searchText: string = '', ) {
     this.showLoader(true);
 
-    this._SeoService.getSuplierProducts(companyId).subscribe(data => {
+    this._SeoService.getSuplierProducts(companyId, searchText, offset).subscribe(data => {
       if (data) {
         this.loadProducts(data.Products);
         this.loadFilters(data.Filters);
@@ -100,23 +92,12 @@ export class SearchProductComponent implements OnInit {
     });
   }
 
-  setPage(page: number) {
-    // get pager object from service
-    this.pager = this._Pager.getPager(this.products.length, page);
-    this.totalPages = this.pager.totalPages;
-    this.currPage = this.pager.currentPage;
-
-    // get current page of items
-    this.pagedItems = this.products.slice(this.pager.startIndex, this.pager.endIndex + 1);
-
-    //this.onSingleChange(true, 0);
+  navigatePage(page: any) {
+    this.getSupplierProducts(this.companyId, page.startIndex ? page.startIndex : 0);
   }
-
-  onPagerChange(pageValue: string) {
-    this.setPage(parseInt(pageValue));
-  }
+  
   onSelectAllProducts(event) {
-    this.pagedItems.forEach((x) => x.IsSelected = this.isSelectAll);
+    this.products.forEach((x) => x.IsSelected = this.isSelectAll);
   }
 
   searchClick(arg: any) {
@@ -153,10 +134,6 @@ export class SearchProductComponent implements OnInit {
 
   openBulkEdit() {
     this.modalService.open(BulkEditModalComponent, { backdrop: 'static', size: 'lg' });
-  }
-
-  getFilterId(filter: string): string {
-    return filter.replace(/\s/g, "_");
   }
 
   applyFilter(filterBy: string): void {
