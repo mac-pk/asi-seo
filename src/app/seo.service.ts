@@ -28,7 +28,7 @@ export class SeoService {
   private handleError<T>(operation = 'operation') {
     return (error: any): Observable<T> => {
       // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
+      //console.error(error); // log to console instead
 
       // TODO: better job of transforming error for user consumption
       this.log(`${operation} failed: ${error.Message}`);
@@ -70,7 +70,7 @@ export class SeoService {
     return this.http
       .get(this.supplierUrl, { params })
       .pipe(map((response: any) => {
-        console.log(response);
+        //console.log(response);
         return response.map(item => item.Results)[0];
       })
       );

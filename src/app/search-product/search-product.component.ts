@@ -73,7 +73,7 @@ export class SearchProductComponent implements OnInit {
   }
 
   loadFilters(filters: any[]) {
-    if (filter.length) {
+    if (filters.length) {
       this.objSearchFilter = filters.map((x) => new SearchFilter(x.Facet, x.Terms));
     }
   }

@@ -104,7 +104,7 @@
                             <a (click)="facetTermClick(facetTerm)">{{facetTerm.Term}} ({{facetTerm.Count}})</a>
                         </li>
                         <li>
-                            <a class="see-all" (click)="toggleSee(search, true)">See
+                            <a class="see-all" (click)="toggleSee(search)">See
                                 {{ !search.SeeAll ? "All" : "Less" }}
                                 <i class="material-icons">
                                     {{ !search.SeeAll ? "add_circle" : "remove_circle" }}
