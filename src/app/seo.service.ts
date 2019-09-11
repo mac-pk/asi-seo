@@ -10,16 +10,15 @@ import { environment } from '../environments/environment';
 export class SeoService {
 
   private loginUrl = environment.apiBaseUrl + 'login';
-  private Filters: any[] = [];
+  private supplierUrl = environment.apiBaseUrl + 'Companies';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
   constructor(
-    private http: HttpClient) { 
-      this.Filters = [];
-    }
+    private http: HttpClient) {
+  }
 
   /**
    * Handle Http operation that failed.
@@ -45,10 +44,10 @@ export class SeoService {
 
   getSuplierProducts(companyId: number, searchText: string, offset: number = 0, limit: number = 10): Observable<any> {
     let params = new HttpParams()
-    .set("companyid", companyId.toString())
-    .set("offset", offset.toString())
-    .set("limit", limit.toString())
-    .set("searchterm", searchText);
+      .set("companyid", companyId.toString())
+      .set("offset", offset.toString())
+      .set("limit", limit.toString())
+      .set("searchterm", searchText);
     return this.http.get(environment.apiBaseUrl + "SEOproducts", { params });
   };
 
@@ -59,27 +58,21 @@ export class SeoService {
     );
   }
 
-  getSuppliers(searchText: string, offset: number): Observable<any> {
-    //this.Filters = [];
-    this.Filters.push({ searchterm: searchText });
+  getSuppliers(searchText: string, offset: number = 0, limit: number = 10): Observable<ISupplier[]> {
+    let filters: any[] = [];
+    filters.push({ searchterm: searchText });
+
     let params = new HttpParams()
-      .set("Filters", JSON.stringify(this.Filters));
+      .set("filters", JSON.stringify(filters))
+      .set("offset", offset.toString())
+      .set("limit", limit.toString());
 
-      return this.http
-          .get(environment.apiBaseUrl + "Companies", { params })
-          .pipe(map((response: any) => {
-            console.log(response);
-              return response.map(item => item.Results)[0];
-            })
-          );
-    
-    //return this.http.get(environment.apiBaseUrl + "Companies", { params }).
-    //   return this.http.get(environment.apiBaseUrl + "Companies", { params })
-    // .pipe(tap(() => this.log(`Search for Supplier=${searchText}`)),
-    //   catchError(this.handleError<any>('getSuppliers'))).pipe(delay(1000));
-
-      // search$(searchModel: ClaimSearch): Observable<any[]> {
-        
-      // }
+    return this.http
+      .get(this.supplierUrl, { params })
+      .pipe(map((response: any) => {
+        console.log(response);
+        return response.map(item => item.Results)[0];
+      })
+      );
   }
 }

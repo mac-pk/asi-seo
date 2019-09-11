@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SeoService } from '../seo.service';
 import { ISupplier } from '../shared/models/searchSuppliers/ISearchSuppliers';
 import { Router } from '@angular/router';
@@ -14,32 +14,39 @@ export class SearchSupplierComponent implements OnInit {
   searchText: string = '';
   isSearchPerformed: boolean = false;
   isLoading: boolean = false;
-  pagedItems: any[];
+  noSearchResult: boolean = false;
+  totalCount: number = 0;
+  searchSupplierFrm: NgForm;
 
   constructor(private seoService: SeoService,
     private router: Router) { }
 
   ngOnInit() { }
 
-  searchSuppliers(searchSupplierForm: NgForm): void {
+  searchSuppliers(searchSupplierForm: NgForm, offset: number = 0): void {
+    this.searchSupplierFrm = searchSupplierForm;
     this.isSearchPerformed = false;
-    this.isLoading = true;
+    this.noSearchResult = false;
+    this.showLoader(true);
 
-    if (searchSupplierForm.valid) {
-      this.seoService.getSuppliers(this.searchText, 0).subscribe(suppliers => {
+    if (this.searchSupplierFrm.valid) {
+      this.seoService.getSuppliers(this.searchText, offset).subscribe(suppliers => {
         console.log(suppliers);
         if (suppliers.length > 0) {
           this.suppliers = suppliers;
-          this.isLoading = false;
-          this.pagedItems = this.suppliers;
-          //console.log(JSON.stringify(this.pagedItems));
+          this.totalCount = 500 // this will be returned by the api;
         }
+        else {
+          this.noSearchResult = true;
+          this.suppliers = null;
+        }
+        this.showLoader(false);
       });
     }
     else {
       this.isSearchPerformed = true;
-      this.isLoading = false;
-      this.pagedItems = null;
+      this.showLoader(false);
+      this.suppliers = null;
     }
   }
 
@@ -47,7 +54,11 @@ export class SearchSupplierComponent implements OnInit {
     this.router.navigate(['/searchProduct'], { queryParams: { id: companyId } });
   }
 
-  onPagerChange(pagedList: any[]) {
-    this.pagedItems = pagedList;
+  showLoader(show: boolean): void {
+    this.isLoading = show;
+  }
+
+  navigatePage(page: any) {
+    this.searchSuppliers(this.searchSupplierFrm, page.startIndex ? page.startIndex : 0);
   }
 }

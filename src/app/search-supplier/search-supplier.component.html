@@ -7,8 +7,8 @@
     </div>
     <div class="col text-right">
     </div>
-    <app-page *ngIf='pagedItems && pagedItems.length > 0' 
-        >
+    <app-page *ngIf='suppliers && suppliers.length > 0' [totalCount]='totalCount'
+        (navigate)="navigatePage($event)">
     </app-page>
 </div>
 <div class="row h-100">
@@ -28,13 +28,11 @@
                                 </i></button>
                         </div>
                     </div>
-                    <!-- <input type="text" digitOnly/> -->
-                    <!-- <div *ngIf="isSearchPerformed && searchSupplierText.invalid && (searchSupplierText.dirty || searchSupplierText.touched)" class="error text-danger">
-                    <div *ngIf="pagedItems == null">
+                    <div *ngIf="noSearchResult && (searchSupplierText.dirty || searchSupplierText.touched)"
+                        class="error text-danger">
                         <i class="material-icons">info</i>
                         0 results returned
                     </div>
-                </div> -->
                     <div *ngIf="isSearchPerformed && searchSupplierText.invalid" class="error text-danger">
                         <div *ngIf="searchSupplierText.errors.required">
                             <i class="material-icons">info</i>
@@ -45,11 +43,11 @@
 
             </form>
             <div class="clearfix"></div>
-            <div *ngIf='pagedItems && pagedItems.length > 0'>
-                <div class="row pl-3 mb-4" *ngFor="let supplier of pagedItems">
+            <div *ngIf='suppliers && suppliers.length > 0'>
+                <div class="row pl-3 mb-4" *ngFor="let supplier of suppliers">
                     <div class="col-12 col-md-6 col-lg-3  float-left mt-2 ">
                         <div class="d-block member-details p-2 pl-3">
-                            <h6 class="mt-3"><span class="label-red">{{supplier.CompanyId}}</span>
+                            <h6 class="mt-3"><span class="label-red">{{supplier.AsiNumber}}</span>
                                 {{supplier.CompanyName}}</h6>
                             <p class="mb-0">{{supplier.Address1}}</p>
                             <p class="mb-0">{{supplier.City}} {{supplier.StateCode}} {{supplier.PostalCode}}</p>
@@ -101,7 +99,8 @@
                 </div>
             </div>
             <div class=" float-right">
-                <app-page *ngIf='pagedItems && pagedItems.length > 0' >
+                <app-page *ngIf='suppliers && suppliers.length > 0' [totalCount]='totalCount'
+                    (navigate)="navigatePage($event)">
                 </app-page>
 
             </div>

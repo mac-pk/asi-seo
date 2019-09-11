@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginSeo: ISeoLogin = { Asi: '', Username: '', Password: '' };
-  //loginSeo: ISeoLogin = {Asi: '68507', Username: 'na68507', Password: 'p@kistan123'};
+  //loginSeo: ISeoLogin = {Asi: '30232', Username: 'umarejaz', Password: 'Asiqa2014a'};
   error: string = '';
   isLoading: boolean = false;
   showHead: boolean = false;
