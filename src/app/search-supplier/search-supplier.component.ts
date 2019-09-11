@@ -27,6 +27,7 @@ export class SearchSupplierComponent implements OnInit {
 
     if (searchSupplierForm.valid) {
       this.seoService.getSuppliers(this.searchText, 0).subscribe(suppliers => {
+        console.log(suppliers);
         if (suppliers.length > 0) {
           this.suppliers = suppliers;
           this.isLoading = false;

@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SeoService } from '../seo.service';
-import { ISearchProduct } from '../shared/models/SearchProduct/ISearchProduct';
-import { IFacetTerms } from '../shared/models/SearchProduct/IFacetTerms';
-import { ISearchFilter } from '../shared/models/SearchProduct/ISearchFilter';
+import { SearchProduct } from '../shared/models/searchProduct/SearchProduct';
+import { FacetTerms } from '../shared/models/searchProduct/FacetTerms';
+import { SearchFilter } from '../shared/models/searchProduct/SearchFilter';
 import { EnumSeoStatus } from '../shared/models/searchProduct/EnumSeoStatus';
 import { PagerService } from '../shared/services/pager.service';
 import { MyOrderByPipe } from '../shared/sort/sort.pipe';
@@ -19,10 +19,10 @@ import { filter } from 'rxjs/operators';
 })
 export class SearchProductComponent implements OnInit {
 
-  products: ISearchProduct[] = [];
-  objSearchFilter: ISearchFilter[] = [];
-  selectedFacetTerms: IFacetTerms[] = [];
-  filtersShouAll: any = [];
+  products: SearchProduct[] = [];
+  objSearchFilter: SearchFilter[] = [];
+  selectedFacetTerms: FacetTerms[] = [];
+  seoStatusShowAll: boolean = false;
 
   // pager object
   pager: any = {};
@@ -68,7 +68,8 @@ export class SearchProductComponent implements OnInit {
 
   loadProducts(products: any[]) {
     if (products.length) {
-      this.products = products.map((product) => new ISearchProduct(product));
+      this.products = products.map((product) => new SearchProduct(product));
+      console.log(this.products);
     }
 
     //   //console.log(this.products);
@@ -80,7 +81,8 @@ export class SearchProductComponent implements OnInit {
 
   loadFilters(filters: any[]) {
     if (filter.length) {
-      this.objSearchFilter = filters;
+      this.objSearchFilter = filters.map((x) => new SearchFilter(x.Facet, x.Terms));
+      console.log(this.objSearchFilter);
     }
   }
 
@@ -129,7 +131,7 @@ export class SearchProductComponent implements OnInit {
     this.searchtxt = '';
     this.mdlsearch = '';
   }
-  cancelItem(objFaceterm: IFacetTerms) {
+  cancelItem(objFaceterm: FacetTerms) {
     if (this.selectedFacetTerms && this.selectedFacetTerms.length > 0) {
       if (this.selectedFacetTerms.some(element => element.Term.includes(objFaceterm.Term))) {
         // this.data = this.selectedFacetTerm.filter(item => item !== data_item);
@@ -137,7 +139,7 @@ export class SearchProductComponent implements OnInit {
       }
     }
   }
-  facetTermClick(objFaceterm: IFacetTerms) {
+  facetTermClick(objFaceterm: FacetTerms) {
     if (this.selectedFacetTerms && this.selectedFacetTerms.length > 0) {
       if (this.selectedFacetTerms.some(element => element.Term.includes(objFaceterm.Term))) {
 
@@ -161,23 +163,12 @@ export class SearchProductComponent implements OnInit {
 
   }
 
-  see(parent: string, showAll: boolean): void {
-    var obj = this.filtersShouAll.find(x => x.name == this.getFilterId(parent))
-    if (obj) {
-      if (showAll) obj.value = true;
-      else obj.value = false;
-    }
-    else {
-      this.filtersShouAll.push({ name: this.getFilterId(parent), value: showAll ? true : false })
-    }
+  toggleSee(filter: SearchFilter): void {
+    filter.SeeAll = !filter.SeeAll;
   }
 
-  isShowAll(filter: string): boolean {
-    var obj = this.filtersShouAll.find(x => x.name == this.getFilterId(filter))
-    if (obj) {
-      return obj.value;
-    }
-    return false;
+  toggleSEOStatus(seeAll: boolean) {
+    this.seoStatusShowAll = !seeAll;
   }
 
   showLoader(show: boolean): void {

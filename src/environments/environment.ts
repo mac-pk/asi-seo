@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: "https://productservice.stage-asicentral.com/",
+  apiBaseUrl: "https://productservice.stage-asicentral.com/api/v5/",
   mockBaseUrl: "http://www.mocky.io/"
 };
 

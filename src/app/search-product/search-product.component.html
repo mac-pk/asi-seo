@@ -24,7 +24,9 @@
             </i>Email Supplier</button>
 
     </div>
-    <div class="col pagination-cont">
+    <app-page *ngIf='products && products.length > 0' [currentList]='products' (pagedList)="onPagerChange($event)">
+    </app-page>
+    <!-- <div class="col pagination-cont">
         <nav class="float-right mt-2 esp-pagination">
             <ul class="pagination">
                 <li class="page-item disabled">
@@ -54,7 +56,7 @@
                 </li>
             </ul>
         </nav>
-    </div>
+    </div> -->
 
 </div>
 <div class="row h-100">
@@ -100,20 +102,14 @@
                     <a href=".seo-status" data-toggle="collapse">Seo Status</a>
                     <ul class="side-sub-nav-list collapse seo-status">
                         <li *ngFor="let enum of seoStausEnum | keyvalue; let i = index"
-                            [hidden]="i > 2 && !isShowAll('seo_status')">
+                            [hidden]="i >= 3 && !seoStatusShowAll">
                             <a href="" (click)="applyFilter(enum.key)">{{enum.value}}</a>
                         </li>
-                        <li [hidden]="isShowAll('seo_status')">
-                            <a class="see-all" (click)="see('seo_status', true)">See All
+                        <li>
+                            <a class="see-all" (click)="toggleSEOStatus(seoStatusShowAll)">See
+                                {{ !seoStatusShowAll ? "All" : "Less" }}
                                 <i class="material-icons">
-                                    add_circle
-                                </i>
-                            </a>
-                        </li>
-                        <li [hidden]="!isShowAll('seo_status')">
-                            <a class="see-all" (click)="see('seo_status', false)">See Less
-                                <i class="material-icons">
-                                    remove_circle
+                                    {{ !seoStatusShowAll ? "add_circle" : "remove_circle" }}
                                 </i>
                             </a>
                         </li>
@@ -127,26 +123,23 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="">Product Type</a>
+                    <a href="#product_type" data-toggle="collapse">Product Type</a>
+                    <ul class="side-sub-nav-list collapse" id="product_type">
+                        <li><a href="#">Type 1</a></li>
+                        <li><a href="#">Type 2</a></li>
+                    </ul>
                 </li>
                 <li *ngFor="let search of objSearchFilter">
-                    <a href="#{{getFilterId(search.Facet)}}" data-toggle="collapse">{{search.Facet}}</a>
-                    <ul class="side-sub-nav-list collapse" id="{{getFilterId(search.Facet)}}">
-                        <li *ngFor="let facetTerm of search.Terms; let i = index"
-                            [hidden]="i >= 5  && !isShowAll(search.Facet)">
+                    <a href="#{{ search.FacetId }}" data-toggle="collapse">{{search.Facet}}</a>
+                    <ul class="side-sub-nav-list collapse" id="{{ search.FacetId }}">
+                        <li *ngFor="let facetTerm of search.Terms; let i = index" [hidden]="i >= 5 && !search.SeeAll">
                             <a (click)="facetTermClick(facetTerm)">{{facetTerm.Term}} ({{facetTerm.Count}})</a>
                         </li>
-                        <li [hidden]="isShowAll(search.Facet)">
-                            <a class="see-all" (click)="see(search.Facet, true)">See All
+                        <li>
+                            <a class="see-all" (click)="toggleSee(search, true)">See
+                                {{ !search.SeeAll ? "All" : "Less" }}
                                 <i class="material-icons">
-                                    add_circle
-                                </i>
-                            </a>
-                        </li>
-                        <li [hidden]="!isShowAll(search.Facet)">
-                            <a class="see-all" (click)="see(search.Facet, false)">See Less
-                                <i class="material-icons">
-                                    remove_circle
+                                    {{ !search.SeeAll ? "add_circle" : "remove_circle" }}
                                 </i>
                             </a>
                         </li>
@@ -160,8 +153,8 @@
             <div class="row">
                 <div class="col-8">
                     <div class="custom-control custom-checkbox my-1 mr-sm-2">
-                        <input type="checkbox" name="selectAll" id="selectAll"
-                            (change)="onSelectAllProducts($event)" [(ngModel)]="isSelectAll" />
+                        <input type="checkbox" name="selectAll" id="selectAll" (change)="onSelectAllProducts($event)"
+                            [(ngModel)]="isSelectAll" />
                         <label class="label-black" for="selectAll">Select All</label>
                     </div>
                 </div>

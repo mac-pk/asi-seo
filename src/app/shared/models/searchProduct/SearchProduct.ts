@@ -1,5 +1,5 @@
-export class ISearchProduct {
-
+export class SearchProduct {
+    
     constructor(product: any) {
         this.SEOStatus = product.SEOStatus;
         this.ProductStatus = product.ProductStatus;
