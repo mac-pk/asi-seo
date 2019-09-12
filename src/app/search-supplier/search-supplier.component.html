@@ -7,7 +7,7 @@
     </div>
     <div class="col text-right">
     </div>
-    <app-page *ngIf='suppliers && suppliers.length > 0' [totalCount]='totalCount'
+    <app-page *ngIf='suppliers && suppliers.length > 0' [currPage]='currPage' [totalCount]='totalCount'
         (navigate)="navigatePage($event)">
     </app-page>
 </div>
@@ -20,7 +20,7 @@
                     <h5 class="pt-2">Search for members</h5>
                     <p>Search by name or ASI number</p>
                     <div class="input-group  pt-2">
-                        <input type="text" class="form-control" [(ngModel)]="searchText" required autocomplete="off"
+                        <input type="text" class="form-control" [(ngModel)]="searchText" required autoFocus autocomplete="off"
                             placeholder="Search Suppliers" #searchSupplierText="ngModel" name="searchSupplierText">
                         <div class="input-group-append">
                             <button class="btn btn-search pt-2" type="submit"><i class="material-icons">
@@ -99,7 +99,7 @@
                 </div>
             </div>
             <div class=" float-right">
-                <app-page *ngIf='suppliers && suppliers.length > 0' [totalCount]='totalCount'
+                <app-page *ngIf='suppliers && suppliers.length > 0' [currPage]='currPage' [totalCount]='totalCount'
                     (navigate)="navigatePage($event)">
                 </app-page>
 

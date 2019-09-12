@@ -15,6 +15,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { BulkEditModalComponent } from './modals/bulk-edit-modal/bulk-edit-modal.component';
 import { PageComponent } from './shared/page/page.component';
 import { DigitOnlyDirective } from './shared/digit-only/digit-only.directive';
+import { AutoFocusDirective } from './shared/auto-focus/auto-focus.directive';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { DigitOnlyDirective } from './shared/digit-only/digit-only.directive';
     MyOrderByPipe,
     BulkEditModalComponent,
     PageComponent,
-    DigitOnlyDirective
+    DigitOnlyDirective,
+    AutoFocusDirective
   ],
   imports: [
     BrowserModule,

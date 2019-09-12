@@ -22,13 +22,15 @@ export class LoginComponent implements OnInit {
     if (localStorage.getItem('asiNumber') != null) {
       this.rememberPreference = true;
       this.loginSeo.Asi = localStorage.getItem('asiNumber');
-      this.loginSeo.Username = localStorage.getItem('username');
+      this.loginSeo.Username = localStorage.getItem('userName');
     }
   }
 
   loginAsiSeo(): void {
     this.error = '';
     this.isLoading = true;
+    this.loginSeo.Asi = this.loginSeo.Asi.trim();
+    this.loginSeo.Username = this.loginSeo.Username.trim();
     this.seoService.loginSeo(this.loginSeo)
       .subscribe(
         data => {
@@ -37,11 +39,11 @@ export class LoginComponent implements OnInit {
 
             if (this.rememberPreference) {
               localStorage.setItem('asiNumber', this.loginSeo.Asi);
-              localStorage.setItem('username', this.loginSeo.Username);
+              localStorage.setItem('userName', this.loginSeo.Username);
             }
             else {
               localStorage.removeItem('asiNumber');
-              localStorage.removeItem('username');
+              localStorage.removeItem('userName');
             }
 
             localStorage.setItem('userToken', data.AccessToken);
@@ -61,7 +63,6 @@ export class LoginComponent implements OnInit {
             }
           }
 
-          //console.log(this.error);
           this.isLoading = false;
         });
   }

@@ -12,7 +12,8 @@ export class AppComponent {
   constructor(private router: Router) {
     router.events.forEach((event) => {
       if (event instanceof NavigationStart) {
-        if ((event['url'] == '/login') || (event['url'] == '/')) {
+        if ((event['url'] == '/login') || (event['url'] == '/') ||
+          ((event['url'] == '/searchSupplier') && (localStorage.getItem('userToken') == null))) {
           this.showHead = false;
         } else {
           this.showHead = true;

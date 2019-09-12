@@ -70,7 +70,6 @@ export class SeoService {
     return this.http
       .get(this.supplierUrl, { params })
       .pipe(map((response: any) => {
-        //console.log(response);
         return response.map(item => item.Results)[0];
       })
       );

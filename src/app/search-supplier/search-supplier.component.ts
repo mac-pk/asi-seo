@@ -16,6 +16,7 @@ export class SearchSupplierComponent implements OnInit {
   isLoading: boolean = false;
   noSearchResult: boolean = false;
   totalCount: number = 0;
+  currPage: number = 0;
   searchSupplierFrm: NgForm;
 
   constructor(private seoService: SeoService,
@@ -29,12 +30,16 @@ export class SearchSupplierComponent implements OnInit {
     this.noSearchResult = false;
     this.showLoader(true);
 
+    if (offset == 0)
+    {
+      this.currPage = 1;
+    }
+
     if (this.searchSupplierFrm.valid) {
       this.seoService.getSuppliers(this.searchText, offset).subscribe(suppliers => {
-        //.log(suppliers);
         if (suppliers.length > 0) {
           this.suppliers = suppliers;
-          this.totalCount = 500 // this will be returned by the api;
+          this.totalCount = 36 // this will be returned by the api;
         }
         else {
           this.noSearchResult = true;
@@ -60,5 +65,6 @@ export class SearchSupplierComponent implements OnInit {
 
   navigatePage(page: any) {
     this.searchSuppliers(this.searchSupplierFrm, page.startIndex ? page.startIndex : 0);
+    this.currPage = +page.currentPage;
   }
 }

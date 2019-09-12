@@ -9,7 +9,7 @@ import { PagerService } from '../services/pager.service';
 export class PageComponent implements OnInit {
   pager: any = {};
   totalPages: number;
-  currPage: number;
+  @Input() currPage: number;
   @Input() totalCount: number;
   @Output() navigate = new EventEmitter();
 
@@ -29,7 +29,9 @@ export class PageComponent implements OnInit {
     if (pageValue < 1) {
       this.currPage = 1;
     }
+    //console.log(this.pager.currentPage + ' ' + pageValue + ' ' + this.currPage);
 
+    this.pager.currentPage = this.currPage;
     this.setPage(pageValue);
     this.navigate.emit(this.pager);
   }

@@ -51,7 +51,7 @@
                                     <div class="input-group-text">ASI/</div>
                                 </div>
 
-                                <input [(ngModel)]="loginSeo.Asi" #asiNumber="ngModel" required type="text"
+                                <input [(ngModel)]="loginSeo.Asi" #asiNumber="ngModel" required autoFocus type="text"
                                     class="form-control" placeholder="" name="asiNumber" autocomplete="off">
                             </div>
                             <div *ngIf="asiNumber.invalid && (asiNumber.dirty || asiNumber.touched)"
