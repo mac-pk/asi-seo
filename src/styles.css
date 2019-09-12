@@ -358,13 +358,36 @@ button:focus{
   background: #fff;
 
 }
+.remove-searched{
+  position:relative;
+  padding-left:0px !important;
+  margin-left:38px;
+  display:block;
+}
+  .remove-searched input {
+    background: none;
+    border: none;
+    position: absolute;
+    z-index: 1;
+    width: 14px;
+    height: 14px;
+    top: 4px;
+    left: 0px;
+  }
+  .remove-searched i {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+    float: left;
+  }
+.no-products h5 {
+  color: #344986;
+}
 
 
-
-
-@media only screen 
-  and (max-width: 1024px) {
- .section-logo{
+@media only screen
+and (max-width: 1024px) {
+  .section-logo{
   max-width: 100px;
 }
 

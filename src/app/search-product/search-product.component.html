@@ -56,13 +56,14 @@
                     <a>Your Search Terms</a>
                     <ul class="side-sub-nav-list">
                         <li *ngIf="showhideSearch">
-                            <a>{{searchtxt}} <input style="width:12px;height:12px;" (click)="cancelSearch()"
-                                    type="button" />
+                            <a class="remove-searched">{{searchtxt}} <input (click)="cancelSearch()"
+                                    type="button" /> <i class="material-icons">close</i>
                             </a>
                         </li>
                         <li *ngFor="let selected of selectedFacetTerms">
-                            <a>{{selected.Term}} <input style="width:12px;height:12px;" (click)="cancelItem(selected)"
-                                    type="button" /> </a>
+                            <a class="remove-searched">{{selected.Term}} <input (click)="cancelItem(selected)"
+                                    type="button" /> <i class="material-icons">close</i>
+                            </a>
                         </li>
                     </ul>
                 </li>
@@ -136,6 +137,9 @@
             </div>
 
         </div>
+      <div class="col-12 result-box no-products mt-2 text-center">
+        <h5 class="mt-5 text-normal">No Products Found!</h5>
+      </div>
         <div class="col-12 result-box mt-2" *ngFor="let product of products | orderBy : customorder : reverse">
             <div class="row">
                 <div class="col-8 pl-2 d-flex pt-3">
