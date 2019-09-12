@@ -37,7 +37,7 @@
 
         <div class="input-group  pt-2">
             <input type="text" class="form-control" [(ngModel)]="mdlsearch" placeholder="Search Product"
-                aria-describedby="btnSearch">
+                aria-describedby="btnSearch" (keyup.enter)="searchClick(mdlsearch)">
             <div class="input-group-append">
                 <button class="btn btn-search pt-2" id="btnSearch" (click)=searchClick(mdlsearch) type="button">
                     <i class="material-icons">
@@ -104,7 +104,7 @@
                         <li *ngFor="let facetTerm of search.Terms; let i = index" [hidden]="i >= 5 && !search.SeeAll">
                             <a (click)="facetTermClick(facetTerm)">{{facetTerm.Term}} ({{facetTerm.Count}})</a>
                         </li>
-                        <li>
+                        <li *ngIf="search.Terms.length > 5">
                             <a class="see-all" (click)="toggleSee(search)">See
                                 {{ !search.SeeAll ? "All" : "Less" }}
                                 <i class="material-icons">
