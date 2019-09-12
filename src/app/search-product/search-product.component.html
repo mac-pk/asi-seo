@@ -103,7 +103,7 @@
                         <li *ngFor="let facetTerm of search.Terms; let i = index" [hidden]="i >= 5 && !search.SeeAll">
                             <a (click)="facetTermClick(facetTerm)">{{facetTerm.Term}} ({{facetTerm.Count}})</a>
                         </li>
-                        <li>
+                        <li *ngIf="search.Terms.length > 5">
                             <a class="see-all" (click)="toggleSee(search)">See
                                 {{ !search.SeeAll ? "All" : "Less" }}
                                 <i class="material-icons">
