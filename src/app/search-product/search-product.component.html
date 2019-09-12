@@ -37,7 +37,7 @@
 
         <div class="input-group  pt-2">
             <input type="text" class="form-control" [(ngModel)]="mdlsearch" placeholder="Search Product"
-                aria-describedby="btnSearch">
+                aria-describedby="btnSearch" (keyup.enter)="searchClick(mdlsearch)">
             <div class="input-group-append">
                 <button class="btn btn-search pt-2" id="btnSearch" (click)=searchClick(mdlsearch) type="button">
                     <i class="material-icons">
