@@ -24,7 +24,7 @@
             </i>Email Supplier</button>
 
     </div>
-    <app-page *ngIf='products && products.length > 0' [totalCount]='totalCount' (navigate)="navigatePage($event)">
+    <app-page *ngIf='products && products.length > 0' [totalCount]='totalCount' [currPage]='currPage' (navigate)="navigatePage($event)">
     </app-page>
 </div>
 <div class="row h-100">
@@ -56,8 +56,8 @@
                     <a>Your Search Terms</a>
                     <ul class="side-sub-nav-list">
                         <li *ngIf="showhideSearch">
-                            <a class="remove-searched">{{searchtxt}} <input (click)="cancelSearch()"
-                                    type="button" /> <i class="material-icons">close</i>
+                            <a class="remove-searched">{{searchtxt}} <input (click)="cancelSearch()" type="button" /> <i
+                                    class="material-icons">close</i>
                             </a>
                         </li>
                         <li *ngFor="let selected of selectedFacetTerms">
@@ -137,10 +137,10 @@
             </div>
 
         </div>
-      <div class="col-12 result-box no-products mt-2 text-center">
-        <h5 class="mt-5 text-normal">No Products Found!</h5>
-      </div>
-        <div class="col-12 result-box mt-2" *ngFor="let product of products | orderBy : customorder : reverse">
+        <div [hidden]="!noProductsFound" class="col-12 result-box no-products mt-2 text-center">
+            <h5 class="mt-5 text-normal">No Products Found!</h5>
+        </div>
+        <div [hidden]="noProductsFound" class="col-12 result-box mt-2" *ngFor="let product of products">
             <div class="row">
                 <div class="col-8 pl-2 d-flex pt-3">
                     <div class="select-all-box p-0">
@@ -179,7 +179,7 @@
         </div>
         <div class="col float-right">
             <app-page *ngIf='products && products.length > 0' [totalCount]='totalCount'
-                (navigate)="navigatePage($event)">
+                (navigate)="navigatePage($event)" [currPage]='currPage'>
             </app-page>
         </div>
     </div>

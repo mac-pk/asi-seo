@@ -29,7 +29,7 @@ export class SearchProductComponent implements OnInit {
   // paged items
   pagedItems: any[];
   totalPages: number;
-  currPage: number;
+  currPage: number = 0;
   AllControls: boolean = false;
   customorder = "Name";
   reverse = false;
@@ -43,6 +43,7 @@ export class SearchProductComponent implements OnInit {
   seoStausEnum = EnumSeoStatus;
   isSelectAll: boolean = false;
   companyId: number;
+  noProductsFound: boolean = false;
 
   constructor(
     private _SeoService: SeoService,
@@ -69,7 +70,9 @@ export class SearchProductComponent implements OnInit {
   loadProducts(products: any[]) {
     if (products.length) {
       this.products = products.map((product) => new SearchProduct(product));
-    }
+      this.noProductsFound = false;
+    } else
+      this.noProductsFound = true;
   }
 
   loadFilters(filters: any[]) {
@@ -80,6 +83,8 @@ export class SearchProductComponent implements OnInit {
 
   getSupplierProducts(companyId: number, offset: number = 0, searchText: string = '', ) {
     this.showLoader(true);
+    if (offset == 0)
+      this.currPage = 1;
 
     this._SeoService.getSuplierProducts(companyId, searchText, offset).subscribe(data => {
       if (data) {
@@ -94,8 +99,9 @@ export class SearchProductComponent implements OnInit {
 
   navigatePage(page: any) {
     this.getSupplierProducts(this.companyId, page.startIndex ? page.startIndex : 0);
+    this.currPage = +page.currentPage;
   }
-  
+
   onSelectAllProducts(event) {
     this.products.forEach((x) => x.IsSelected = this.isSelectAll);
   }
