@@ -16,6 +16,7 @@ import { BulkEditModalComponent } from './modals/bulk-edit-modal/bulk-edit-modal
 import { PageComponent } from './shared/page/page.component';
 import { DigitOnlyDirective } from './shared/digit-only/digit-only.directive';
 import { AutoFocusDirective } from './shared/auto-focus/auto-focus.directive';
+import { NoWhitespaceDirective } from './shared/no-whitespace/no-whitespace.directive';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { AutoFocusDirective } from './shared/auto-focus/auto-focus.directive';
     BulkEditModalComponent,
     PageComponent,
     DigitOnlyDirective,
-    AutoFocusDirective
+    AutoFocusDirective,
+    NoWhitespaceDirective
   ],
   imports: [
     BrowserModule,

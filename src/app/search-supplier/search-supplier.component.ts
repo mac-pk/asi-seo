@@ -36,7 +36,7 @@ export class SearchSupplierComponent implements OnInit {
     }
 
     if (this.searchSupplierFrm.valid) {
-      this.seoService.getSuppliers(this.searchText, offset).subscribe(suppliers => {
+      this.seoService.getSuppliers(this.searchText.trim(), offset).subscribe(suppliers => {
         if (suppliers.length > 0) {
           this.suppliers = suppliers;
           this.totalCount = 36 // this will be returned by the api;
