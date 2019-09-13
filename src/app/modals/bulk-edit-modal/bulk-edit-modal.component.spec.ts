@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { BulkEditModalComponent } from './bulk-edit-modal.component';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 describe('BulkEditModalComponent', () => {
   let component: BulkEditModalComponent;
@@ -8,9 +8,10 @@ describe('BulkEditModalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BulkEditModalComponent ]
+      providers: [NgbActiveModal],
+      declarations: [BulkEditModalComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

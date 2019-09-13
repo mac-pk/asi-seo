@@ -1,11 +1,15 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, async, inject } from '@angular/core/testing';
 import { SeoService } from './seo.service';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('SeoService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+  beforeEach(() => TestBed.configureTestingModule({
+    imports: [HttpClientModule]
+  }));
 
-  it('should be created', () => {
-    const service: SeoService = TestBed.get(SeoService);
-    expect(service).toBeTruthy();
-  });
+  it(`should create`, async(inject([SeoService],
+    (seoService: SeoService) => {
+      expect(seoService).toBeTruthy();
+    })));
+
 });
