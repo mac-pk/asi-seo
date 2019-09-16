@@ -28,17 +28,17 @@ describe('LoginComponent', () => {
     providers: [SeoService]
   }));
 
-   xit('should be created', () => {
+   it('should be created', () => {
     const service: SeoService = TestBed.get(SeoService);
     expect(service).toBeTruthy();
    });
 
-   xit('should have loginSeo function', () => {
+   it('should have loginSeo function', () => {
     const service: SeoService = TestBed.get(SeoService);
     expect(service.loginSeo).toBeTruthy();
    });
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

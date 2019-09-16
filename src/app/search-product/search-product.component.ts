@@ -6,11 +6,8 @@ import { FacetTerms } from '../shared/models/searchProduct/FacetTerms';
 import { SearchFilter } from '../shared/models/searchProduct/SearchFilter';
 import { EnumSeoStatus } from '../shared/models/searchProduct/EnumSeoStatus';
 import { PagerService } from '../shared/services/pager.service';
-import { MyOrderByPipe } from '../shared/sort/sort.pipe';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BulkEditModalComponent } from '../modals/bulk-edit-modal/bulk-edit-modal.component';
-import { filter } from 'rxjs/operators';
-
 
 @Component({
   selector: 'app-search-product',
@@ -48,7 +45,6 @@ export class SearchProductComponent implements OnInit {
   constructor(
     private _SeoService: SeoService,
     private _Pager: PagerService,
-    private orderPipe: MyOrderByPipe,
     private changeDetectorRef: ChangeDetectorRef,
     private modalService: NgbModal,
     private activeRoute: ActivatedRoute,
