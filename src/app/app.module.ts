@@ -17,6 +17,7 @@ import { PageComponent } from './shared/page/page.component';
 import { DigitOnlyDirective } from './shared/digit-only/digit-only.directive';
 import { AutoFocusDirective } from './shared/auto-focus/auto-focus.directive';
 import { NoWhitespaceDirective } from './shared/no-whitespace/no-whitespace.directive';
+import { EmailSupplierModalComponent } from './modals/email-supplier-modal/email-supplier-modal.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { NoWhitespaceDirective } from './shared/no-whitespace/no-whitespace.dire
     PageComponent,
     DigitOnlyDirective,
     AutoFocusDirective,
-    NoWhitespaceDirective
+    NoWhitespaceDirective,
+    EmailSupplierModalComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +53,7 @@ import { NoWhitespaceDirective } from './shared/no-whitespace/no-whitespace.dire
   ]
   ,
   bootstrap: [AppComponent],
-  entryComponents: [BulkEditModalComponent],
+  entryComponents: [BulkEditModalComponent, EmailSupplierModalComponent],
   exports: [DigitOnlyDirective]
 })
 export class AppModule { }

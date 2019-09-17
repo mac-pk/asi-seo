@@ -8,6 +8,7 @@ import { EnumSeoStatus } from '../shared/models/searchProduct/EnumSeoStatus';
 import { PagerService } from '../shared/services/pager.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BulkEditModalComponent } from '../modals/bulk-edit-modal/bulk-edit-modal.component';
+import { EmailSupplierModalComponent } from '../modals/email-supplier-modal/email-supplier-modal.component';
 
 @Component({
   selector: 'app-search-product',
@@ -136,6 +137,10 @@ export class SearchProductComponent implements OnInit {
 
   openBulkEdit() {
     this.modalService.open(BulkEditModalComponent, { backdrop: 'static', size: 'lg' });
+  }
+
+  openEmailSupplier() {
+    this.modalService.open(EmailSupplierModalComponent, { backdrop: 'static', size: 'lg' });
   }
 
   applyFilter(filterBy: string): void {
