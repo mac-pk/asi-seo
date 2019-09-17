@@ -3,6 +3,8 @@ import { SeoService } from '../seo.service';
 import { ISupplier } from '../shared/models/searchSuppliers/ISearchSuppliers';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { EmailSupplierModalComponent } from '../modals/email-supplier-modal/email-supplier-modal.component';
 
 @Component({
   selector: 'app-search-supplier',
@@ -19,8 +21,11 @@ export class SearchSupplierComponent implements OnInit {
   currPage: number = 0;
   searchSupplierFrm: NgForm;
 
-  constructor(private seoService: SeoService,
-    private router: Router) { }
+  constructor(
+    private seoService: SeoService,
+    private router: Router,
+    private modalService: NgbModal,
+    ) { }
 
   ngOnInit() { }
 
@@ -30,8 +35,7 @@ export class SearchSupplierComponent implements OnInit {
     this.noSearchResult = false;
     this.showLoader(true);
 
-    if (offset == 0)
-    {
+    if (offset == 0) {
       this.currPage = 1;
     }
 
@@ -66,5 +70,13 @@ export class SearchSupplierComponent implements OnInit {
   navigatePage(page: any) {
     this.searchSuppliers(this.searchSupplierFrm, page.startIndex ? page.startIndex : 0);
     this.currPage = +page.currentPage;
+  }
+
+  emailSupplier(supplier: ISupplier) {
+    if (supplier) {
+      let options: NgbModalOptions = { backdrop: 'static', size: 'lg', scrollable: true, centered: true };
+      const modalRef = this.modalService.open(EmailSupplierModalComponent, options);
+      modalRef.componentInstance.supplier = supplier;
+    }
   }
 }

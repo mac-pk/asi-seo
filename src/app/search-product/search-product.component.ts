@@ -6,7 +6,7 @@ import { FacetTerms } from '../shared/models/searchProduct/FacetTerms';
 import { SearchFilter } from '../shared/models/searchProduct/SearchFilter';
 import { EnumSeoStatus } from '../shared/models/searchProduct/EnumSeoStatus';
 import { PagerService } from '../shared/services/pager.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { BulkEditModalComponent } from '../modals/bulk-edit-modal/bulk-edit-modal.component';
 import { EmailSupplierModalComponent } from '../modals/email-supplier-modal/email-supplier-modal.component';
 
@@ -136,11 +136,14 @@ export class SearchProductComponent implements OnInit {
   }
 
   openBulkEdit() {
-    this.modalService.open(BulkEditModalComponent, { backdrop: 'static', size: 'lg' });
+    let options: NgbModalOptions = { backdrop: 'static', size: 'lg' };
+    this.modalService.open(BulkEditModalComponent, options);
   }
 
   openEmailSupplier() {
-    this.modalService.open(EmailSupplierModalComponent, { backdrop: 'static', size: 'lg' });
+    let options: NgbModalOptions = { backdrop: 'static', size: 'lg', scrollable: true, centered: true };
+    const modalRef = this.modalService.open(EmailSupplierModalComponent, options);
+    modalRef.componentInstance.supplier = { email: "abc@gmail.com" }
   }
 
   applyFilter(filterBy: string): void {

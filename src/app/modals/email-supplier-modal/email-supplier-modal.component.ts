@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -7,12 +7,14 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./email-supplier-modal.component.css']
 })
 export class EmailSupplierModalComponent implements OnInit {
+  @Input() supplier;
 
   constructor(
     public modal: NgbActiveModal
   ) { }
 
   ngOnInit() {
+    //console.log(this.supplier);
   }
 
   close() {
