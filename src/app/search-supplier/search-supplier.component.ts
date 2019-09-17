@@ -23,7 +23,7 @@ export class SearchSupplierComponent implements OnInit {
     private seoService: SeoService,
     private router: Router,
     private modalService: NgbModal,
-    ) { }
+  ) { }
 
   ngOnInit() { }
 
@@ -59,12 +59,12 @@ export class SearchSupplierComponent implements OnInit {
   showLoader(show: boolean): void {
     this.isLoading = show;
   }
-  }
-
   emailSupplier(supplier: ISupplier) {
     if (supplier) {
       let options: NgbModalOptions = { backdrop: 'static', size: 'lg', scrollable: true, centered: true };
       const modalRef = this.modalService.open(EmailSupplierModalComponent, options);
       modalRef.componentInstance.supplier = supplier;
+
     }
+  }
 }

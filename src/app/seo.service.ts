@@ -58,7 +58,7 @@ export class SeoService {
     );
   }
 
-  getSuppliers(searchText: string, offset: number = 0, limit: number = 20): Observable<ISupplier[]> {
+  getSuppliers(searchText: string, offset: number = 0, limit: number = 50): Observable<ISupplier[]> {
     let filters: any[] = [];
     filters.push({ searchterm: searchText });
 
