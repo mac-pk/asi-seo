@@ -7,9 +7,6 @@
     </div>
     <div class="col text-right">
     </div>
-    <app-page *ngIf='suppliers && suppliers.length > 0' [currPage]='currPage' [totalCount]='totalCount'
-        (navigate)="navigatePage($event)">
-    </app-page>
 </div>
 <div class="row h-100">
 
@@ -98,13 +95,6 @@
                     </div>
                 </div>
             </div>
-            <div class=" float-right">
-                <app-page *ngIf='suppliers && suppliers.length > 0' [currPage]='currPage' [totalCount]='totalCount'
-                    (navigate)="navigatePage($event)">
-                </app-page>
-
-            </div>
-
         </div>
     </div>
 </div>

@@ -17,8 +17,6 @@ export class SearchSupplierComponent implements OnInit {
   isSearchPerformed: boolean = false;
   isLoading: boolean = false;
   noSearchResult: boolean = false;
-  totalCount: number = 0;
-  currPage: number = 0;
   searchSupplierFrm: NgForm;
 
   constructor(
@@ -29,21 +27,16 @@ export class SearchSupplierComponent implements OnInit {
 
   ngOnInit() { }
 
-  searchSuppliers(searchSupplierForm: NgForm, offset: number = 0): void {
+  searchSuppliers(searchSupplierForm: NgForm): void {
     this.searchSupplierFrm = searchSupplierForm;
     this.isSearchPerformed = false;
     this.noSearchResult = false;
     this.showLoader(true);
 
-    if (offset == 0) {
-      this.currPage = 1;
-    }
-
     if (this.searchSupplierFrm.valid) {
-      this.seoService.getSuppliers(this.searchText.trim(), offset).subscribe(suppliers => {
+      this.seoService.getSuppliers(this.searchText.trim()).subscribe(suppliers => {
         if (suppliers.length > 0) {
           this.suppliers = suppliers;
-          this.totalCount = 36 // this will be returned by the api;
         }
         else {
           this.noSearchResult = true;
@@ -66,10 +59,6 @@ export class SearchSupplierComponent implements OnInit {
   showLoader(show: boolean): void {
     this.isLoading = show;
   }
-
-  navigatePage(page: any) {
-    this.searchSuppliers(this.searchSupplierFrm, page.startIndex ? page.startIndex : 0);
-    this.currPage = +page.currentPage;
   }
 
   emailSupplier(supplier: ISupplier) {
@@ -78,5 +67,4 @@ export class SearchSupplierComponent implements OnInit {
       const modalRef = this.modalService.open(EmailSupplierModalComponent, options);
       modalRef.componentInstance.supplier = supplier;
     }
-  }
 }
