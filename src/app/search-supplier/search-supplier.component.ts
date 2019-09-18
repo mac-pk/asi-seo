@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { EmailSupplierModalComponent } from '../modals/email-supplier-modal/email-supplier-modal.component';
+import { SupplierService } from '../shared/services/supplier.service';
 
 @Component({
   selector: 'app-search-supplier',
@@ -23,6 +24,7 @@ export class SearchSupplierComponent implements OnInit {
     private seoService: SeoService,
     private router: Router,
     private modalService: NgbModal,
+    private supplierService: SupplierService
   ) { }
 
   ngOnInit() { }
@@ -52,8 +54,9 @@ export class SearchSupplierComponent implements OnInit {
     }
   }
 
-  viewProducts(companyId): void {
-    this.router.navigate(['/searchProduct'], { queryParams: { id: companyId } });
+  viewProducts(supplier: ISupplier): void {
+    this.supplierService.setSupplier(supplier);
+    this.router.navigate(['/searchProduct']);
   }
 
   showLoader(show: boolean): void {

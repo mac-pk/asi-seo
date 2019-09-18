@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { SeoService } from '../seo.service';
 import { SearchProduct } from '../shared/models/searchProduct/SearchProduct';
 import { FacetTerms } from '../shared/models/searchProduct/FacetTerms';
@@ -9,6 +9,8 @@ import { PagerService } from '../shared/services/pager.service';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { BulkEditModalComponent } from '../modals/bulk-edit-modal/bulk-edit-modal.component';
 import { EmailSupplierModalComponent } from '../modals/email-supplier-modal/email-supplier-modal.component';
+import { ISupplier } from '../shared/models/searchSuppliers/ISearchSuppliers';
+import { SupplierService } from '../shared/services/supplier.service';
 
 @Component({
   selector: 'app-search-product',
@@ -20,6 +22,7 @@ export class SearchProductComponent implements OnInit {
   products: SearchProduct[] = [];
   objSearchFilter: SearchFilter[] = [];
   selectedFacetTerms: FacetTerms[] = [];
+  supplier: ISupplier;
   seoStatusShowAll: boolean = false;
 
   // pager object
@@ -40,7 +43,6 @@ export class SearchProductComponent implements OnInit {
   showAll_seoStatus: boolean = false;
   seoStausEnum = EnumSeoStatus;
   isSelectAll: boolean = false;
-  companyId: number;
   noProductsFound: boolean = false;
 
   constructor(
@@ -48,19 +50,18 @@ export class SearchProductComponent implements OnInit {
     private _Pager: PagerService,
     private changeDetectorRef: ChangeDetectorRef,
     private modalService: NgbModal,
-    private activeRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private supplierService: SupplierService
   ) {
-    this.activeRoute.queryParams.subscribe(params => {
-      this.companyId = params['id'];
-      if (!this.companyId)
-        this.router.navigate(['/searchSupplier']);
-    });
+    
   }
 
   ngOnInit() {
-    if (this.companyId) {
-      this.getSupplierProducts(this.companyId);
+    if (this.supplierService.getSupplier()) {
+      this.supplier = this.supplierService.getSupplier();
+      this.getSupplierProducts(this.supplier.CompanyId);
+    } else {
+      this.router.navigate(['/searchSupplier']);
     }
   }
 
@@ -95,7 +96,7 @@ export class SearchProductComponent implements OnInit {
   }
 
   navigatePage(page: any) {
-    this.getSupplierProducts(this.companyId, page.startIndex ? page.startIndex : 0);
+    this.getSupplierProducts(this.supplier.CompanyId, page.startIndex ? page.startIndex : 0);
     this.currPage = +page.currentPage;
   }
 
@@ -143,7 +144,7 @@ export class SearchProductComponent implements OnInit {
   openEmailSupplier() {
     let options: NgbModalOptions = { backdrop: 'static', size: 'lg', scrollable: true, centered: true };
     const modalRef = this.modalService.open(EmailSupplierModalComponent, options);
-    modalRef.componentInstance.supplier = { email: "abc@gmail.com" }
+    modalRef.componentInstance.supplier = this.supplier;
   }
 
   applyFilter(filterBy: string): void {
