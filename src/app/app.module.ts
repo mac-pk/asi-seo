@@ -18,6 +18,7 @@ import { DigitOnlyDirective } from './shared/digit-only/digit-only.directive';
 import { AutoFocusDirective } from './shared/auto-focus/auto-focus.directive';
 import { NoWhitespaceDirective } from './shared/no-whitespace/no-whitespace.directive';
 import { EmailSupplierModalComponent } from './modals/email-supplier-modal/email-supplier-modal.component';
+import { ProductOptimizationComponent } from './product-optimization/product-optimization.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { EmailSupplierModalComponent } from './modals/email-supplier-modal/email
     DigitOnlyDirective,
     AutoFocusDirective,
     NoWhitespaceDirective,
+    ProductOptimizationComponent,
     EmailSupplierModalComponent
   ],
   imports: [

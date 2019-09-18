@@ -13,7 +13,6 @@ export class LoginComponent implements OnInit {
   //loginSeo: ISeoLogin = {Asi: '30232', Username: 'umarejaz', Password: 'Asiqa2014a'};
   error: string = '';
   isLoading: boolean = false;
-  showHead: boolean = false;
   rememberPreference: boolean = false;
 
   constructor(private seoService: SeoService, private router: Router) { }

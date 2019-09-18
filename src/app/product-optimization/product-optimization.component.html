@@ -1,0 +1,156 @@
+<div class="row esp-sub-header pt-2">
+    <div class="col-md-2 col-sm-12">
+        <figure><img src="./assets/images/image.png"></figure>
+    </div>
+    <div class="col text-lg-right text-md-left text-sm-left text-left">
+        <div class="float-lg-left float-md-left pt-3"><label class="label-black">Adding Details for</label> <label
+                class="label-light"> {{product.AsiProdNo}} / {{product.Name}} </label> </div>
+        <div class="pt-3 float-lg-right float-md-left">
+            <div class="col"> <a href="#/searchProduct?id={{companyId}}" class="mr-3">Manage My Products</a>
+                <a href="#/optimizeProduct?id={{externalProductId}}" class="mr-3">Previous Product</a>
+                <a href="#/optimizeProduct?id={{externalProductId}}" class="mr-3">Next Product</a>
+                <a href="#/searchProduct?id={{companyId}}"> Cancel and Exit</a></div>
+            <div class="col"> <label class="label-black">ASIQA Distributor I</label> <label
+                    class="label-red">asi/101574</label><label class="label-black"> (Canada,USA)</label></div>
+        </div>
+    </div>
+</div>
+<div class="row h-100">
+    <div class="col-12">
+        <div class="d-block border mb-4 pb-4 h-100">
+            <div class="col-12 col-md-6 col-lg-3">
+                <h5 class="pt-2">Product Optimization</h5>
+            </div>
+            <div class="col-12 d-flex flex-row">
+                <div class="p-0">
+                    <div class="figure product-image-thumb">
+                        <img style="width:114px;height:126px;" src="https://media.asicdn.com/images/orig/81477897.jpg">
+                    </div>
+                </div>
+                <div class="p-3">
+                    <label class="label-black">Product SEO Status:</label><label class="label-light">Approved</label>
+                    <div class="clearfix"></div>
+                    <label class="label-dark">XID:</label><label class="label-red">{{product.ExternalProductId}}</label>
+                </div>
+            </div>
+            <div class="col-12 col-md-12 col-sm-12 col-lg-6 float-lg-left float-md-none float-sm-none ">
+                <div class="col-12 product-optimization-aside">
+                    <h5 class="pt-3">Current Data</h5>
+                    <p class="label-black mb-0">Supplier Company Name:</p>
+                    <p class="product-supplier">{{product.Description}}</p>
+                    <p class="label-black mb-0">Summary</p>
+                    <p class="product-summary">{{product.Summary}}</p>
+                    <p class="label-black mb-0">Category</p>
+                    <table class="table category-table">
+                        <thead>
+                            <tr>
+                                <td>Categories</td>
+                                <td>Product</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Towels-Beach</td>
+                                <td>ASI</td>
+                            </tr>
+                            <tr>
+                                <td>Towels-Wrap-Around</td>
+                                <td>ASI</td>
+                            </tr>
+                            <tr>
+                                <td>Towels-Sports</td>
+                                <td>ASI</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="label-black mb-0">Ad Category</p>
+                    <p>NA</p>
+                    <p class="label-black mb-0">EIT Category</p>
+                    <p>NA</p>
+                    <p class="label-black mb-0">Product Keywords:</p>
+                    <p>Big time jersey,towel,full color towel,beach accessories</p>
+                    <p class="label-black mb-0">SEO Keywords</p>
+                    <p>NA</p>
+                    <p class="label-black mb-0">Advertising Keywords:</p>
+                    <p>NA</p>
+                    <p class="label-black mb-0">Product Theme</p>
+                    <p>NA</p>
+                </div>
+            </div>
+            <div class="col-12 col-md-12 col-sm-12 col-lg-6 float-lg-left float-md-none float-sm-none ">
+                <div class="col-12 product-optimization-aside">
+                    <h5 class="pt-3">SEO Data</h5>
+                    <p class="label-black mb-0">Ad Category</p>
+                    <p>NA</p>
+                    <div class="form-group">
+                        <textarea class="form-control" rows="4"></textarea>
+                        <label class="label-light">0 of 800 characters</label>
+                    </div>
+                    <p class="label-black mb-0">Optimized Summary</p>
+                    <p>Enter an abridged description for quick view and other short description areas</p>
+                    <div class="form-group">
+                        <textarea class="form-control" rows="Z"></textarea>
+                        <label class="label-light">0 of 130 characters</label>
+                    </div>
+                    <p class="label-black mb-0">Categories</p>
+                    <p>Choose up to 2 categories that describe your product.</p>
+                    <button type="submit" class="btn esp-btn-white my-1 mr-2">Choose a catogory</button>
+                    <table class="table category-table">
+                        <thead>
+                            <tr>
+                                <td>Categories</td>
+                                <td>Type</td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>TCERTIFICATE HOLDERS &amp; FRAMES</td>
+                                <td>Product</td>
+                                <td><i class="material-icons">
+                                        close
+                                    </i></td>
+                            </tr>
+                            <tr>
+                                <td>FRAMES</td>
+                                <td>Product</td>
+                                <td><i class="material-icons">
+                                        close
+                                    </i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="label-black mb-0">SEO Keywords </p>
+                    <div class="form-group">
+                        <span class="d-flex justify-content-between"><label class="label-light ">Seperate keyword with a
+                                comma</label>
+                            <a href="#">Clear all</a></span>
+
+                        <input type="text" class="form-control" />
+                    </div>
+                    <p class="label-black mb-0">Product Theme</p>
+                    <div class="col-12 p-0 keytag mt-2">
+                        <a href="">Sports<span class="close-tag"><i class="material-icons">
+                                    close
+                                </i></span></a>
+                    </div>
+                    <div class="form-group mt-2">
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="form-group mt-2 col-2 p-0">
+                        <select class="form-control">
+                            <option>Start With</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-12 text-lg-right text-md-right text-sm-right text-center   mt-1 ">
+                <button type="submit" class="btn btn-blue cancel my-1 mr-2">Cancel</button>
+                <button type="submit" class="btn btn-blue my-1 mr-2">Done</button>
+                <button type="submit" class="btn btn-blue my-1">Save</button>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

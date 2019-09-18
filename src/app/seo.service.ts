@@ -5,6 +5,7 @@ import { catchError, map, tap, delay } from 'rxjs/operators';
 import { ISeoLogin, ISeoLoginResponse } from './shared/models/login/ILogin';
 import { ISupplier } from './shared/models/searchSuppliers/ISearchSuppliers';
 import { environment } from '../environments/environment';
+import { IOptimizeProduct } from './shared/models/optimizeProduct/IOptimizeProduct';
 
 @Injectable({ providedIn: 'root' })
 export class SeoService {
@@ -71,6 +72,16 @@ export class SeoService {
       .get(this.supplierUrl, { params })
       .pipe(map((response: any) => {
         return response.map(item => item.Results)[0];
+      })
+      );
+  }
+
+  getProduct(productId: number): Observable<IOptimizeProduct[]> {
+    return this.http
+      .get("http://www.mocky.io/v2/5d80b6b930000061af8e712a")
+      .pipe(map((response: any) => {
+        //debugger;
+        return response;
       })
       );
   }

@@ -161,4 +161,8 @@ export class SearchProductComponent implements OnInit {
   showLoader(show: boolean): void {
     this.isLoading = show;
   }
+
+  viewProduct(externalProductId: string): void {
+    this.router.navigate(['/optimizeProduct'], { queryParams: { id: externalProductId } });
+  }
 }
