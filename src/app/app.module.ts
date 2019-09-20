@@ -19,6 +19,7 @@ import { AutoFocusDirective } from './shared/auto-focus/auto-focus.directive';
 import { NoWhitespaceDirective } from './shared/no-whitespace/no-whitespace.directive';
 import { EmailSupplierModalComponent } from './modals/email-supplier-modal/email-supplier-modal.component';
 import { ProductOptimizationComponent } from './product-optimization/product-optimization.component';
+import { ProductCategoryModalComponent } from './modals/product-category-modal/product-category-modal.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ProductOptimizationComponent } from './product-optimization/product-opt
     AutoFocusDirective,
     NoWhitespaceDirective,
     ProductOptimizationComponent,
-    EmailSupplierModalComponent
+    EmailSupplierModalComponent,
+    ProductCategoryModalComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,7 @@ import { ProductOptimizationComponent } from './product-optimization/product-opt
   ]
   ,
   bootstrap: [AppComponent],
-  entryComponents: [BulkEditModalComponent, EmailSupplierModalComponent],
+  entryComponents: [BulkEditModalComponent, EmailSupplierModalComponent, ProductCategoryModalComponent],
   exports: [DigitOnlyDirective]
 })
 export class AppModule { }

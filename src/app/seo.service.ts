@@ -78,11 +78,20 @@ export class SeoService {
 
   getProduct(productId: number): Observable<IOptimizeProduct[]> {
     return this.http
-      .get("http://www.mocky.io/v2/5d80b6b930000061af8e712a")
+      .get(environment.mockBaseUrl + "v2/5d80b6b930000061af8e712a")
       .pipe(map((response: any) => {
         //debugger;
         return response;
       })
       );
   }
+
+  getProductCategories(): Observable<any> {
+    const productCategories = '../assets/json/productCategory.json';
+
+    return this.http.get(productCategories)
+      .pipe(map((response: Response) => {
+        return <any>response;
+      }));
+  } 
 }

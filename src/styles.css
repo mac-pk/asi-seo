@@ -447,8 +447,5 @@ and (max-width: 1024px) {
             max-width: none;
     flex-basis: auto;
     width: 100%;
-
       }
-     
-        
 }

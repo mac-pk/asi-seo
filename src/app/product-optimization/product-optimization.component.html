@@ -94,7 +94,8 @@
                     </div>
                     <p class="label-black mb-0">Categories</p>
                     <p>Choose up to 2 categories that describe your product.</p>
-                    <button type="submit" class="btn esp-btn-white my-1 mr-2">Choose a catogory</button>
+                    <button type="submit" (click)="openProductCategories()" class="btn esp-btn-white my-1 mr-2">Choose a
+                        Category</button>
                     <table class="table category-table">
                         <thead>
                             <tr>
@@ -104,19 +105,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>TCERTIFICATE HOLDERS &amp; FRAMES</td>
-                                <td>Product</td>
-                                <td><i class="material-icons">
-                                        close
-                                    </i></td>
-                            </tr>
-                            <tr>
-                                <td>FRAMES</td>
-                                <td>Product</td>
-                                <td><i class="material-icons">
-                                        close
-                                    </i></td>
+                            <tr *ngFor="let category of this.categoryService.getCategories()">
+                                <td>{{category.Name}}</td>
+                                <td *ngIf="category.IsProductCategoryType">Product</td>
+                                <td *ngIf="!category.IsProductCategoryType">EIT</td>
+                                <td>
+                                    <a class="remove-searched"><input (click)="removeCategory(category.Code)" type="button" /> <i
+                                            class="material-icons">close</i>
+                                    </a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
