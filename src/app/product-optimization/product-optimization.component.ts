@@ -16,7 +16,7 @@ export class ProductOptimizationComponent implements OnInit {
   companyId: number;
   productId: number;
   externalProductId: string;
-  product: IOptimizeProduct[] = [];
+  product: IOptimizeProduct;
   productCategories: ProductCategory[] = [];
   selectedCategories: ProductCategory[] = [];
 
@@ -25,7 +25,7 @@ export class ProductOptimizationComponent implements OnInit {
     private activeRoute: ActivatedRoute,
     private router: Router,
     private modalService: NgbModal,
-    private categoryService: CategoryService) {
+    public categoryService: CategoryService) {
     this.activeRoute.queryParams.subscribe(params => {
       this.externalProductId = params['id'];
       if (!this.externalProductId)

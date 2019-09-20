@@ -76,7 +76,7 @@ export class SeoService {
       );
   }
 
-  getProduct(productId: number): Observable<IOptimizeProduct[]> {
+  getProduct(productId: number): Observable<IOptimizeProduct> {
     return this.http
       .get(environment.mockBaseUrl + "v2/5d80b6b930000061af8e712a")
       .pipe(map((response: any) => {
