@@ -77,77 +77,94 @@
                     <p>NA</p>
                 </div>
             </div>
-            <div class="col-12 col-md-12 col-sm-12 col-lg-6 float-lg-left float-md-none float-sm-none ">
-                <div class="col-12 product-optimization-aside">
-                    <h5 class="pt-3">SEO Data</h5>
-                    <p class="label-black mb-0">Ad Category</p>
-                    <p>NA</p>
-                    <div class="form-group">
-                        <textarea class="form-control" rows="4"></textarea>
-                        <label class="label-light">0 of 800 characters</label>
-                    </div>
-                    <p class="label-black mb-0">Optimized Summary</p>
-                    <p>Enter an abridged description for quick view and other short description areas</p>
-                    <div class="form-group">
-                        <textarea class="form-control" rows="Z"></textarea>
-                        <label class="label-light">0 of 130 characters</label>
-                    </div>
-                    <p class="label-black mb-0">Categories</p>
-                    <p>Choose up to 2 categories that describe your product.</p>
-                    <button type="submit" (click)="openProductCategories()" class="btn esp-btn-white my-1 mr-2">Choose a
-                        Category</button>
-                    <table class="table category-table">
-                        <thead>
-                            <tr>
-                                <td>Categories</td>
-                                <td>Type</td>
-                                <td></td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let category of this.categoryService.getCategories()">
-                                <td>{{category.Name}}</td>
-                                <td *ngIf="category.IsProductCategoryType">Product</td>
-                                <td *ngIf="!category.IsProductCategoryType">EIT</td>
-                                <td>
-                                    <a class="remove-searched"><input (click)="removeCategory(category.Code)" type="button" /> <i
-                                            class="material-icons">close</i>
-                                    </a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <p class="label-black mb-0">SEO Keywords </p>
-                    <div class="form-group">
-                        <span class="d-flex justify-content-between"><label class="label-light ">Seperate keyword with a
-                                comma</label>
-                            <a href="#">Clear all</a></span>
+            <form (ngSubmit)="saveProduct()" #optimizeForm="ngForm" class="h-100">
+                <div class="col-12 col-md-12 col-sm-12 col-lg-6 float-lg-left float-md-none float-sm-none ">
+                    <div class="col-12 product-optimization-aside">
+                        <h5 class="pt-3">SEO Data</h5>
+                        <p class="label-black mb-0">Ad Category</p>
+                        <p>NA</p>
+                        <div class="form-group">
+                            <textarea [(ngModel)]="product.Description" #description="ngModel" name="description"
+                                required class="form-control" rows="4"></textarea>
+                            <label class="label-light">0 of 800 characters</label>
+                            <div *ngIf="description.invalid && (description.dirty || description.touched)"
+                                class="error text-danger">
+                                <div *ngIf="description.errors.required">
+                                    <i class="material-icons">info</i> Product description is required.
+                                </div>
+                            </div>
+                        </div>
+                        <p class="label-black mb-0">Optimized Summary</p>
+                        <p>Enter an abridged description for quick view and other short description areas</p>
+                        <div class="form-group">
+                            <textarea class="form-control" rows="Z"></textarea>
+                            <label class="label-light">0 of 130 characters</label>
+                            <div *ngIf="description.invalid && (description.dirty || description.touched)"
+                                class="error text-danger">
+                                <div *ngIf="description.errors.required">
+                                    <i class="material-icons">info</i> Product description is required.
+                                </div>
+                            </div>                            
+                        </div>
+                        <p class="label-black mb-0">Categories</p>
+                        <p>Choose up to 2 categories that describe your product.</p>
+                        <button type="submit" (click)="openProductCategories()"
+                            class="btn esp-btn-white my-1 mr-2">Choose a
+                            Category</button>
+                        <table class="table category-table">
+                            <thead>
+                                <tr>
+                                    <td>Categories</td>
+                                    <td>Type</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let category of this.categoryService.getCategories()">
+                                    <td>{{category.Name}}</td>
+                                    <td *ngIf="category.IsProductCategoryType">Product</td>
+                                    <td *ngIf="!category.IsProductCategoryType">EIT</td>
+                                    <td>
+                                        <a class="remove-searched"><input (click)="removeCategory(category.Code)"
+                                                type="button" /> <i class="material-icons">close</i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="label-black mb-0">SEO Keywords </p>
+                        <div class="form-group">
+                            <span class="d-flex justify-content-between"><label class="label-light ">Seperate keyword
+                                    with a
+                                    comma</label>
+                                <a href="#">Clear all</a></span>
 
-                        <input type="text" class="form-control" />
-                    </div>
-                    <p class="label-black mb-0">Product Theme</p>
-                    <div class="col-12 p-0 keytag mt-2">
-                        <a href="">Sports<span class="close-tag"><i class="material-icons">
-                                    close
-                                </i></span></a>
-                    </div>
-                    <div class="form-group mt-2">
-                        <input type="text" class="form-control" />
-                    </div>
-                    <div class="form-group mt-2 col-2 p-0">
-                        <select class="form-control">
-                            <option>Start With</option>
-                        </select>
+                            <input type="text" class="form-control" />
+                        </div>
+                        <p class="label-black mb-0">Product Theme</p>
+                        <div class="col-12 p-0 keytag mt-2">
+                            <a href="">Sports<span class="close-tag"><i class="material-icons">
+                                        close
+                                    </i></span></a>
+                        </div>
+                        <div class="form-group mt-2">
+                            <input type="text" class="form-control" />
+                        </div>
+                        <div class="form-group mt-2 col-2 p-0">
+                            <select class="form-control">
+                                <option>Start With</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class="col-12 text-lg-right text-md-right text-sm-right text-center   mt-1 ">
-                <button type="submit" class="btn btn-blue cancel my-1 mr-2">Cancel</button>
-                <button type="submit" class="btn btn-blue my-1 mr-2">Done</button>
-                <button type="submit" class="btn btn-blue my-1">Save</button>
-            </div>
-            <div class="clearfix"></div>
+                <div class="clearfix"></div>
+                <div class="col-12 text-lg-right text-md-right text-sm-right text-center   mt-1 ">
+                    <button type="submit" class="btn btn-blue cancel my-1 mr-2">Cancel</button>
+                    <button type="submit" class="btn btn-blue my-1 mr-2">Done</button>
+                    <button type="submit" class="btn btn-blue my-1">Save</button>
+                </div>
+                <div class="clearfix"></div>
+            </form>
         </div>
     </div>
 </div>

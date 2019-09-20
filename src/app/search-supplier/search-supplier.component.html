@@ -48,8 +48,8 @@
                                 {{supplier.CompanyName}}</h6>
                             <p class="mb-0">{{supplier.Address1}}</p>
                             <p class="mb-0">{{supplier.City}} {{supplier.StateCode}} {{supplier.PostalCode}}</p>
-                            <p class="mb-0">{{supplier.PhoneNumber}}</p>
-                            <p>Email:<a href="mailto:{{supplier.EmailAddress}}">{{supplier.EmailAddress}}</a></p>
+                            <p class="mb-0">Phone:&nbsp;{{supplier.PhoneNumber}}</p>
+                            <p>Email:&nbsp;<a href="mailto:{{supplier.EmailAddress}}">{{supplier.EmailAddress}}</a></p>
                             <button type="button" class="btn esp-btn-white my-1 mr-2" (click)="emailSupplier(supplier)"><i class="material-icons">
                                     email
                                 </i>Email Supplier</button>
@@ -68,7 +68,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><label class="label-strong">Premier</label></td>
+                                        <td><label class="label-strong">Premier:</label></td>
                                         <td>{{supplier.Premier}}</td>
                                         <td><label class="label-strong">Replink:</label></td>
                                         <td>{{supplier.Replink}}</td>

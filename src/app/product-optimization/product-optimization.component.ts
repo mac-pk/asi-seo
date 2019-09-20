@@ -91,4 +91,8 @@ export class ProductOptimizationComponent implements OnInit {
       this.categoryService.setCategories(this.selectedCategories);
     }
   }
+
+  saveProduct() {
+    
+  }
 }
