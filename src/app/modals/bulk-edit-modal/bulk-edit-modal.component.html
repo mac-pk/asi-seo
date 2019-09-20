@@ -9,8 +9,7 @@
         <label class="date">Apply Bulk Edit To:</label>
         <div class="clearfix"></div>
         <div class="form-check form-check-inline pr-3">
-            <input class="form-check-input" type="radio" name="product-option" id="allProducts" value="AP"
-                checked>
+            <input class="form-check-input" type="radio" name="product-option" id="allProducts" value="AP" checked>
             <label class="form-check-label" for="exampleRadios1">
                 ALL Products (1000)
             </label>
@@ -30,7 +29,16 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="submit" class="btn esp-btn-white my-1 mr-2 p-1">Set Product SEO Status</button>
+        <div class="dropdown">
+            <button class="btn esp-btn-white my-1 mr-2 p-1 dropdown-toggle" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Set Product SEO Status
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" [routerLink]="">Ready for SEO</a>
+                <a class="dropdown-item" [routerLink]="">Needs Approval</a>
+            </div>
+        </div>
         <button type="submit" class="btn esp-btn-white my-1 mr-2 p-1">Email</button>
         <button type="submit" class="btn btn-blue my-1 mr-2 p-1">Approve SEO </button>
     </div>

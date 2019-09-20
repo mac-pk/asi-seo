@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { EmailSupplier } from 'src/app/shared/models/emailSupplier/EmailSupplier';
+import { NgForm } from '@angular/forms';
+import { SupplierService } from 'src/app/shared/services/supplier.service';
 
 @Component({
   selector: 'app-email-supplier-modal',
@@ -10,9 +12,11 @@ import { EmailSupplier } from 'src/app/shared/models/emailSupplier/EmailSupplier
 export class EmailSupplierModalComponent implements OnInit {
   @Input() supplier;
   emailSupplier: EmailSupplier;
+  isValid: boolean = false;
 
   constructor(
-    public modal: NgbActiveModal
+    public modal: NgbActiveModal,
+    public supplierService: SupplierService
   ) { }
 
   ngOnInit() {
@@ -25,8 +29,26 @@ export class EmailSupplierModalComponent implements OnInit {
     this.modal.dismiss();
   }
 
-  clearAll() {
-    this.emailSupplier.To = '';
+  clearAll(option: string) {
+    if (option == 'TO')
+      this.emailSupplier.To = '';
+    if (option == 'CC')
+      this.emailSupplier.Cc = '';
+    if (option == 'BCC')
+      this.emailSupplier.Bcc = '';
   }
 
+  send(form: NgForm) {
+    console.log(this.isValid);
+    if (form.valid) {
+      this.isValid = true;
+    } else {
+      this.isValid = false;
+      return;
+    }
+
+    this.supplierService.sendEmail(this.emailSupplier).subscribe(x => {
+      console.log(x);
+    })
+  }
 }

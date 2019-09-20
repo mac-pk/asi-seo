@@ -5,6 +5,7 @@ import { SearchProduct } from '../shared/models/searchProduct/SearchProduct';
 import { FacetTerms } from '../shared/models/searchProduct/FacetTerms';
 import { SearchFilter } from '../shared/models/searchProduct/SearchFilter';
 import { EnumSeoStatus } from '../shared/models/searchProduct/EnumSeoStatus';
+import { EnumProductStatus } from '../shared/models/searchProduct/EnumProductStatus';
 import { PagerService } from '../shared/services/pager.service';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { BulkEditModalComponent } from '../modals/bulk-edit-modal/bulk-edit-modal.component';
@@ -42,6 +43,7 @@ export class SearchProductComponent implements OnInit {
   isExactMatch: boolean = false;
   showAll_seoStatus: boolean = false;
   seoStausEnum = EnumSeoStatus;
+  productStatusEnum = EnumProductStatus;
   isSelectAll: boolean = false;
   noProductsFound: boolean = false;
 

@@ -1,6 +1,6 @@
 import { ISupplier } from '../searchSuppliers/ISearchSuppliers'
 export class EmailSupplier {
-    
+
     constructor(supplier: ISupplier) {
         this.To = supplier.EmailAddress;
     };

@@ -19,12 +19,14 @@
             <option value="XID">Product Number</option>
             <option value="StatusCode">Catalog</option>
         </select>
-        <button type="submit" (click)="openEmailSupplier()" class="btn btn-blue my-1 pl-3">
+        <!-- (click)="openEmailSupplier()" -->
+        <button type="submit" class="btn btn-blue my-1 pl-3">
             <i class="material-icons">email
             </i>Email Supplier</button>
 
     </div>
-    <app-page *ngIf='products && products.length > 0' [totalCount]='totalCount' [currPage]='currPage' (navigate)="navigatePage($event)">
+    <app-page *ngIf='products && products.length > 0' [totalCount]='totalCount' [currPage]='currPage'
+        (navigate)="navigatePage($event)">
     </app-page>
 </div>
 <div class="row h-100">
@@ -68,11 +70,11 @@
                     </ul>
                 </li>
                 <li>
-                    <a href=".seo-status" data-toggle="collapse">Seo Status</a>
+                    <a href=".seo-status" data-toggle="collapse">SEO Status</a>
                     <ul class="side-sub-nav-list collapse seo-status">
                         <li *ngFor="let enum of seoStausEnum | keyvalue; let i = index"
                             [hidden]="i >= 3 && !seoStatusShowAll">
-                            <a href="" (click)="applyFilter(enum.key)">{{enum.value}}</a>
+                            <a [routerLink]="" (click)="applyFilter(enum.key)">{{enum.value}}</a>
                         </li>
                         <li>
                             <a class="see-all" (click)="toggleSEOStatus(seoStatusShowAll)">See
@@ -87,22 +89,23 @@
                 <li>
                     <a href=".seo-flag" data-toggle="collapse">SEO Flag</a>
                     <ul class="side-sub-nav-list collapse seo-flag">
-                        <li><a href="#">Yes</a></li>
-                        <li><a href="#">No</a></li>
+                        <li><a [routerLink]="">Yes</a></li>
+                        <li><a [routerLink]="">No</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="#product_type" data-toggle="collapse">Product Type</a>
                     <ul class="side-sub-nav-list collapse" id="product_type">
-                        <li><a href="#">Type 1</a></li>
-                        <li><a href="#">Type 2</a></li>
+                        <li><a [routerLink]="">Type 1</a></li>
+                        <li><a [routerLink]="">Type 2</a></li>
                     </ul>
                 </li>
                 <li *ngFor="let search of objSearchFilter">
                     <a href="#{{ search.FacetId }}" data-toggle="collapse">{{search.Facet}}</a>
                     <ul class="side-sub-nav-list collapse" id="{{ search.FacetId }}">
                         <li *ngFor="let facetTerm of search.Terms; let i = index" [hidden]="i >= 5 && !search.SeeAll">
-                            <a (click)="facetTermClick(facetTerm)">{{facetTerm.Term}} ({{facetTerm.Count}})</a>
+                            <a [routerLink]="" (click)="facetTermClick(facetTerm)">{{facetTerm.Term}}
+                                ({{facetTerm.Count}})</a>
                         </li>
                         <li *ngIf="search.Terms.length > 5">
                             <a class="see-all" (click)="toggleSee(search)">See
@@ -120,12 +123,15 @@
     <div class="col pb-5">
         <div class="action-tool-bar px-2">
             <div class="row">
-                <div class="col-8">
+                <div class="col-6">
                     <div class="custom-control custom-checkbox my-1 mr-sm-2">
                         <input type="checkbox" name="selectAll" id="selectAll" (change)="onSelectAllProducts($event)"
                             [(ngModel)]="isSelectAll" />
                         <label class="label-black" for="selectAll">Select All</label>
                     </div>
+                </div>
+                <div class="col-2 pl-2">
+                    <label>Product Status</label>
                 </div>
                 <div class="col-2 pl-2">
                     <label>SEO Status</label>
@@ -142,7 +148,7 @@
         </div>
         <div [hidden]="noProductsFound" class="col-12 result-box mt-2" *ngFor="let product of products">
             <div class="row">
-                <div class="col-8 pl-2 d-flex pt-3">
+                <div class="col-6 pl-2 d-flex pt-3">
                     <div class="select-all-box p-0">
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" [(ngModel)]="product.IsSelected" />
@@ -168,7 +174,10 @@
 
                 </div>
                 <div class="col-2 d-flex align-content-center flex-wrap">
-                    <label>{{ seoStausEnum[product.SEOStatus] }}</label>
+                    <label>{{ productStatusEnum[product.ProductStatus] ? productStatusEnum[product.ProductStatus] : '' }}</label>
+                </div>
+                <div class="col-2 d-flex align-content-center flex-wrap">
+                    <label>{{ seoStausEnum[product.SEOStatus] ? seoStausEnum[product.SEOStatus] : seoStausEnum.REDY }}</label>
                 </div>
                 <div class="col-2 d-flex align-content-center flex-wrap">
                     <button class="btn esp-btn-white my-1 mr-2 p-1">Start

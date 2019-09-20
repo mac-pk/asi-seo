@@ -4,44 +4,56 @@
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
-<div class="modal-body pt-0">
-  <div class="col-12 col-md-12 col-lg-12  float-left p-0">
-    <div class="d-block email-supplier-form py-2">
-      <div class="col-9 p-0">
-        <div class="form-group mb-2">
-          <span class="d-flex justify-content-between">
-            <label class="label-light ">To</label>
-            <a [routerLink]="" (click)="clearAll()">Clear all</a>
-          </span>
-          <input type="text" [(ngModel)]="emailSupplier.To" class="form-control form-control-lg">
+<form #emailSupplierForm="ngForm" (ngSubmit)="send(emailSupplierForm)" novalidate>
+  <div class="modal-body pt-0">
+    <div class="col-12 col-md-12 col-lg-12  float-left p-0">
+      <div class="d-block email-supplier-form py-2">
+        <div class="col-9 p-0">
+          <div class="form-group mb-2">
+            <span class="d-flex justify-content-between">
+              <label class="label-light ">To</label>
+              <a [routerLink]="" (click)="clearAll('TO')">Clear all</a>
+            </span>
+            <input type="text" pattern="^(\s?[^\s,]+@[^\s,]+\.[^\s,]+\s?,)*(\s?[^\s,]+@[^\s,]+\.[^\s,]+)$" required [(ngModel)]="emailSupplier.To" #emailTo="ngModel" name="emailTo" class="form-control form-control-lg">
+            <div *ngIf="emailTo.dirty && emailTo.invalid">
+                <div *ngIf="emailTo.errors.required && !isValid" class="error text-danger"><i class="material-icons">info</i> Required </div>
+                <div *ngIf="emailSupplierForm.submitted && !isValid && emailTo.errors.pattern" class="error text-danger"><i class="material-icons">info</i> Invalid Email Address </div>
+            </div>
+          </div>
+          <div class="form-group mb-2">
+            <span class="d-flex justify-content-between">
+              <label class="label-light">CC</label>
+              <a [routerLink]="" (click)="clearAll('CC')">Clear all</a>
+            </span>
+            <input type="text" pattern="^(\s?[^\s,]+@[^\s,]+\.[^\s,]+\s?,)*(\s?[^\s,]+@[^\s,]+\.[^\s,]+)$" [(ngModel)]="emailSupplier.Cc" name="emailCc" #emailCc="ngModel" class="form-control form-control-lg">
+            <div *ngIf="emailCc.dirty && emailCc.invalid">
+                <div *ngIf="emailSupplierForm.submitted && !isValid && emailCc.errors.pattern" class="error text-danger"><i class="material-icons">info</i> Invalid Email Address </div>
+            </div>
+          </div>
+          <div class="form-group mb-2">
+            <span class="d-flex justify-content-between">
+              <label class="label-light ">BCC</label>
+              <a [routerLink]="" (click)="clearAll('BCC')">Clear all</a>
+            </span>
+            <input type="text" pattern="^(\s?[^\s,]+@[^\s,]+\.[^\s,]+\s?,)*(\s?[^\s,]+@[^\s,]+\.[^\s,]+)$" [(ngModel)]="emailSupplier.Bcc" #emailBCc="ngModel" name="emailBCc" class="form-control form-control-lg">
+            <div *ngIf="emailBCc.dirty && emailBCc.invalid">
+                <div *ngIf="emailSupplierForm.submitted && !isValid && emailBCc.errors.pattern" class="error text-danger"><i class="material-icons">info</i> Invalid Email Address </div>
+            </div>
+          </div>
+          <div class="form-group mb-2">
+            <span class="d-flex justify-content-between">
+              <label class="label-light ">Subject</label>
+            </span>
+            <input type="text" [(ngModel)]="emailSupplier.Subject" name="emailSubject" class="form-control form-control-lg">
+          </div>
         </div>
         <div class="form-group mb-2">
-          <span class="d-flex justify-content-between">
-            <label class="label-light ">CC</label>
-            <a [routerLink]="">Clear all</a>
-          </span>
-          <input type="text" class="form-control form-control-lg">
+          <textarea class="form-control" [(ngModel)]="emailSupplier.Body" name="emailBody" rows="5"></textarea>
         </div>
-        <div class="form-group mb-2">
-          <span class="d-flex justify-content-between">
-            <label class="label-light ">BCC</label>
-            <a [routerLink]="" >Clear all</a>
-          </span>
-          <input type="text" class="form-control form-control-lg">
-        </div>
-        <div class="form-group mb-2">
-          <span class="d-flex justify-content-between">
-            <label class="label-light ">Subject</label>
-          </span>
-          <input type="text" class="form-control form-control-lg">
-        </div>
-      </div>
-      <div class="form-group mb-2">
-        <textarea class="form-control" rows="8"></textarea>
       </div>
     </div>
   </div>
-</div>
-<div class="modal-footer py-2">
-  <button type="submit" class="btn btn-blue my-1">Send</button>
-</div>
+  <div class="modal-footer py-2">
+    <button type="submit" class="btn btn-blue my-1">Send</button>
+  </div>
+</form>
