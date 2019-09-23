@@ -19,6 +19,10 @@ export class PageComponent implements OnInit {
     this.setPage(1);
   }
 
+  ngOnChanges() {
+    this.setPage(this.currPage);
+  }
+
   setPage(page: number) {
     this.pager = this._Pager.getPager(this.totalCount, page);
     this.totalPages = this.pager.totalPages;
@@ -29,7 +33,6 @@ export class PageComponent implements OnInit {
     if (pageValue < 1) {
       this.currPage = 1;
     }
-    //console.log(this.pager.currentPage + ' ' + pageValue + ' ' + this.currPage);
 
     this.pager.currentPage = this.currPage;
     this.setPage(pageValue);

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SeoService } from '../seo.service';
 import { SearchProduct } from '../shared/models/searchProduct/SearchProduct';
@@ -6,12 +6,12 @@ import { FacetTerms } from '../shared/models/searchProduct/FacetTerms';
 import { SearchFilter } from '../shared/models/searchProduct/SearchFilter';
 import { EnumSeoStatus } from '../shared/models/searchProduct/EnumSeoStatus';
 import { EnumProductStatus } from '../shared/models/searchProduct/EnumProductStatus';
-import { PagerService } from '../shared/services/pager.service';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { BulkEditModalComponent } from '../modals/bulk-edit-modal/bulk-edit-modal.component';
 import { EmailSupplierModalComponent } from '../modals/email-supplier-modal/email-supplier-modal.component';
 import { ISupplier } from '../shared/models/searchSuppliers/ISearchSuppliers';
 import { SupplierService } from '../shared/services/supplier.service';
+import { SearchFilterParam } from '../shared/models/searchProduct/SearchFilterParam';
 
 @Component({
   selector: 'app-search-product',
@@ -25,16 +25,9 @@ export class SearchProductComponent implements OnInit {
   selectedFacetTerms: FacetTerms[] = [];
   supplier: ISupplier;
   seoStatusShowAll: boolean = false;
+  filterParam: SearchFilterParam[] = [];
 
-  // pager object
-  pager: any = {};
-  // paged items
-  pagedItems: any[];
-  totalPages: number;
   currPage: number = 0;
-  AllControls: boolean = false;
-  customorder = "Name";
-  reverse = false;
   mdlsearch: '';
   searchtxt: '';
   isLoading: boolean = false;
@@ -49,13 +42,11 @@ export class SearchProductComponent implements OnInit {
 
   constructor(
     private _SeoService: SeoService,
-    private _Pager: PagerService,
-    private changeDetectorRef: ChangeDetectorRef,
     private modalService: NgbModal,
     private router: Router,
     private supplierService: SupplierService
   ) {
-    
+
   }
 
   ngOnInit() {
@@ -81,13 +72,15 @@ export class SearchProductComponent implements OnInit {
     }
   }
 
-  getSupplierProducts(companyId: number, offset: number = 0, searchText: string = '', ) {
+  getSupplierProducts(companyId: number, searchText: string = '', filters: SearchFilterParam[] = null, offset: number = 0) {
     this.showLoader(true);
+    
     if (offset == 0)
       this.currPage = 1;
 
-    this._SeoService.getSuplierProducts(companyId, searchText, offset).subscribe(data => {
+    this._SeoService.getSuplierProducts(companyId, searchText, filters, offset).subscribe(data => {
       if (data) {
+        this.isSelectAll = false;
         this.loadProducts(data.Products);
         this.loadFilters(data.Filters);
         this.totalCount = data.TotalCount;
@@ -98,12 +91,21 @@ export class SearchProductComponent implements OnInit {
   }
 
   navigatePage(page: any) {
-    this.getSupplierProducts(this.supplier.CompanyId, page.startIndex ? page.startIndex : 0);
+    this.getSupplierProducts(this.supplier.CompanyId, '', this.filterParam, page.startIndex ? page.startIndex : 0);
     this.currPage = +page.currentPage;
   }
 
   onSelectAllProducts(event) {
     this.products.forEach((x) => x.IsSelected = this.isSelectAll);
+  }
+  onSelectProduct(product) {
+    if (this.isSelectAll)
+      this.isSelectAll = false;
+    else {
+      if (!this.products.find(item => item.IsSelected == false)) {
+        this.isSelectAll = true;
+      }
+    }
   }
 
   searchClick(arg: any) {
@@ -120,22 +122,44 @@ export class SearchProductComponent implements OnInit {
   }
   cancelItem(objFaceterm: FacetTerms) {
     if (this.selectedFacetTerms && this.selectedFacetTerms.length > 0) {
-      if (this.selectedFacetTerms.some(element => element.Term.includes(objFaceterm.Term))) {
-        // this.data = this.selectedFacetTerm.filter(item => item !== data_item);
+      if (this.selectedFacetTerms.filter(item => item.ParentTerm === objFaceterm.Term).length > 1) {
+        for (var i = 0; i < this.selectedFacetTerms.length; i++) {
+          if (this.selectedFacetTerms[i].ParentTerm === objFaceterm.Term) {
+            this.selectedFacetTerms.splice(i, 1);
+            i--;
+          }
+        }
+        this.filterParam.splice(this.filterParam.findIndex(item => item.SearchTerm === objFaceterm.ParentTerm), 1);
+        this.applyFilter();
+      }
+      else if (this.selectedFacetTerms.some(element => element.Term.includes(objFaceterm.Term))) {
         this.selectedFacetTerms.splice(this.selectedFacetTerms.indexOf(objFaceterm), 1);
+        if (this.filterParam.some(item => item.SearchTerm === objFaceterm.ParentTerm && item.ChildTerm === objFaceterm.Term)) {
+          var facetName = this.filterParam.find(item => item.SearchTerm === objFaceterm.ParentTerm && item.ChildTerm === objFaceterm.Term).FacetName;
+          this.filterParam.splice(this.filterParam.findIndex(item => item.SearchTerm === objFaceterm.ParentTerm), 1);
+          this.filterParam.push(new SearchFilterParam(facetName, objFaceterm.ParentTerm));
+        }
+        else
+          this.filterParam.splice(this.filterParam.findIndex(item => item.SearchTerm === objFaceterm.Term), 1);
+        this.applyFilter();
       }
     }
   }
-  facetTermClick(objFaceterm: FacetTerms) {
+  facetTermClick(facet: string, objFaceterm: FacetTerms) {
     if (this.selectedFacetTerms && this.selectedFacetTerms.length > 0) {
-      if (this.selectedFacetTerms.some(element => element.Term.includes(objFaceterm.Term))) {
-
+      if (this.selectedFacetTerms.some(element => element.ParentTerm === objFaceterm.ParentTerm)) {
+        this.selectedFacetTerms.push(objFaceterm);
+        this.filterParam.splice(this.filterParam.findIndex(item => item.SearchTerm === objFaceterm.ParentTerm), 1);
+        this.filterParam.push(new SearchFilterParam(facet, objFaceterm.ParentTerm, objFaceterm.Term));
       } else {
         this.selectedFacetTerms.push(objFaceterm);
+        this.filterParam.push(new SearchFilterParam(facet, objFaceterm.Term))
       }
     } else {
       this.selectedFacetTerms.push(objFaceterm);
+      this.filterParam.push(new SearchFilterParam(facet, objFaceterm.Term))
     }
+    this.applyFilter();
   }
 
   openBulkEdit() {
@@ -149,8 +173,8 @@ export class SearchProductComponent implements OnInit {
     modalRef.componentInstance.supplier = this.supplier;
   }
 
-  applyFilter(filterBy: string): void {
-
+  applyFilter(): void {
+    this.getSupplierProducts(this.supplier.CompanyId, '', this.filterParam, 0);
   }
 
   toggleSee(filter: SearchFilter): void {

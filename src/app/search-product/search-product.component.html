@@ -50,7 +50,7 @@
         </div>
         <div class="form-check my-1 mr-sm-2">
             <input type="checkbox" class="form-check-input" [(ngModel)]="isExactMatch" id="cbxExactMatch">
-            <label class="form-check-label label-light" for="cbxExactMatch">Exact match</label>
+            <label class="form-check-label label-light" for="cbxExactMatch">Exact Match</label>
         </div>
         <div class="row">
             <ul class="side-nav-list mt-2">
@@ -104,7 +104,7 @@
                     <a href="#{{ search.FacetId }}" data-toggle="collapse">{{search.Facet}}</a>
                     <ul class="side-sub-nav-list collapse" id="{{ search.FacetId }}">
                         <li *ngFor="let facetTerm of search.Terms; let i = index" [hidden]="i >= 5 && !search.SeeAll">
-                            <a [routerLink]="" (click)="facetTermClick(facetTerm)">{{facetTerm.Term}}
+                            <a [routerLink]="" (click)="facetTermClick(search.Facet, facetTerm)">{{facetTerm.Term}}
                                 ({{facetTerm.Count}})</a>
                         </li>
                         <li *ngIf="search.Terms.length > 5">
@@ -151,7 +151,7 @@
                 <div class="col-6 pl-2 d-flex pt-3">
                     <div class="select-all-box p-0">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" [(ngModel)]="product.IsSelected" />
+                            <input type="checkbox" [(ngModel)]="product.IsSelected" (change)="onSelectProduct($product)" />
                         </div>
                     </div>
                     <div class="result-img">

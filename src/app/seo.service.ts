@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, map, tap, delay } from 'rxjs/operators';
-import { ISeoLogin, ISeoLoginResponse } from './shared/models/login/ILogin';
+import { catchError, map, tap } from 'rxjs/operators';
+import { ISeoLogin } from './shared/models/login/ILogin';
 import { ISupplier } from './shared/models/searchSuppliers/ISearchSuppliers';
 import { environment } from '../environments/environment';
 import { IOptimizeProduct } from './shared/models/optimizeProduct/IOptimizeProduct';
+import { SearchFilterParam } from './shared/models/searchProduct/SearchFilterParam';
 
 @Injectable({ providedIn: 'root' })
 export class SeoService {
@@ -43,12 +44,15 @@ export class SeoService {
     //console.log(`SeoService: ${message}`);
   }
 
-  getSuplierProducts(companyId: number, searchText: string, offset: number = 0, limit: number = 10): Observable<any> {
+  getSuplierProducts(companyId: number, searchText: string, filters: SearchFilterParam[] = null, offset: number = 0, limit: number = 10): Observable<any> {
     let params = new HttpParams()
       .set("companyid", companyId.toString())
       .set("offset", offset.toString())
-      .set("limit", limit.toString())
-      .set("searchterm", searchText);
+      .set("limit", limit.toString());
+    if (searchText)
+      params = params.append("searchterm", searchText)
+    if (filters && filters.length > 0)
+      params = params.append("filters", JSON.stringify(filters));
     return this.http.get(environment.apiBaseUrl + "SEOproducts", { params });
   };
 
@@ -93,5 +97,5 @@ export class SeoService {
       .pipe(map((response: Response) => {
         return <any>response;
       }));
-  } 
+  }
 }
