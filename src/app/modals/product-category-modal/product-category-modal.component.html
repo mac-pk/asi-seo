@@ -5,7 +5,7 @@
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
-<div class="modal-body pt-0">
+<div class="modal-body">
     <div *ngIf="isSelectCategoryTypeView">
         <button type="submit" class="btn btn-blue my-1" (click)="showCategories(true)">Product</button> &nbsp;
         <button type="submit" class="btn btn-blue my-1" (click)="showCategories(false)">EIT</button>
@@ -13,10 +13,11 @@
     <div *ngIf="!isSelectCategoryTypeView">
         <em>All Available Categories</em>
         <hr>
-        <div>
+        <div class="search-cat form-inline">
             <label>Search Categories:&nbsp;</label>
-            <input type="text" (input)="onSearchChange($event.target.value)">
+            <input class="form-control" type="text" (input)="onSearchChange($event.target.value)">
         </div>
+		<hr>
         <div class="row float-left" *ngIf='productCategories && productCategories.length > 0'>
             <div class="d-block email-supplier-form py-2 col-6 col-md-6 col-lg-6"
                 *ngFor="let productCategory of productCategories| orderBy:'Name'">

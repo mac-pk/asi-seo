@@ -40,7 +40,7 @@ label{
 }
 .label-black{
   color: #000 !important;
-  font-weight: 400;
+  font-weight: 500;
 }
 .btn-blue{
 background: linear-gradient(180deg, #007DCC 0%, #004ACC 100%);
@@ -315,6 +315,86 @@ box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.09);
   border:0px;
   color: #fff;
 }
+
+.product-optimization-aside{
+    background: #FFFFFF;
+border: 1px solid #F0F0F0;
+box-sizing: border-box;
+box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.09);
+    min-height: 1069px;
+}
+.product-image-thumb{
+    width: 84px;
+    height: 84px;
+    background: #FFFFFF;
+    border: 1px solid #E6E3E3;
+    background: #fff;
+}
+.product-image-thumb img{
+	max-width:100%;
+}
+table.category-table{
+	border: 1px solid #e8ebee;
+}
+table.category-table thead{
+    background: #EDEDED !important;
+
+}
+.table.category-table td, .table.category-table th{
+    padding: 5px !important;   
+    border-bottom: 0px !important;
+}
+
+.category-table i{
+    color: #d80000;
+    font-size: 19px;
+    
+}
+.search-cat .form-control{
+	width:80%;
+}
+.email-supplier-form input[type=checkbox]{
+	margin: 7px 4px 0px 0px;
+    float: left;
+    display: inline-block;
+}
+.keytag a{
+    min-width: 111px;
+    height: 28px;
+    background: #FFFFFF;
+    border: 1px solid #0E9AFF;
+    border-radius: 4px;
+    display: inline-block;
+    color: #0E9AFF;
+    text-decoration: none;
+    padding-left: 5px;
+    padding-right: 0px;
+    line-height: 24px;
+}
+.close-tag{
+    display: inline-block;
+    background: #0E9AFF;
+border: 1px solid #0E9AFF;
+box-sizing: border-box;
+border-radius: 0px 4px 4px 0px;
+    width: 29px;
+height: 27px;
+    float: right;
+    text-align: center;
+}
+.close-tag i{
+     color: #fff;
+}
+.product-summary{
+    min-height: 213px;
+}
+.product-supplier{
+        min-height: 165px;
+}
+.product-approval .product-optimization-aside{
+        min-height: 842px;
+}
+
 button:focus{
    outline: none !important;
 }
