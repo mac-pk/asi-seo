@@ -49,7 +49,8 @@ box-sizing: border-box;
 border-radius: 4px;
   color: #fff;
   min-width: 120px;
-height: 37px;
+height: 30px;
+line-height: 0px;
 
 font-weight: 400;
 font-size: 14px;
@@ -59,6 +60,15 @@ font-size: 14px;
   
   background: linear-gradient(180deg, rgba(0, 125, 204, 0.77) 0%, #004ACC 100%);
   color: #fff;
+}
+.section-logo{
+    max-width: 305px;
+}
+.with-btn-gray{
+  background: linear-gradient(180deg, #FFFFFF 0%, #F0F0F0 100%) !important;
+border: 1px solid #E1E1E3 !important;
+ color: #4F4E4E !important;
+     line-height: 1;
 }
 
 .btn-search{
@@ -145,8 +155,8 @@ p{
 }
 
 .side-nav-toolbar{
-  max-width: 314px;
-  background: #F8F8F8;
+  max-width: 290px;
+  background: #fff;
 border: 1px solid #EBE9E9;
 }
 .side-nav-toolbar a.manage-product{
@@ -175,15 +185,19 @@ border: 1px solid #EBE9E9;
    display: inline-block;
   width: 100%;
   border-top: 1px solid #E5E3E3;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  /*padding-top: 8px;*/
+ /* padding-bottom: 8px;*/
  
   
 }
 .side-nav-list li a{
-   color: #344986;
+   color: #0088cc;
   font-weight: 600;
   padding-left: 38px;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F0F0F0 100%);
+  display: block;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 ul.side-sub-nav-list{
    padding: 0px;
@@ -197,9 +211,12 @@ ul.side-sub-nav-list li{
   
 }
 ul.side-sub-nav-list li a{
-  color: #6B6B6B;
+  color: #0088cc;
   font-size: 13px;
   font-weight: 400;
+  background: none;
+  text-transform:uppercase;
+
   
 }
 ul.side-sub-nav-list li a.see-all, a.see-all i{
