@@ -31,6 +31,7 @@ export class AppComponent {
 
   logout() {
     localStorage.removeItem('userToken');
+    localStorage.removeItem('supplier');
     this.router.navigate(['/login']);
   }
 }

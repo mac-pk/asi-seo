@@ -74,7 +74,7 @@
                     <ul class="side-sub-nav-list collapse seo-status">
                         <li *ngFor="let enum of seoStausEnum | keyvalue; let i = index"
                             [hidden]="i >= 3 && !seoStatusShowAll">
-                            <a [routerLink]="" (click)="applyFilter(enum.key)">{{enum.value}}</a>
+                            <a [routerLink]="">{{enum.value}}</a>
                         </li>
                         <li>
                             <a class="see-all" (click)="toggleSEOStatus(seoStatusShowAll)">See
@@ -151,7 +151,7 @@
                 <div class="col-6 pl-2 d-flex pt-3">
                     <div class="select-all-box p-0">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" [(ngModel)]="product.IsSelected" (change)="onSelectProduct($product)" />
+                            <input type="checkbox" [(ngModel)]="product.IsSelected" (change)="onSelectProduct(product)" />
                         </div>
                     </div>
                     <div class="result-img">
