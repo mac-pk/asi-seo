@@ -2,7 +2,7 @@
     <div *ngIf="isLoading" class="progress-img d-flex text-center">
         <img src="./assets/images/esp-loader-genreal.gif" class="justify-content-center align-self-center mx-auto">
     </div>
-    <div class="col section-logo ml-3">
+    <div class="col section-logo">
         <figure>
             <img src="./assets/images/image.png">
         </figure>
@@ -20,7 +20,7 @@
             <option value="StatusCode">Catalog</option>
         </select>
         <!-- (click)="openEmailSupplier()" -->
-        <button type="submit" (click)="openEmailSupplier()" class="btn btn-blue with-btn-gray my-1 pl-3">
+        <button type="submit" class="btn btn-blue with-btn-gray my-1 pl-3">
             <i class="material-icons">email
             </i>Email Supplier</button>
 
@@ -30,7 +30,7 @@
     </app-page>
 </div>
 <div class="row h-100">
-    <div class="col side-nav-toolbar pt-2 ml-3 ">
+    <div class="col side-nav-toolbar pt-2">
         <a class="manage-product">
             <i class="material-icons">
                 card_giftcard
@@ -180,7 +180,7 @@
                     <label>{{ seoStausEnum[product.SEOStatus] ? seoStausEnum[product.SEOStatus] : seoStausEnum.REDY }}</label>
                 </div>
                 <div class="col-2 d-flex align-content-center flex-wrap">
-                    <button class="btn esp-btn-white my-1 mr-2 p-1" (click)="viewProduct(product.ExternalProductId)">Start
+                    <button class="btn esp-btn-white my-1 mr-2 p-1">Start
                         SEO</button> 
                         <!-- (click)="viewProduct(product.ExternalProductId)" -->
                 </div>
