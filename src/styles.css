@@ -419,6 +419,7 @@ height: 27px;
 }
 .product-supplier{
         min-height: 165px;
+        word-break: break-all;
 }
 .product-approval .product-optimization-aside{
         min-height: 842px;
@@ -498,6 +499,9 @@ button:focus{
 }
 select.with-btn-gray{
  padding-top:3px; 
+}
+.bg-md-gray{
+   background: #eeeeee;
 }
 
 
