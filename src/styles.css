@@ -300,8 +300,9 @@ box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.09);
 .esp-btn-white i{
       color: #6B6B6B;
   position: relative;
-  left: -3px;
-  top: 6px;
+  left: -7px;
+    top: 4px;
+    font-size: 18px;
 }
 .label-strong{
   font-family: 'Open Sans', sans-serif !important;
