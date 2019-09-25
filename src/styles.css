@@ -73,8 +73,8 @@ border: 1px solid #E1E1E3 !important;
 }
 
 .btn-search{
-background: linear-gradient(180deg, #007DCC 0%, #004ACC 100%);
-border: 1px solid #004ACC;
+ background: linear-gradient(180deg, #FFFFFF 0%, #F0F0F0 100%);
+border: 1px solid #E1E1E3 !important;
 box-sizing: border-box;
 border-radius: 4px;
   color: #fff;
@@ -88,6 +88,7 @@ font-size: 14px;
 .btn-search i{
       position: relative;
     top: -3px;
+    color: #4F4E4E !important;
 }
 .sort-select option{
 	background:#fff;
@@ -493,6 +494,9 @@ button:focus{
 }
 .btm-pagination .pagination-cont{
   padding-right: 0px !important;
+}
+select.with-btn-gray{
+ padding-top:3px; 
 }
 
 
