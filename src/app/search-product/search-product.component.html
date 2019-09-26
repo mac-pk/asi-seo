@@ -57,7 +57,7 @@
                 <li [hidden]="selectedFacetTerms.length == 0 && !showhideSearch">
                     <a>Your Search Terms</a>
                     <ul class="side-sub-nav-list">
-                        <li *ngIf="showhideSearch">
+                        <li *ngIf="showhideSearch" class="pl-3">
                             <a class="remove-searched">{{searchtxt}} <input (click)="cancelSearch()" type="button" /> <i
                                     class="material-icons">close</i>
                             </a>
