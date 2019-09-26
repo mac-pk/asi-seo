@@ -509,6 +509,14 @@ select.with-btn-gray{
    background: #ececec;
     border:1px solid #e2dddd;
 }
+.pagination .page-link.arrows {
+  padding: 0px !important;
+  border: 0px !important;
+}
+.pagination .page-link.arrows i {
+      font-size: 30px;
+
+}
 
 
 @media only screen
