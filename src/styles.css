@@ -529,6 +529,7 @@ select.with-btn-gray{
 }
 .clearall-txt{
   font-weight: 400 !important;
+  background: none !important;
 }
 
 @media only screen
