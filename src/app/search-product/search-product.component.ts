@@ -202,6 +202,15 @@ export class SearchProductComponent implements OnInit {
     this.applyFilter();
   }
 
+  clearAll(){
+    this.showhideSearch = false;
+    this.searchtxt = '';
+    this.mdlsearch = '';
+    this.selectedFacetTerms = [];
+    this.filterParam = [];
+    this.applyFilter();
+  }
+
   showLoader(show: boolean): void {
     this.isLoading = show;
   }
