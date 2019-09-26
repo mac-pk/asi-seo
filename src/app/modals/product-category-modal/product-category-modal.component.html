@@ -20,7 +20,7 @@
 		<hr>
         <div class="row float-left" *ngIf='productCategories && productCategories.length > 0'>
             <div class="d-block email-supplier-form py-2 col-6 col-md-6 col-lg-6"
-                *ngFor="let productCategory of productCategories| orderBy:'Name'">
+                *ngFor="let productCategory of productCategories">
                 <div class="margin0">
                     <div class="control-group checkbox">
                         <input type="checkbox" [(ngModel)]="productCategory.IsSelected"

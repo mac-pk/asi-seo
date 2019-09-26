@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'
-import { MyOrderByPipe } from './shared/sort/sort.pipe';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -27,7 +26,6 @@ import { ProductCategoryModalComponent } from './modals/product-category-modal/p
     LoginComponent,
     SearchSupplierComponent,
     SearchProductComponent,
-    MyOrderByPipe,
     BulkEditModalComponent,
     PageComponent,
     DigitOnlyDirective,
@@ -45,7 +43,6 @@ import { ProductCategoryModalComponent } from './modals/product-category-modal/p
     NgbModule
   ],
   providers: [
-    MyOrderByPipe,
     SeoService,
     AuthGuard,
     {

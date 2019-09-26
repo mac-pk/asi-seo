@@ -1,17 +1,35 @@
-<div class="row esp-sub-header pt-2">
+<div *ngIf="currentProduct" class="row esp-sub-header pt-2">
+    <div *ngIf="isLoading" class="progress-img d-flex text-center">
+        <img src="assets/images/esp-loader-genreal.gif" class="justify-content-center align-self-center mx-auto">
+    </div>
     <div class="col-md-2 col-sm-12">
         <figure><img src="./assets/images/image.png"></figure>
     </div>
     <div class="col text-lg-right text-md-left text-sm-left text-left">
-        <div class="float-lg-left float-md-left pt-3"><label class="label-black">Adding Details for</label> <label
-                class="label-light"> {{product.AsiProdNo}} / {{product.Name}} </label> </div>
+        <div class="float-lg-left float-md-left pt-3"><label class="label-black">Adding Details for&nbsp;</label> <label
+                class="label-light"> {{currentProduct.ExternalProductId}} / {{currentProduct.Name}} </label> </div>
         <div class="pt-3 float-lg-right float-md-left">
             <div class="col"> <a href="#/searchProduct?id={{companyId}}" class="mr-3">Manage My Products</a>
-                <a href="#/optimizeProduct?id={{externalProductId}}" class="mr-3">Previous Product</a>
-                <a href="#/optimizeProduct?id={{externalProductId}}" class="mr-3">Next Product</a>
-                <a href="#/searchProduct?id={{companyId}}"> Cancel and Exit</a></div>
-            <div class="col"> <label class="label-black">ASIQA Distributor I</label> <label
-                    class="label-red">asi/101574</label><label class="label-black"> (Canada,USA)</label></div>
+                <span *ngIf="hasPreviousProduct">
+                    <a (click)="getNextOrPreviousProduct(false)" href="#/optimizeProduct"
+                        class="mr-3">Previous Product</a>
+                </span>
+                <span *ngIf="!hasPreviousProduct">
+                    <a class="mr-3">Previous Product</a>
+
+                </span>
+                <span *ngIf="hasNextProduct">
+                    <a (click)="getNextOrPreviousProduct(true)" href="#/optimizeProduct"
+                        class="mr-3">Next Product</a>
+                </span>
+                <span *ngIf="!hasNextProduct">
+                    <a class="mr-3">Next Product</a>
+
+                </span>
+                <a href="#/searchProduct?id={{companyId}}"> Cancel and Exit</a>
+            </div>
+            <div class="col"> <label class="label-black">{{supplier.CompanyName}}</label> <label
+                    class="label-red">&nbsp;asi/{{supplier.AsiNumber}}</label><label class="label-black">&nbsp;({{supplier.CountryCode}})</label></div>
         </div>
     </div>
 </div>
@@ -21,25 +39,27 @@
             <div class="col-12 col-md-6 col-lg-3">
                 <h5 class="pt-2">Product Optimization</h5>
             </div>
-            <div class="col-12 d-flex flex-row">
+            <div *ngIf="currentProduct" class="col-12 d-flex flex-row">
                 <div class="p-0">
                     <div class="figure product-image-thumb">
-                        <img style="width:114px;height:126px;" src="https://media.asicdn.com/images/orig/81477897.jpg">
+                        <img style="width:114px;height:126px;" [src]="currentProduct.PrimaryImageUrl">
                     </div>
                 </div>
                 <div class="p-3">
-                    <label class="label-black">Product SEO Status:</label><label class="label-light">Approved</label>
+                    <label class="label-black">Product SEO Status:&nbsp;</label><label class="label-light">Approved</label>
                     <div class="clearfix"></div>
-                    <label class="label-dark">XID:</label><label class="label-red">{{product.ExternalProductId}}</label>
+                    <label class="label-dark">XID:&nbsp;</label><label
+                        class="label-red">{{currentProduct.ExternalProductId}}</label>
                 </div>
             </div>
-            <div class="col-12 col-md-12 col-sm-12 col-lg-6 float-lg-left float-md-none float-sm-none ">
+            <div *ngIf="currentProduct"
+                class="col-12 col-md-12 col-sm-12 col-lg-6 float-lg-left float-md-none float-sm-none ">
                 <div class="col-12 product-optimization-aside">
                     <h5 class="pt-3">Current Data</h5>
-                    <p class="label-black mb-0">Supplier Company Name:</p>
-                    <p class="product-supplier">{{product.Description}}</p>
+                    <p class="label-black mb-0">Description</p>
+                    <p class="product-supplier">{{currentProduct.Description}}</p>
                     <p class="label-black mb-0">Summary</p>
-                    <p class="product-summary">{{product.Summary}}</p>
+                    <p class="product-summary">{{currentProduct.Summary}}</p>
                     <p class="label-black mb-0">Category</p>
                     <table class="table category-table">
                         <thead>
@@ -49,18 +69,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Towels-Beach</td>
-                                <td>ASI</td>
-                            </tr>
-                            <tr>
-                                <td>Towels-Wrap-Around</td>
-                                <td>ASI</td>
-                            </tr>
-                            <tr>
-                                <td>Towels-Sports</td>
-                                <td>ASI</td>
-                            </tr>
+                            <ng-container *ngIf="currentProduct && currentProduct.ProductCategories">
+                                <tr *ngFor="let category of currentProduct.ProductCategories">
+                                    <td>{{category.Value}}</td>
+                                    <td>{{category.Type}}</td>
+                                </tr>
+                            </ng-container>
                         </tbody>
                     </table>
                     <p class="label-black mb-0">Ad Category</p>
@@ -68,25 +82,26 @@
                     <p class="label-black mb-0">EIT Category</p>
                     <p>NA</p>
                     <p class="label-black mb-0">Product Keywords:</p>
-                    <p>Big time jersey,towel,full color towel,beach accessories</p>
+                    <p>{{productKeywords}}</p>
                     <p class="label-black mb-0">SEO Keywords</p>
                     <p>NA</p>
                     <p class="label-black mb-0">Advertising Keywords:</p>
                     <p>NA</p>
                     <p class="label-black mb-0">Product Theme</p>
-                    <p>NA</p>
+                    <p *ngIf="hasProductThemes">{{currentProduct.ProductThemes}}</p>
+                    <p *ngIf="!hasProductThemes">N/A</p>
                 </div>
             </div>
             <form (ngSubmit)="saveProduct()" #optimizeForm="ngForm" class="h-100">
-                <div class="col-12 col-md-12 col-sm-12 col-lg-6 float-lg-left float-md-none float-sm-none ">
+                <div *ngIf="seoProduct"
+                    class="col-12 col-md-12 col-sm-12 col-lg-6 float-lg-left float-md-none float-sm-none ">
                     <div class="col-12 product-optimization-aside">
                         <h5 class="pt-3">SEO Data</h5>
-                        <p class="label-black mb-0">Ad Category</p>
-                        <p>NA</p>
+                        <p class="label-black mb-0">Optimized Description</p>
                         <div class="form-group">
-                            <textarea [(ngModel)]="product.Description" #description="ngModel" name="description"
-                                required class="form-control" rows="4"></textarea>
-                            <label class="label-light">0 of 800 characters</label>
+                            <textarea [(ngModel)]="seoProduct.Description" #description="ngModel" name="description"
+                                required class="form-control" rows="4" maxlength="800"></textarea>
+                            <label class="label-light">{{seoProduct.Description.length}} of 800 characters</label>
                             <div *ngIf="description.invalid && (description.dirty || description.touched)"
                                 class="error text-danger">
                                 <div *ngIf="description.errors.required">
@@ -97,12 +112,13 @@
                         <p class="label-black mb-0">Optimized Summary</p>
                         <p>Enter an abridged description for quick view and other short description areas</p>
                         <div class="form-group">
-                            <textarea class="form-control" rows="Z"></textarea>
-                            <label class="label-light">0 of 130 characters</label>
-                            <div *ngIf="description.invalid && (description.dirty || description.touched)"
+                            <textarea [(ngModel)]="seoProduct.Summary" #summary="ngModel" name="summary" required
+                                class="form-control" rows="Z" maxlength="130"></textarea>
+                            <label class="label-light">{{seoProduct.Summary?.length}} of 130 characters</label>
+                            <div *ngIf="summary.invalid && (summary.dirty || summary.touched)"
                                 class="error text-danger">
-                                <div *ngIf="description.errors.required">
-                                    <i class="material-icons">info</i> Product description is required.
+                                <div *ngIf="summary.errors.required">
+                                    <i class="material-icons">info</i> Product summary is required.
                                 </div>
                             </div>
                         </div>

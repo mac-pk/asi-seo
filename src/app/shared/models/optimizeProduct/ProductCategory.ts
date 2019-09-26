@@ -10,6 +10,8 @@ export class ProductCategory {
         this.IsAllowsAssign = product.IsAllowsAssign;
         this.IsParent = product.IsParent;
         this.IsPrimary = product.IsPrimary;
+        this.Value = product.Value;
+        this.Type = product.Type;
     };
 
     Code: string;
@@ -22,6 +24,8 @@ export class ProductCategory {
     IsAllowsAssign: string;
     IsParent: string;
     IsPrimary: string;
+    Value: string;
+    Type: string;
     IsSelected: boolean = false;
     IsDisabled: boolean = false;
     IsProductCategoryType: boolean = false;

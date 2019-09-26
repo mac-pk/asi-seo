@@ -207,6 +207,8 @@ export class SearchProductComponent implements OnInit {
   }
 
   viewProduct(externalProductId: string): void {
-    this.router.navigate(['/optimizeProduct'], { queryParams: { id: externalProductId } });
+    localStorage.setItem('selectedExternalProductId', externalProductId);
+    localStorage.setItem('searchProducts', JSON.stringify(this.products));
+    this.router.navigate(['/optimizeProduct']);
   }
 }

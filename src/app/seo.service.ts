@@ -5,7 +5,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { ISeoLogin } from './shared/models/login/ILogin';
 import { ISupplier } from './shared/models/searchSuppliers/ISearchSuppliers';
 import { environment } from '../environments/environment';
-import { IOptimizeProduct } from './shared/models/optimizeProduct/IOptimizeProduct';
+import { OptimizeProduct } from './shared/models/optimizeProduct/OptimizeProduct';
 import { SearchFilterParam } from './shared/models/searchProduct/SearchFilterParam';
 
 @Injectable({ providedIn: 'root' })
@@ -65,14 +65,12 @@ export class SeoService {
     );
   }
 
-  getSuppliers(searchText: string, offset: number = 0, limit: number = 50): Observable<ISupplier[]> {
+  getSuppliers(searchText: string): Observable<ISupplier[]> {
     let filters: any[] = [];
     filters.push({ searchterm: searchText });
 
     let params = new HttpParams()
-      .set("filters", JSON.stringify(filters))
-      .set("offset", offset.toString())
-      .set("limit", limit.toString());
+      .set("filters", JSON.stringify(filters));
 
     return this.http
       .get(this.supplierUrl, { params })
@@ -82,11 +80,13 @@ export class SeoService {
       );
   }
 
-  getProduct(productId: number): Observable<IOptimizeProduct> {
+  getProduct(productId: string, companyId: number): Observable<OptimizeProduct> {
+    let params = new HttpParams()
+    .set("companyId", companyId.toString());
+
     return this.http
-      .get(environment.mockBaseUrl + "v2/5d80b6b930000061af8e712a")
+      .get(environment.apiBaseUrl + "SEOproducts/" + productId, { params })
       .pipe(map((response: any) => {
-        //debugger;
         return response;
       })
       );
