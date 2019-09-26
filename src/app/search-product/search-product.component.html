@@ -12,12 +12,12 @@
         <button type="submit" class="btn btn-blue with-btn-gray my-1 mr-2" (click)="openBulkEdit()">
             <i class="material-icons">edit
             </i>Bulk Edit</button>
-        <select class="btn btn-blue my-1 mr-2 with-btn-gray sort-select ">
-            <!-- [(ngModel)]="drpSort" (change)="changeSort($event)" -->
-            <option value="UpdateDate">Last Updated</option>
-            <option value="Name">Product Name</option>
-            <option value="XID">Product Number</option>
-            <option value="StatusCode">Catalog</option>
+        <select class="btn btn-blue my-1 mr-2 with-btn-gray sort-select" [(ngModel)]="sortBy"
+            (change)="changeSort($event)">
+            <option value="Last Updated">Last Updated</option>
+            <option value="Product Name">Product Name</option>
+            <option value="Product Number">Product Number</option>
+            <option value="Catalog">Catalog</option>
         </select>
         <!-- (click)="openEmailSupplier()" -->
         <button type="submit" class="btn btn-blue with-btn-gray my-1 pl-3">
@@ -151,12 +151,13 @@
                 <div class="col-6 pl-2 d-flex pt-3">
                     <div class="select-all-box p-0">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" [(ngModel)]="product.IsSelected" (change)="onSelectProduct(product)" />
+                            <input type="checkbox" [(ngModel)]="product.IsSelected"
+                                (change)="onSelectProduct(product)" />
                         </div>
                     </div>
                     <div class="result-img">
                         <img style="width:114px;height:126px;"
-                            src="{{product.PrimaryImageUrl != '' ? product.PrimaryImageUrl : 'assets/images/1.png'}}">
+                            src="{{ product.PrimaryImageUrl && product.PrimaryImageUrl !== '' ? product.PrimaryImageUrl : './assets/images/no_image.png' }}">
                     </div>
                     <div class="result-content pl-2 ">
                         <h6>{{product.Name}}</h6>
@@ -181,8 +182,8 @@
                 </div>
                 <div class="col-2 d-flex align-content-center flex-wrap">
                     <button class="btn esp-btn-white my-1 mr-2 p-1">Start
-                        SEO</button> 
-                        <!-- (click)="viewProduct(product.ExternalProductId)" -->
+                        SEO</button>
+                    <!-- (click)="viewProduct(product.ExternalProductId)" -->
                 </div>
             </div>
 

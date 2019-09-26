@@ -39,6 +39,8 @@ export class SearchProductComponent implements OnInit {
   productStatusEnum = EnumProductStatus;
   isSelectAll: boolean = false;
   noProductsFound: boolean = false;
+  sortBy: string = 'Last Updated';
+  sortByOptions: string[];
 
   constructor(
     private _SeoService: SeoService,
@@ -72,13 +74,13 @@ export class SearchProductComponent implements OnInit {
     }
   }
 
-  getSupplierProducts(companyId: number, searchText: string = '', filters: SearchFilterParam[] = null, offset: number = 0) {
+  getSupplierProducts(companyId: number, searchText: string = '', filters: SearchFilterParam[] = null, sortBy: string[] = null, offset: number = 0) {
     this.showLoader(true);
-    
+
     if (offset == 0)
       this.currPage = 1;
 
-    this._SeoService.getSuplierProducts(companyId, searchText, filters, offset).subscribe(data => {
+    this._SeoService.getSuplierProducts(companyId, searchText, filters, sortBy, offset).subscribe(data => {
       if (data) {
         this.isSelectAll = false;
         this.loadProducts(data.Products);
@@ -91,7 +93,7 @@ export class SearchProductComponent implements OnInit {
   }
 
   navigatePage(page: any) {
-    this.getSupplierProducts(this.supplier.CompanyId, '', this.filterParam, page.startIndex ? page.startIndex : 0);
+    this.getSupplierProducts(this.supplier.CompanyId, '', this.filterParam, this.sortByOptions, page.startIndex ? page.startIndex : 0);
     this.currPage = +page.currentPage;
   }
 
@@ -113,12 +115,21 @@ export class SearchProductComponent implements OnInit {
       this.showhideSearch = true;
       this.searchtxt = arg;
       this.mdlsearch = '';
+      this.filterParam = [];
+      this.selectedFacetTerms = [];
+      if (this.isExactMatch)
+        this.filterParam.push(new SearchFilterParam("SearchTerm", '"' + this.searchtxt + '"'));
+      else
+        this.filterParam.push(new SearchFilterParam("SearchTerm", this.searchtxt));
+      this.applyFilter();
     }
   }
   cancelSearch() {
     this.showhideSearch = false;
     this.searchtxt = '';
     this.mdlsearch = '';
+    this.filterParam.splice(this.filterParam.findIndex(item => item.FacetName === "SearchTerm"), 1);
+    this.applyFilter();
   }
   cancelItem(objFaceterm: FacetTerms) {
     if (this.selectedFacetTerms && this.selectedFacetTerms.length > 0) {
@@ -174,7 +185,7 @@ export class SearchProductComponent implements OnInit {
   }
 
   applyFilter(): void {
-    this.getSupplierProducts(this.supplier.CompanyId, '', this.filterParam, 0);
+    this.getSupplierProducts(this.supplier.CompanyId, '', this.filterParam, this.sortByOptions, 0);
   }
 
   toggleSee(filter: SearchFilter): void {
@@ -183,6 +194,12 @@ export class SearchProductComponent implements OnInit {
 
   toggleSEOStatus(seeAll: boolean) {
     this.seoStatusShowAll = !seeAll;
+  }
+
+  changeSort(event) {
+    this.sortByOptions = [];
+    this.sortByOptions.push(this.sortBy);
+    this.applyFilter();
   }
 
   showLoader(show: boolean): void {

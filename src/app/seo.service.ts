@@ -44,7 +44,7 @@ export class SeoService {
     //console.log(`SeoService: ${message}`);
   }
 
-  getSuplierProducts(companyId: number, searchText: string, filters: SearchFilterParam[] = null, offset: number = 0, limit: number = 10): Observable<any> {
+  getSuplierProducts(companyId: number, searchText: string, filters: SearchFilterParam[] = null, sortBy: string[] = [], offset: number = 0, limit: number = 10): Observable<any> {
     let params = new HttpParams()
       .set("companyid", companyId.toString())
       .set("offset", offset.toString())
@@ -53,6 +53,8 @@ export class SeoService {
       params = params.append("searchterm", searchText)
     if (filters && filters.length > 0)
       params = params.append("filters", JSON.stringify(filters));
+    if (sortBy && sortBy.length > 0)
+      params = params.append("SortBy", JSON.stringify(sortBy));
     return this.http.get(environment.apiBaseUrl + "SEOproducts", { params });
   };
 
