@@ -71,7 +71,7 @@
                 </li>
                 <li>
                     <a href=".seo-status" data-toggle="collapse">SEO Status</a>
-                    <ul class="side-sub-nav-list collapse seo-status">
+                    <ul class="side-sub-nav-list collapse seo-status show">
                         <li *ngFor="let enum of seoStausEnum | keyvalue; let i = index"
                             [hidden]="i >= 3 && !seoStatusShowAll">
                             <a [routerLink]="">{{enum.value}}</a>
@@ -88,21 +88,21 @@
                 </li>
                 <li>
                     <a href=".seo-flag" data-toggle="collapse">SEO Flag</a>
-                    <ul class="side-sub-nav-list collapse seo-flag">
+                    <ul class="side-sub-nav-list collapse  seo-flag  show">
                         <li><a [routerLink]="">Yes</a></li>
                         <li><a [routerLink]="">No</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="#product_type" data-toggle="collapse">Product Type</a>
-                    <ul class="side-sub-nav-list collapse" id="product_type">
+                    <ul class="side-sub-nav-list collapse show" id="product_type">
                         <li><a [routerLink]="">Type 1</a></li>
                         <li><a [routerLink]="">Type 2</a></li>
                     </ul>
                 </li>
                 <li *ngFor="let search of objSearchFilter">
                     <a href="#{{ search.FacetId }}" data-toggle="collapse">{{search.Facet}}</a>
-                    <ul class="side-sub-nav-list collapse" id="{{ search.FacetId }}">
+                    <ul class="side-sub-nav-list collapse show" id="{{ search.FacetId }}">
                         <li *ngFor="let facetTerm of search.Terms; let i = index" [hidden]="i >= 5 && !search.SeeAll">
                             <a [routerLink]="" (click)="facetTermClick(search.Facet, facetTerm)">{{facetTerm.Term}}
                                 ({{facetTerm.Count}})</a>
