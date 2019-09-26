@@ -225,7 +225,7 @@ ul.side-sub-nav-list li a{
   font-size: 13px;
   font-weight: 400;
   background: none;
-  text-transform:uppercase;
+
 
   
 }
@@ -527,7 +527,9 @@ select.with-btn-gray{
     right: 20px;
     font-size: 11px;
 }
-
+.clearall-txt{
+  font-weight: 400 !important;
+}
 
 @media only screen
 and (max-width: 1024px) {
