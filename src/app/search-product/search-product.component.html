@@ -20,7 +20,7 @@
             <option value="Catalog">Catalog</option>
         </select>
         <!-- (click)="openEmailSupplier()" -->
-        <button (click)="openEmailSupplier()" type="submit" class="btn btn-blue with-btn-gray my-1 pl-3">
+        <button type="submit" (click)="openEmailSupplier()" class="btn btn-blue with-btn-gray my-1 pl-3">
             <i class="material-icons">email
             </i>Email Supplier</button>
 
@@ -62,7 +62,7 @@
                                     class="material-icons">close</i>
                             </a>
                         </li>
-                        <li *ngFor="let selected of selectedFacetTerms">
+                        <li *ngFor="let selected of selectedFacetTerms" class="pl-3">
                             <a class="remove-searched">{{selected.Term}} <input (click)="cancelItem(selected)"
                                     type="button" /> <i class="material-icons">close</i>
                             </a>
@@ -147,7 +147,7 @@
 
         </div>
         <div [hidden]="!noProductsFound" class="col-12 result-box no-products mt-2 text-center">
-            <h5 class="mt-5 text-normal">No Products Found!</h5>
+            <h5 class="mt-5 text-normal">No Products Found</h5>
         </div>
         <div [hidden]="noProductsFound" class="col-12 result-box mt-2" *ngFor="let product of products">
             <div class="row">
@@ -184,7 +184,7 @@
                     <label>{{ seoStausEnum[product.SEOStatus] ? seoStausEnum[product.SEOStatus] : seoStausEnum.REDY }}</label>
                 </div>
                 <div class="col-2 d-flex align-content-center flex-wrap">
-                    <button (click)="viewProduct(product.ExternalProductId)" class="btn esp-btn-white my-1 mr-2 p-1">Start
+                    <button class="btn esp-btn-white my-1 mr-2 p-1" (click)="viewProduct(product.ExternalProductId)">Start
                         SEO</button>
                     <!-- (click)="viewProduct(product.ExternalProductId)" -->
                 </div>

@@ -10,20 +10,20 @@
             </li>
 
             <li class="page-item disabled" style="width:90px;">
-                <a class="page-link" href="#">Of {{totalPages}}</a>
+                <a class="page-link" href="#">of {{totalPages}}</a>
             </li>
-            <li class="page-item">
+            <li class="page-item" [class.disabled]="1 >= currPage">
                 <a class="page-link arrows" (click)="pageNavigate(currPage - 1)">
-                   <i class="material-icons">
-arrow_left
-</i>
+                    <i class="material-icons">
+                        arrow_left
+                    </i>
                 </a>
             </li>
-            <li class="page-item">
+            <li class="page-item" [class.disabled]="currPage === totalPages">
                 <a class="page-link arrows" (click)="pageNavigate(currPage + 1)">
-                   <i class="material-icons">
-arrow_right
-</i>
+                    <i class="material-icons">
+                        arrow_right
+                    </i>
                 </a>
             </li>
         </ul>
