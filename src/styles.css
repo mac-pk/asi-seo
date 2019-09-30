@@ -492,10 +492,11 @@ button:focus{
     left: 0px;
   }
   .remove-searched i {
-    color: red;
+    color: #0E9AFF;
     font-size: 14px;
     margin-top: 5px;
     float: left;
+    font-weight: 700;
   }
 .no-products h5 {
   color: #344986;
@@ -548,7 +549,7 @@ and (max-width: 1024px) {
       .side-nav-toolbar{
           position: absolute;
           left: 0px;
-          display: none;
+       
           z-index: 9;
           max-width: 100%;
       }
