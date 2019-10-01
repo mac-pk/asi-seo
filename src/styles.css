@@ -547,11 +547,11 @@ and (max-width: 1024px) {
   and (-webkit-min-device-pixel-ratio: 1) {
       
       .side-nav-toolbar{
-          position: absolute;
+         /* position: absolute;*/
           left: 0px;
        
           z-index: 9;
-          max-width: 100%;
+          /*max-width: 100%;*/
       }
       .side-nav-toolbar-show{
          display: block;    
@@ -596,4 +596,13 @@ and (max-width: 1024px) {
     flex-basis: auto;
     width: 100%;
       }
+    
 }
+@media only screen 
+  and (max-width: 700px) {
+
+  .side-nav-toolbar{
+        max-width: 209px;
+
+      }
+  }
