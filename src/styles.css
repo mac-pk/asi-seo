@@ -230,9 +230,6 @@ ul.side-sub-nav-list li a{
   font-size: 13px;
   font-weight: 400;
   background: none;
-
-
-  
 }
 ul.side-sub-nav-list li a.see-all, a.see-all i{
   color: #0E9AFF;
@@ -493,11 +490,13 @@ button:focus{
   height: 33px;
 
 }
-.remove-searched{
-  position:relative;
-  padding-left:0px !important;
-  margin-left:38px;
-  display:block;
+.remove-searched {
+  position: relative;
+  padding-left: 15px !important;
+  padding-right:8px;
+  margin-left: 32px;
+  display: block;
+  word-break: break-all;
 }
   .remove-searched input {
     background: none;
@@ -506,7 +505,7 @@ button:focus{
     z-index: 1;
     width: 14px;
     height: 14px;
-    top: 4px;
+    top: 8px;
     left: 0px;
   }
   .remove-searched i {
@@ -515,6 +514,9 @@ button:focus{
     margin-top: 5px;
     float: left;
     font-weight: 700;
+    position:absolute;
+    left:0px;
+    top:4px;
   }
 .no-products h5 {
   color: #344986;
