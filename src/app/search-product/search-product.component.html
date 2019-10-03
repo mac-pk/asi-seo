@@ -12,13 +12,19 @@
         <button type="submit" class="btn btn-blue with-btn-gray my-1 mr-2" (click)="openBulkEdit()">
             <i class="material-icons">edit
             </i>Bulk Edit</button>
-        <select class="btn btn-blue my-1 mr-2 with-btn-gray sort-select" [(ngModel)]="sortBy"
-            (change)="changeSort($event)">
-            <option value="Last Updated">Last Updated</option>
-            <option value="Product Name">Product Name</option>
-            <option value="Product Number">Product Number</option>
-            <option value="Catalog">Catalog</option>
-        </select>
+      
+           <div class="dropdown sort-by-list">
+            <button class="btn esp-btn-white my-1 mr-2 p-1 dropdown-toggle" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Sort By
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" >Last Updated</a>
+                <a class="dropdown-item" >Product Name</a>
+                <a class="dropdown-item" >Product Number</a>
+                <a class="dropdown-item" >Catalog</a>
+            </div>
+        </div>
         <!-- (click)="openEmailSupplier()" -->
         <button type="submit" (click)="openEmailSupplier()" class="btn btn-blue with-btn-gray my-1 pl-3">
             <i class="material-icons">email
