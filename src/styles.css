@@ -41,7 +41,8 @@ label{
 }
 .label-black{
   color: #000 !important;
-  font-weight: 500;
+  font-weight: 600;
+
 }
 .btn-blue{
 background: linear-gradient(180deg, #007DCC 0%, #004ACC 100%);
@@ -371,6 +372,7 @@ box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.09);
 }
 .product-image-thumb img{
 	max-width:100%;
+  max-height: 100%;
 }
 table.category-table{
 	border: 1px solid #e8ebee;
@@ -400,29 +402,41 @@ table.category-table thead{
 .keytag a{
     min-width: 111px;
     height: 28px;
-    background: #FFFFFF;
-    border: 1px solid #0E9AFF;
+
+
     border-radius: 4px;
     display: inline-block;
-    color: #0E9AFF;
+
     text-decoration: none;
     padding-left: 5px;
     padding-right: 0px;
     line-height: 24px;
+
+
+         background: linear-gradient(180deg, #FFFFFF 0%, #F0F0F0 100%);
+border: 1px solid #E1E1E3;
+box-sizing: border-box;
+border-radius: 4px;
+color: #000;
+
 }
 .close-tag{
     display: inline-block;
-    background: #0E9AFF;
-border: 1px solid #0E9AFF;
 box-sizing: border-box;
 border-radius: 0px 4px 4px 0px;
     width: 29px;
    height: 27px;
     float: right;
     text-align: center;
+
 }
 .close-tag i{
-     color: #fff;
+     color: #c31919;
+     font-size: 15px;
+         position: relative;
+    top: 4px;
+    font-weight: 700;
+     
 }
 .product-summary{
     min-height: 213px;
@@ -535,6 +549,20 @@ select.with-btn-gray{
 .clearall-txt{
   font-weight: 400 !important;
   background: none !important;
+}
+.cla{
+  background: linear-gradient(180deg, #007DCC 0%, #004ACC 100%);
+border: 1px solid #004ACC;
+box-sizing: border-box;
+border-radius: 4px;
+  color: #fff;
+  padding-left: 8px;
+    padding-right: 8px;
+    line-height: 16px;
+    height: 20px;
+}
+.cla:hover{
+  color: #fff;
 }
 
 @media only screen

@@ -6,9 +6,9 @@
         <figure><img src="./assets/images/image.png"></figure>
     </div>
     <div class="col text-lg-right text-md-left text-sm-left text-left">
-        <div class="float-lg-left float-md-left pt-3"><label class="label-black">Adding Details for&nbsp;</label> <label
-                class="label-light"> {{currentProduct.ExternalProductId}} / {{currentProduct.Name}} </label> </div>
-        <div class="pt-3 float-lg-right float-md-left">
+        <div class="float-lg-left float-md-left"><label class="label-black">Adding Details for&nbsp;</label> <label
+                class="label-light"> <i>{{currentProduct.ExternalProductId}} / {{currentProduct.Name}} </i></label> </div>
+        <div class=" float-lg-right float-md-left">
             <div class="col"> <a href="#/searchProduct" class="mr-3">Manage My Products</a>
                 <span *ngIf="hasPreviousProduct">
                     <a (click)="getNextOrPreviousProduct(false)" href="#/optimizeProduct"
@@ -154,7 +154,7 @@
                             <span class="d-flex justify-content-between"><label class="label-light ">Seperate keyword
                                     with a
                                     comma</label>
-                                <a href="#">Clear all</a></span>
+                                <a href="#" class="cla">Clear all</a></span>
 
                             <input type="text" class="form-control" />
                         </div>
