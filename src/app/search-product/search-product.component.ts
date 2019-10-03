@@ -196,18 +196,21 @@ export class SearchProductComponent implements OnInit {
     this.seoStatusShowAll = !seeAll;
   }
 
-  changeSort(event) {
+  changeSort(sortBy: string) {
+    this.sortBy = sortBy;
     this.sortByOptions = [];
     this.sortByOptions.push(this.sortBy);
     this.applyFilter();
   }
 
-  clearAll(){
+  clearAll() {
     this.showhideSearch = false;
     this.searchtxt = '';
     this.mdlsearch = '';
     this.selectedFacetTerms = [];
     this.filterParam = [];
+    this.sortBy = 'Last Updated';
+    this.sortByOptions = [];
     this.applyFilter();
   }
 

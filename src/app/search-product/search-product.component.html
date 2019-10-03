@@ -8,7 +8,6 @@
         </figure>
     </div>
     <div class="col text-center text-lg-left text-md-right text-sm-right pt-1  pl-0">
-
         <button type="submit" class="btn btn-blue with-btn-gray my-1 mr-2" (click)="openBulkEdit()">
             <i class="material-icons">edit
             </i>Bulk Edit</button>
@@ -19,10 +18,10 @@
                 Sort By
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" >Last Updated</a>
-                <a class="dropdown-item" >Product Name</a>
-                <a class="dropdown-item" >Product Number</a>
-                <a class="dropdown-item" >Catalog</a>
+                <a class="dropdown-item" [routerLink]="" (click)="changeSort('Last Updated')">Last Updated</a>
+                <a class="dropdown-item" [routerLink]="" (click)="changeSort('Product Name')">Product Name</a>
+                <a class="dropdown-item" [routerLink]="" (click)="changeSort('Product Number')">Product Number</a>
+                <a class="dropdown-item" [routerLink]="" (click)="changeSort('Catalog')">Catalog</a>
             </div>
         </div>
         <!-- (click)="openEmailSupplier()" -->
