@@ -140,6 +140,10 @@ p{
   
   
 }
+.esp-sub-header{
+  height: 61px;
+}
+
 .esp-sub-header button i{
       line-height: 0;
   position: relative;
