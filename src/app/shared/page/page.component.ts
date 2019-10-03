@@ -30,6 +30,8 @@ export class PageComponent implements OnInit {
   }
 
   pageNavigate(pageValue: number) {
+    if (!pageValue)
+      pageValue = 0;
     if (pageValue < 1) {
       this.currPage = 1;
     }
