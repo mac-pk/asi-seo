@@ -44,7 +44,7 @@ export class SeoService {
     //console.log(`SeoService: ${message}`);
   }
 
-  getSuplierProducts(companyId: number, searchText: string, filters: SearchFilterParam[] = null, sortBy: string[] = [], offset: number = 0, limit: number = 10): Observable<any> {
+  getSuplierProducts(companyId: number, searchText: string, filters: SearchFilterParam[] = null, sortBy: string[] = [], offset: number = 0, limit: number = 20): Observable<any> {
     let params = new HttpParams()
       .set("companyid", companyId.toString())
       .set("offset", offset.toString())

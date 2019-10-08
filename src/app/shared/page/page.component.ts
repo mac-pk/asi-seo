@@ -12,6 +12,7 @@ export class PageComponent implements OnInit {
   @Input() currPage: number;
   @Input() totalCount: number;
   @Output() navigate = new EventEmitter();
+  limit: number = 20;
 
   constructor(private _Pager: PagerService) { }
 
@@ -24,7 +25,7 @@ export class PageComponent implements OnInit {
   }
 
   setPage(page: number) {
-    this.pager = this._Pager.getPager(this.totalCount, page);
+    this.pager = this._Pager.getPager(this.totalCount, page, this.limit);
     this.totalPages = this.pager.totalPages;
     this.currPage = this.pager.currentPage;
   }
