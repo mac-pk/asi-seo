@@ -4,56 +4,168 @@
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
-<form #emailSupplierForm="ngForm" (ngSubmit)="send(emailSupplierForm)" novalidate>
-  <div class="modal-body pt-0">
-    <div class="col-12 col-md-12 col-lg-12  float-left p-0">
-      <div class="d-block email-supplier-form py-2">
-        <div class="col-9 p-0">
-          <div class="form-group mb-2">
-            <span class="d-flex justify-content-between">
-              <label class="label-light ">To</label>
-              <a [routerLink]="" (click)="clearAll('TO')">Clear all</a>
-            </span>
-            <input type="text" pattern="^(\s?[^\s,]+@[^\s,]+\.[^\s,]+\s?,)*(\s?[^\s,]+@[^\s,]+\.[^\s,]+)$" required [(ngModel)]="emailSupplier.To" #emailTo="ngModel" name="emailTo" class="form-control form-control-lg">
-            <div *ngIf="emailTo.dirty && emailTo.invalid">
-                <div *ngIf="emailTo.errors.required && !isValid" class="error text-danger"><i class="material-icons">info</i> Required </div>
-                <div *ngIf="emailSupplierForm.submitted && !isValid && emailTo.errors.pattern" class="error text-danger"><i class="material-icons">info</i> Invalid Email Address </div>
+<div class="modal-body pt-0" [hidden]="selectedTemplate">
+  <label class="date">Please select any Template:</label>
+  <div class="clearfix"></div>
+  <div>
+    <button type="button" (click)="selectTemplate(welcome)" class="btn btn-blue my-1 mr-2 p-1">Welcome</button>
+    <button type="button" (click)="selectTemplate(rfr)" class="btn btn-blue my-1 mr-2 p-1">Ready for
+      Review </button>
+    <button type="button" (click)="selectTemplate(complete)" class="btn btn-blue my-1 mr-2 p-1">SEO
+      Complete</button>
+    <button type="button" (click)="selectTemplate(other)" class="btn btn-blue my-1 mr-2 p-1">Other</button>
+  </div>
+</div>
+<div [hidden]="!selectedTemplate">
+  <form #emailSupplierForm="ngForm" (ngSubmit)="send(emailSupplierForm)" novalidate>
+    <div class="modal-body pt-0">
+      <div class="col-12 col-md-12 col-lg-12  float-left p-0">
+        <div class="d-block email-supplier-form py-2">
+          <div class="col-9 p-0">
+            <div class="form-group mb-2">
+              <span class="d-flex justify-content-between">
+                <label class="label-light ">To</label>
+                <a [routerLink]="" (click)="clearAll('TO')">Clear all</a>
+              </span>
+              <input type="text" pattern="^(\s?[^\s,]+@[^\s,]+\.[^\s,]+\s?,)*(\s?[^\s,]+@[^\s,]+\.[^\s,]+)$" required
+                [(ngModel)]="emailSupplier.To" #emailTo="ngModel" name="emailTo" class="form-control form-control-lg">
+              <div *ngIf="emailTo.dirty && emailTo.invalid">
+                <div *ngIf="emailTo.errors.required && !isValid" class="error text-danger"><i
+                    class="material-icons">info</i> Required </div>
+                <div *ngIf="emailSupplierForm.submitted && !isValid && emailTo.errors.pattern"
+                  class="error text-danger">
+                  <i class="material-icons">info</i> Invalid Email Address </div>
+              </div>
+            </div>
+            <div class="form-group mb-2">
+              <span class="d-flex justify-content-between">
+                <label class="label-light">CC</label>
+                <a [routerLink]="" (click)="clearAll('CC')">Clear all</a>
+              </span>
+              <input type="text" pattern="^(\s?[^\s,]+@[^\s,]+\.[^\s,]+\s?,)*(\s?[^\s,]+@[^\s,]+\.[^\s,]+)$"
+                [(ngModel)]="emailSupplier.Cc" name="emailCc" #emailCc="ngModel" class="form-control form-control-lg">
+              <div *ngIf="emailCc.dirty && emailCc.invalid">
+                <div *ngIf="emailSupplierForm.submitted && !isValid && emailCc.errors.pattern"
+                  class="error text-danger">
+                  <i class="material-icons">info</i> Invalid Email Address </div>
+              </div>
+            </div>
+            <div class="form-group mb-2">
+              <span class="d-flex justify-content-between">
+                <label class="label-light ">BCC</label>
+                <a [routerLink]="" (click)="clearAll('BCC')">Clear all</a>
+              </span>
+              <input type="text" pattern="^(\s?[^\s,]+@[^\s,]+\.[^\s,]+\s?,)*(\s?[^\s,]+@[^\s,]+\.[^\s,]+)$"
+                [(ngModel)]="emailSupplier.Bcc" #emailBCc="ngModel" name="emailBCc"
+                class="form-control form-control-lg">
+              <div *ngIf="emailBCc.dirty && emailBCc.invalid">
+                <div *ngIf="emailSupplierForm.submitted && !isValid && emailBCc.errors.pattern"
+                  class="error text-danger">
+                  <i class="material-icons">info</i> Invalid Email Address </div>
+              </div>
+            </div>
+            <div class="form-group mb-2">
+              <span class="d-flex justify-content-between">
+                <label class="label-light ">Subject</label>
+              </span>
+              <input type="text" [(ngModel)]="emailSupplier.Subject" name="emailSubject"
+                class="form-control form-control-lg">
             </div>
           </div>
+          <!-- apikey -->
+          <!-- macrosoftinc.com -- 6qm95oqy9u3jt5kuhy9ge4mczyd8l7w9diz52rfo8yeth8y3 -->
           <div class="form-group mb-2">
-            <span class="d-flex justify-content-between">
-              <label class="label-light">CC</label>
-              <a [routerLink]="" (click)="clearAll('CC')">Clear all</a>
-            </span>
-            <input type="text" pattern="^(\s?[^\s,]+@[^\s,]+\.[^\s,]+\s?,)*(\s?[^\s,]+@[^\s,]+\.[^\s,]+)$" [(ngModel)]="emailSupplier.Cc" name="emailCc" #emailCc="ngModel" class="form-control form-control-lg">
-            <div *ngIf="emailCc.dirty && emailCc.invalid">
-                <div *ngIf="emailSupplierForm.submitted && !isValid && emailCc.errors.pattern" class="error text-danger"><i class="material-icons">info</i> Invalid Email Address </div>
-            </div>
+            <editor id="body" apiKey="6qm95oqy9u3jt5kuhy9ge4mczyd8l7w9diz52rfo8yeth8y3" [(ngModel)]="emailSupplier.Body" name="body"
+              initialValue="{{ emailSupplier.Body }}" [init]="initTinyMCE()"></editor>
           </div>
-          <div class="form-group mb-2">
-            <span class="d-flex justify-content-between">
-              <label class="label-light ">BCC</label>
-              <a [routerLink]="" (click)="clearAll('BCC')">Clear all</a>
-            </span>
-            <input type="text" pattern="^(\s?[^\s,]+@[^\s,]+\.[^\s,]+\s?,)*(\s?[^\s,]+@[^\s,]+\.[^\s,]+)$" [(ngModel)]="emailSupplier.Bcc" #emailBCc="ngModel" name="emailBCc" class="form-control form-control-lg">
-            <div *ngIf="emailBCc.dirty && emailBCc.invalid">
-                <div *ngIf="emailSupplierForm.submitted && !isValid && emailBCc.errors.pattern" class="error text-danger"><i class="material-icons">info</i> Invalid Email Address </div>
-            </div>
-          </div>
-          <div class="form-group mb-2">
-            <span class="d-flex justify-content-between">
-              <label class="label-light ">Subject</label>
-            </span>
-            <input type="text" [(ngModel)]="emailSupplier.Subject" name="emailSubject" class="form-control form-control-lg">
-          </div>
-        </div>
-        <div class="form-group mb-2">
-          <textarea class="form-control" [(ngModel)]="emailSupplier.Body" name="emailBody" rows="5"></textarea>
         </div>
       </div>
     </div>
-  </div>
-  <div class="modal-footer py-2">
-    <button type="submit" class="btn btn-blue my-1">Send</button>
-  </div>
-</form>
+    <div class="modal-footer py-2">
+      <button type="submit" class="btn btn-blue my-1">Send</button>
+    </div>
+  </form>
+</div>
+
+<!-- HTML Templates -->
+<div id="Welcome" #welcome [hidden]="true">
+  <p>Hi {{ supplier.CompanyName }}</p>
+  <p>Thank you for submitting the information for your Search Engine Optimization order.</p>
+  <p>Our team is scheduled to begin optimizing *Number* products on *Date*</p>
+  <p>During the SEO process, we recommend you don&rsquo;t make changes to your products or data; it may interfere with
+    the accuracy of the optimizations.</p>
+  <p>Our expert team of optimizers will enhance the following fields:</p>
+  <ul>
+    <li><strong>Optimized Description</strong> &ndash; A detailed paragraph describing product features using
+      creative/promotional language.</li>
+    <li><strong>SEO Keywords</strong> &ndash; An extensive list of relevant shapes, sizes, colors, imprint methods,
+      promotional terms, category-based wording and alternative spellings of words related to the product.</li>
+    <li><strong>Summary Description</strong> &ndash; A brief summation of the product (up to 130 characters)</li>
+    <li><strong>Categories</strong> &ndash; We&rsquo;ll review and ensure the existing product categories are accurate
+      and relevant, and add any new ones that may apply.</li>
+    <li><strong>Themes</strong> &ndash; We&rsquo;ll review the existing themes for accuracy and add new ones to help
+      maximize search results.</li>
+  </ul>
+  <p>Pease keep in mind that the best way to increase product exposure is to make sure your product data includes all
+    applicate attributes and information.&nbsp; Review the Product Scorecard regularly to make sure your product data is
+    complete.</p>
+  <p>You will be notified when your optimization is complete.</p>
+  <p><strong>&nbsp;</strong></p>
+  <p>Best Regards,</p>
+  <p>Search Engine Optimization Team</p>
+  <p>Advertising Specialty Institute<sup>&reg; </sup>| Every Step of the Way&trade;&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>Email: <u><a href="mailto:Optimizations@asicentral.com">Optimizations@asicentral.com</a></u></p>
+  <p>Phone: (215) 953-3017</p>
+  <p>Fax: (215) 953-3112</p>
+  <p>Web: <u><a href="http://www.asicentral.com">www.asicentral.com</a></u></p>
+  <p>&nbsp;</p>
+  <p>Access the Industry&rsquo;s #1 Product Sourcing Tool:&nbsp; <a
+      href="http://www.searchesp.com/">www.searchESP.com</a></p>
+</div>
+<div id="ReadyForReview" #rfr [hidden]="true">
+  <p>Good morning/afternoon {{ supplier.CompanyName }}</p>
+  <p>We have completed [XXX products of] your Search Engine Optimization.&nbsp; Please log into XXXXXXXXXXX to access
+    and
+    review the optimized data. Use the comment box to indicate any changes required. &nbsp;Note: Upon approval, the
+    optimized data will automatically publish and be available in ESP within 30 minutes.&nbsp;</p>
+  <p>Should you have any questions or concerns, please contact us.&nbsp; I will be happy to help you.</p>
+  <p>&nbsp;</p>
+  <p>Best Regards,</p>
+  <p>Search Engine Optimization Team</p>
+  <p>Advertising Specialty Institute<sup>&reg; </sup>| Every Step of the Way&trade;&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>Email: <u><a href="mailto:Optimizations@asicentral.com">Optimizations@asicentral.com</a></u></p>
+  <p>Phone: (215) 953-3017</p>
+  <p>Fax: (215) 953-3112</p>
+  <p>Web: <u><a href="http://www.asicentral.com">www.asicentral.com</a></u></p>
+  <p>&nbsp;</p>
+  <p>Access the Industry&rsquo;s #1 Product Sourcing Tool:&nbsp; <a
+      href="http://www.searchesp.com/">www.searchESP.com</a> </p>
+</div>
+<div id="SEOComplete" #complete [hidden]="true">
+  <p>Hi {{ supplier.CompanyName }}</p>
+  <p>Congratulations! The data for your optimized products has been implemented and activated in ESP, and you should
+    start seeing the benefits our of our Search Engine Optimization program!</p>
+  <p>Remember, the best way to increase product exposure is to make sure your product data includes all applicate
+    attributes and information. &nbsp;Review the Product Scorecard regularly to see where your product data can use
+    improvement for search-ability and order-ability.&nbsp;</p>
+  <p>On the Product Scorecard will a number will display next to each attribute where data is missing.&nbsp; Just click
+    the link and you will be taken to those products with missing information.&nbsp; Complete this information to ensure
+    that your products are the most searchable and orderable.</p>
+  <p>Please let me know if you have any questions.</p>
+  <p>&nbsp;</p>
+  <p>Best Regards,</p>
+  <p>Search Engine Optimization Team</p>
+  <p>Advertising Specialty Institute<sup>&reg; </sup>| Every Step of the Way&trade;&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>Email: <u><a href="mailto:Optimizations@asicentral.com">Optimizations@asicentral.com</a></u></p>
+  <p>Phone: (215) 953-3017</p>
+  <p>Fax: (215) 953-3112</p>
+  <p>Web: <u><a href="http://www.asicentral.com">www.asicentral.com</a></u></p>
+  <p>&nbsp;</p>
+  <p>Access the Industry&rsquo;s #1 Product Sourcing Tool:&nbsp; <a
+      href="http://www.searchesp.com/">www.searchESP.com</a></p>
+</div>
+<div id="other" #other [hidden]="true">
+</div>

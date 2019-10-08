@@ -11,8 +11,8 @@
         <button type="submit" class="btn btn-blue with-btn-gray my-1 mr-2" (click)="openBulkEdit()">
             <i class="material-icons">edit
             </i>Bulk Edit</button>
-      
-           <div class="dropdown sort-by-list">
+
+        <div class="dropdown sort-by-list">
             <button class="btn esp-btn-white my-1 mr-2 p-1 dropdown-toggle" type="button" id="dropdownMenuButton"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Sort By
@@ -178,6 +178,9 @@
                         <p>
                             <span class="label-black">Last updated by: </span>{{product.LastUpdatedBy}} on
                             {{product.LastUpdateDateUtc | date}}</p>
+                            <br>
+                        <p>
+                            {{product.Description}}</p>
 
                     </div>
 

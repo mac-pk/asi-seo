@@ -4,6 +4,7 @@ export class SearchProduct {
         this.SEOStatus = product.SEOStatus;
         this.ProductStatus = product.ProductStatus;
         this.Name = product.Name;
+        this.Description = product.Description;
         this.PublishDateUtc = product.PublishDateUtc;
         this.PrimaryImageUrl = product.PrimaryImageUrl;
         this.ExternalProductId = product.ExternalProductId;
@@ -16,6 +17,7 @@ export class SearchProduct {
     SEOStatus: string;
     ProductStatus: string;
     Name: string;
+    Description: string;
     PublishDateUtc: string;
     PrimaryImageUrl: string;
     ExternalProductId: string;

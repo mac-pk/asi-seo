@@ -64,7 +64,7 @@ export class SearchSupplierComponent implements OnInit {
   }
   emailSupplier(supplier: ISupplier) {
     if (supplier) {
-      let options: NgbModalOptions = { backdrop: 'static', size: 'lg', scrollable: true, centered: true };
+      let options: NgbModalOptions = { backdrop: 'static', size: 'xl', scrollable: true };
       const modalRef = this.modalService.open(EmailSupplierModalComponent, options);
       modalRef.componentInstance.supplier = supplier;
 

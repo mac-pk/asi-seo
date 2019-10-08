@@ -13,6 +13,7 @@ export class EmailSupplierModalComponent implements OnInit {
   @Input() supplier;
   emailSupplier: EmailSupplier;
   isValid: boolean = false;
+  selectedTemplate: string = '';
 
   constructor(
     public modal: NgbActiveModal,
@@ -23,6 +24,16 @@ export class EmailSupplierModalComponent implements OnInit {
     if (this.supplier) {
       this.emailSupplier = new EmailSupplier(this.supplier);
     }
+  }
+
+  initTinyMCE(): any {
+    var settings = {
+      menubar: false,
+      plugins: 'link',
+      toolbar: 'bold italic backcolor alignleft aligncenter alignright alignjustify bullist numlist outdent indent removeformat'
+    };
+
+    return settings;
   }
 
   close() {
@@ -38,8 +49,16 @@ export class EmailSupplierModalComponent implements OnInit {
       this.emailSupplier.Bcc = '';
   }
 
+  selectTemplate(template: HTMLInputElement) {
+    if (template && template.id) {
+      this.selectedTemplate = template.id;
+      this.emailSupplier.Body = template.innerHTML;
+    } else {
+      this.selectedTemplate = 'Other';
+    }
+  }
+
   send(form: NgForm) {
-    console.log(this.isValid);
     if (form.valid) {
       this.isValid = true;
     } else {
@@ -47,8 +66,8 @@ export class EmailSupplierModalComponent implements OnInit {
       return;
     }
 
-    this.supplierService.sendEmail(this.emailSupplier).subscribe(x => {
-      console.log(x);
-    })
+    // this.supplierService.sendEmail(this.emailSupplier).subscribe(x => {
+    //   console.log(x);
+    // })
   }
 }

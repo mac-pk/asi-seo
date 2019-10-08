@@ -19,6 +19,7 @@ import { NoWhitespaceDirective } from './shared/no-whitespace/no-whitespace.dire
 import { EmailSupplierModalComponent } from './modals/email-supplier-modal/email-supplier-modal.component';
 import { ProductOptimizationComponent } from './product-optimization/product-optimization.component';
 import { ProductCategoryModalComponent } from './modals/product-category-modal/product-category-modal.component';
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ProductCategoryModalComponent } from './modals/product-category-modal/p
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    EditorModule
   ],
   providers: [
     SeoService,
