@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductCategory } from 'src/app/shared/models/optimizeProduct/ProductCategory';
 import { CategoryService } from 'src/app/shared/services/category.service';
+import { EnumCategoryType } from 'src/app/shared/models/optimizeProduct/EnumCategoryType';
 
 @Component({
   selector: 'app-product-category-modal',
@@ -40,8 +41,8 @@ export class ProductCategoryModalComponent implements OnInit {
       this.productCategories = this.inputProductCategories;
       this.allProductCategories = this.inputProductCategories;
 
-      let allProductTypeCategories = this.allProductCategories.filter(x => x.IsSelected && x.IsProductCategoryType);
-      let allEitTypeCategories = this.allProductCategories.filter(x => x.IsSelected && !x.IsProductCategoryType);
+      let allProductTypeCategories = this.allProductCategories.filter(x => x.IsSelected && x.Type == EnumCategoryType.PRODUCT);
+      let allEitTypeCategories = this.allProductCategories.filter(x => x.IsSelected && x.Type == EnumCategoryType.EIT);
 
       if ((this.isProductType && allProductTypeCategories.length < 2) || (!this.isProductType && allEitTypeCategories.length < 5)) {
         this.isProductCategoriesDisabled(this.allProductCategories.filter(x => !x.IsSelected), false);
@@ -65,7 +66,12 @@ export class ProductCategoryModalComponent implements OnInit {
     //let allProductTypeCategories = this.productCategories.filter(x => x.IsSelected && x.IsProductCategoryType);
     //let allEitTypeCategories = this.productCategories.filter(x => x.IsSelected && !x.IsProductCategoryType);
 
-    productCategory.IsProductCategoryType = this.isProductType;
+    if (this.isProductType) {
+      productCategory.Type = EnumCategoryType.PRODUCT;
+    } else {
+      productCategory.Type = EnumCategoryType.EIT;
+    }
+    
 
     if (productCategory.IsSelected) {
       this.selectedCategoryCount += 1;
@@ -107,10 +113,9 @@ export class ProductCategoryModalComponent implements OnInit {
 
   onSearchChange(searchText: string) {
     let selectedCategories = this.productCategories.filter(x => x.IsSelected);
-    debugger;
 
     for (var i = 0; i < selectedCategories.length; i++) {
-      let index = this.allProductCategories.findIndex(x => x.Code === selectedCategories[i].Code);
+      let index = this.allProductCategories.findIndex(x => x.Value === selectedCategories[i].Value);
       this.allProductCategories[index].IsSelected = true;
     }
 
@@ -119,6 +124,6 @@ export class ProductCategoryModalComponent implements OnInit {
   }
 
   filterByValue(array: ProductCategory[], value) {
-    return array.filter((data) => JSON.stringify(data.Name).toLowerCase().indexOf(value.toLowerCase()) !== -1);
+    return array.filter((data) => JSON.stringify(data.Value).toLowerCase().indexOf(value.toLowerCase()) !== -1);
   }
 }

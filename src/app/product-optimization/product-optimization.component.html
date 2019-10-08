@@ -1,4 +1,4 @@
-<div *ngIf="currentProduct" class="row esp-sub-header pt-2">
+<div class="row esp-sub-header pt-2">
     <div *ngIf="isLoading" class="progress-img d-flex text-center">
         <img src="assets/images/esp-loader-genreal.gif" class="justify-content-center align-self-center mx-auto">
     </div>
@@ -7,29 +7,28 @@
     </div>
     <div class="col text-lg-right text-md-left text-sm-left text-left">
         <div class="float-lg-left float-md-left"><label class="label-black">Adding Details for&nbsp;</label> <label
-                class="label-light"> <i>{{currentProduct.ExternalProductId}} / {{currentProduct.Name}} </i></label> </div>
+                class="label-light"> <i>{{currentProduct.ExternalProductId}} / {{currentProduct.Name}} </i></label>
+        </div>
         <div class=" float-lg-right float-md-left">
             <div class="col"> <a href="#/searchProduct" class="mr-3">Manage My Products</a>
                 <span *ngIf="hasPreviousProduct">
-                    <a (click)="getNextOrPreviousProduct(false)" href="#/optimizeProduct"
-                        class="mr-3">Previous Product</a>
+                    <a (click)="getNextOrPreviousProduct(false)" href="#/optimizeProduct" class="mr-3">Previous
+                        Product</a>
                 </span>
                 <span *ngIf="!hasPreviousProduct">
                     <a class="mr-3">Previous Product</a>
-
                 </span>
                 <span *ngIf="hasNextProduct">
-                    <a (click)="getNextOrPreviousProduct(true)" href="#/optimizeProduct"
-                        class="mr-3">Next Product</a>
+                    <a (click)="getNextOrPreviousProduct(true)" href="#/optimizeProduct" class="mr-3">Next Product</a>
                 </span>
                 <span *ngIf="!hasNextProduct">
                     <a class="mr-3">Next Product</a>
-
                 </span>
                 <a href="#/searchProduct"> Cancel and Exit</a>
             </div>
             <div class="col"> <label class="label-black">{{supplier.CompanyName}}</label> <label
-                    class="label-red">&nbsp;asi/{{supplier.AsiNumber}}</label><label class="label-black">&nbsp;({{supplier.CountryCode}})</label></div>
+                    class="label-red">&nbsp;asi/{{supplier.AsiNumber}}</label><label
+                    class="label-black">&nbsp;({{supplier.CountryCode}})</label></div>
         </div>
     </div>
 </div>
@@ -39,22 +38,22 @@
             <div class="col-12 col-md-6 col-lg-3">
                 <h5 class="pt-2">Product Optimization</h5>
             </div>
-            <div *ngIf="currentProduct" class="col-12 d-flex flex-row">
+            <div class="col-12 d-flex flex-row">
                 <div class="p-0">
                     <div class="figure product-image-thumb">
-                        <img style="width:114px;height:126px;" 
-                        src="{{ currentProduct.PrimaryImageUrl && currentProduct.PrimaryImageUrl !== '' ? currentProduct.PrimaryImageUrl : './assets/images/no_image.png' }}">
+                        <img style="width:114px;height:126px;"
+                            src="{{ currentProduct.PrimaryImageUrl && currentProduct.PrimaryImageUrl !== '' ? currentProduct.PrimaryImageUrl : './assets/images/no_image.png' }}">
                     </div>
                 </div>
                 <div class="p-3">
-                    <label class="label-black">Product SEO Status:&nbsp;</label><label class="label-light">Approved</label>
+                    <label class="label-black">Product SEO Status:&nbsp;</label>
+                    <label class="label-light">{{ currentProduct.SEOStatus }}</label>
                     <div class="clearfix"></div>
                     <label class="label-dark">XID:&nbsp;</label><label
                         class="label-red">{{currentProduct.ExternalProductId}}</label>
                 </div>
             </div>
-            <div *ngIf="currentProduct"
-                class="col-12 col-md-12 col-sm-12 col-lg-6 float-lg-left float-md-none float-sm-none ">
+            <div class="col-12 col-md-12 col-sm-12 col-lg-6 float-lg-left float-md-none float-sm-none ">
                 <div class="col-12 product-optimization-aside">
                     <h5 class="pt-3">Current Data</h5>
                     <p class="label-black mb-0">Description</p>
@@ -78,30 +77,24 @@
                             </ng-container>
                         </tbody>
                     </table>
-                    <p class="label-black mb-0">Ad Category</p>
-                    <p>NA</p>
-                    <p class="label-black mb-0">EIT Category</p>
-                    <p>NA</p>
                     <p class="label-black mb-0">Product Keywords:</p>
-                    <p>{{productKeywords}}</p>
-                    <p class="label-black mb-0">SEO Keywords</p>
-                    <p>NA</p>
+                    <p>{{productKeywords ? productKeywords : 'N/A'}}</p>
+                    <p class="label-black mb-0">SEO Keywords:</p>
+                    <p>{{seoKeywords ? seoKeywords : 'N/A'}}</p>
                     <p class="label-black mb-0">Advertising Keywords:</p>
-                    <p>NA</p>
-                    <p class="label-black mb-0">Product Theme</p>
-                    <p *ngIf="hasProductThemes">{{currentProduct.ProductThemes}}</p>
-                    <p *ngIf="!hasProductThemes">N/A</p>
+                    <p>{{adKeywords ? adKeywords : 'N/A'}}</p>
+                    <p class="label-black mb-0">Product Theme:</p>
+                    <p *ngIf="hasProductThemes">{{ hasProductThemes ? currentProduct.ProductThemes : 'N/A'}}</p>
                 </div>
             </div>
-            <form (ngSubmit)="saveProduct()" #optimizeForm="ngForm" class="h-100">
-                <div *ngIf="seoProduct"
-                    class="col-12 col-md-12 col-sm-12 col-lg-6 float-lg-left float-md-none float-sm-none ">
+            <form (ngSubmit)="saveSeoProduct()" #optimizeForm="ngForm" class="h-100" autocomplete="off">
+                <div class="col-12 col-md-12 col-sm-12 col-lg-6 float-lg-left float-md-none float-sm-none ">
                     <div class="col-12 product-optimization-aside">
                         <h5 class="pt-3">SEO Data</h5>
                         <p class="label-black mb-0">Optimized Description</p>
                         <div class="form-group">
                             <textarea [(ngModel)]="seoProduct.Description" #description="ngModel" name="description"
-                                required class="form-control" rows="4" maxlength="800"></textarea>
+                                required class="form-control" rows="4" maxlength="800" (click)="onClick()"></textarea>
                             <label class="label-light">{{seoProduct.Description.length}} of 800 characters</label>
                             <div *ngIf="description.invalid && (description.dirty || description.touched)"
                                 class="error text-danger">
@@ -125,9 +118,8 @@
                         </div>
                         <p class="label-black mb-0">Categories</p>
                         <p>Choose up to 2 categories that describe your product.</p>
-                        <button type="submit" (click)="openProductCategories()"
-                            class="btn esp-btn-white my-1 mr-2">Choose a
-                            Category</button>
+                        <button type="button" (click)="openProductCategories()"
+                            class="btn esp-btn-white my-1 mr-2">Choose a Category</button>
                         <table class="table category-table">
                             <thead>
                                 <tr>
@@ -138,27 +130,34 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let category of this.categoryService.getCategories()">
-                                    <td>{{category.Name}}</td>
-                                    <td *ngIf="category.IsProductCategoryType">Product</td>
-                                    <td *ngIf="!category.IsProductCategoryType">EIT</td>
+                                    <td>{{category.Value}}</td>
+                                    <td>{{category.Type}}</td>
                                     <td>
-                                        <a class="remove-searched"><input (click)="removeCategory(category.Code)"
-                                                type="button" /> <i class="material-icons">close</i>
+                                        <a class="remove-searched"><input (click)="removeCategory(category.Value)"
+                                            type="button" /> <i class="material-icons">close</i>
                                         </a>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-                        <p class="label-black mb-0">SEO Keywords </p>
+                        <p class="label-black mb-0">SEO Keywords:</p>
                         <div class="form-group">
                             <span class="d-flex justify-content-between"><label class="label-light ">Seperate keyword
                                     with a
                                     comma</label>
-                                <a href="#" class="cla">Clear all</a></span>
-
-                            <input type="text" class="form-control" />
+                                <button type="button" (click)="openClearAllKeywords()" class="btn btn-blue my-1">Clear
+                                    All</button>
+                            </span>
+                            <span *ngFor="let keyword of seoProduct.SeoKeywords">
+                                <a class="remove-searched">{{keyword}}
+                                    <input (click)="cancelItem(keyword)" type="text" />
+                                    <i class="material-icons">close</i>
+                                </a>
+                            </span>
+                            <input type="text" [(ngModel)]="seoKeyword" name="seoKeyword"
+                                (keyup.enter)="enterKeyword(seoKeyword)" class="form-control" />
                         </div>
-                        <p class="label-black mb-0">Product Theme</p>
+                        <p class="label-black mb-0">Product Theme:</p>
                         <div class="col-12 p-0 keytag mt-2">
                             <a href="">Sports<span class="close-tag"><i class="material-icons">
                                         close
@@ -176,8 +175,8 @@
                 </div>
                 <div class="clearfix"></div>
                 <div class="col-12 text-lg-right text-md-right text-sm-right text-center   mt-1 ">
-                    <button type="submit" class="btn btn-blue cancel my-1 mr-2">Cancel</button>
-                    <button type="submit" class="btn btn-blue my-1 mr-2">Done</button>
+                    <button type="button" class="btn btn-blue cancel my-1 mr-2">Cancel</button>
+                    <button type="button" class="btn btn-blue my-1 mr-2">Done</button>
                     <button type="submit" class="btn btn-blue my-1">Save</button>
                 </div>
                 <div class="clearfix"></div>

@@ -9,8 +9,8 @@ export class CategoryService {
 
   constructor() { }
 
-  setCategories(supplier: ProductCategory[]){
-    this._productCategories = supplier;
+  setCategories(productCategories: ProductCategory[]){
+    this._productCategories = productCategories;
   }
 
   getCategories(): ProductCategory[]{

@@ -20,6 +20,7 @@ import { EmailSupplierModalComponent } from './modals/email-supplier-modal/email
 import { ProductOptimizationComponent } from './product-optimization/product-optimization.component';
 import { ProductCategoryModalComponent } from './modals/product-category-modal/product-category-modal.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { ClearKeywordModalComponent } from './modals/clear-keyword-modal/clear-keyword-modal.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     NoWhitespaceDirective,
     ProductOptimizationComponent,
     EmailSupplierModalComponent,
-    ProductCategoryModalComponent
+    ProductCategoryModalComponent,
+    ClearKeywordModalComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +58,11 @@ import { EditorModule } from '@tinymce/tinymce-angular';
   ]
   ,
   bootstrap: [AppComponent],
-  entryComponents: [BulkEditModalComponent, EmailSupplierModalComponent, ProductCategoryModalComponent],
+  entryComponents: [
+    BulkEditModalComponent, 
+    EmailSupplierModalComponent, 
+    ProductCategoryModalComponent, 
+    ClearKeywordModalComponent],
   exports: [DigitOnlyDirective]
 })
 export class AppModule { }

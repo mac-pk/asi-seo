@@ -2,15 +2,20 @@ import { IProductKeywords } from './IProductKeywords';
 import { ProductCategory } from './ProductCategory';
 
 export class OptimizeProduct {
-    constructor(product: any) {
-        this.ExternalProductId = product.ExternalProductId;
-        this.CompanyId = product.CompanyId;
-        this.Name = product.Name;
-        this.Description = product.Description;
-        this.Summary = product.Summary;
-        this.ProductThemes = product.ProductThemes;
-        this.ProductKeywords = product.ProductKeywords;
-        this.ProductCategories = product.ProductCategories;
+    constructor(externalProductId: string,
+        companyId: number,
+        name: string,
+        description: string,
+        summary: string
+        ) {
+        this.ExternalProductId = externalProductId;
+        this.CompanyId = companyId;
+        this.Name = name;
+        this.Description = description;
+        this.Summary = summary;
+        // this.ProductThemes = product.ProductThemes;
+        // this.ProductKeywords = product.ProductKeywords;
+        // this.ProductCategories = product.ProductCategories;
     };
     
     ExternalProductId: string;
@@ -21,6 +26,8 @@ export class OptimizeProduct {
     ProductThemes: string[];
     ProductKeywords: IProductKeywords[];
     ProductCategories: ProductCategory[];
+    SeoKeywords: string[] = [];
+    SEOStatus: string;
     Number: string = "";
     PrimaryImageUrl: string = "";
 }
