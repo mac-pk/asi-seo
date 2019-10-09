@@ -186,6 +186,7 @@ border: 1px solid #EBE9E9;
   margin-right: 8px;
   
 }
+
 .action-tool-bar{
   background: #F8F8F8;
  border: 1px solid #EBE9E9;
@@ -570,6 +571,42 @@ border-radius: 4px;
   display: inline-block;
 }
 
+.remove-searched:hover
+{
+  text-decoration:underline !important;
+}
+.remove-searched input:hover{
+  cursor: pointer;
+}
+.product-optimization-aside .remove-searched i{
+  top: 1px;
+
+}
+
+@media only screen
+and (max-width: 1050px) {
+  .action-tool-bar label
+  {
+  font-size: 11px;
+}
+.result-content p{
+  font-size: 12px;
+}
+.action-tool-bar{
+  height: auto;
+}
+.result-box label{
+  font-size: 11px;
+}
+.result-box .esp-btn-white{
+  max-width: 62px;
+}
+.esp-sub-header{
+  height: auto;
+}
+
+  }
+
 @media only screen
 and (max-width: 1024px) {
   .section-logo{
@@ -577,6 +614,15 @@ and (max-width: 1024px) {
 }
 
   }
+  @media only screen
+and (max-width: 850px) {
+  .has-bulkedit, .pagination-cont{
+    max-width: none;
+    flex-basis: auto;
+    width: 100%;
+  }
+
+}
 
 /* Portrait iPad*/
 @media only screen 
