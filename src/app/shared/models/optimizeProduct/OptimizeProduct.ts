@@ -13,9 +13,6 @@ export class OptimizeProduct {
         this.Name = name;
         this.Description = description;
         this.Summary = summary;
-        // this.ProductThemes = product.ProductThemes;
-        // this.ProductKeywords = product.ProductKeywords;
-        // this.ProductCategories = product.ProductCategories;
     };
     
     ExternalProductId: string;
