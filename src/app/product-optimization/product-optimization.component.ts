@@ -10,10 +10,13 @@ import { IProductKeywords } from '../shared/models/optimizeProduct/IProductKeywo
 import { SearchProduct } from '../shared/models/searchProduct/SearchProduct';
 import { SupplierService } from '../shared/services/supplier.service';
 import { ISupplier } from '../shared/models/searchSuppliers/ISearchSuppliers';
-import { ClearKeywordModalComponent } from '../modals/clear-keyword-modal/clear-keyword-modal.component';
+import { ClearAllModalComponent } from '../modals/clear-all-modal/clear-all-modal.component';
 import { EnumSeoStatus } from '../shared/models/searchProduct/EnumSeoStatus';
 import { EnumKeywordType } from '../shared/models/optimizeProduct/EnumKeywordType';
 import { EnumCategoryType } from '../shared/models/optimizeProduct/EnumCategoryType';
+import { Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-product-optimization',
@@ -31,17 +34,20 @@ export class ProductOptimizationComponent implements OnInit {
   seoKeywords: string;
   adKeywords: string;
   seoKeyword: string;
+  searchTheme: string;
+  themeSearchFilter: string = "Start With";
   hasSeoProductData: boolean;
   hasProductThemes: boolean;
   hasNextProduct: boolean;
   hasPreviousProduct: boolean;
   isNextOrPreviousClick: boolean;
 
+
   allExternalProductIds: string[] = [];
   productCategories: ProductCategory[] = [];
   selectedCategories: ProductCategory[] = [];
   searchProducts: SearchProduct[] = [];
-  //seoKeywords: IProductKeywords[] = [];
+  themes: string[] = [];
 
   constructor(
     private seoService: SeoService,
@@ -52,6 +58,7 @@ export class ProductOptimizationComponent implements OnInit {
 
   ngOnInit() {
     this.getAllCategories();
+    this.getAllThemes();
     this.supplier = this.supplierService.getSupplier();
     this.populateProductsData();
   }
@@ -90,7 +97,6 @@ export class ProductOptimizationComponent implements OnInit {
 
         this.hasSeoProductData = true;
         this.seoProduct = product;
-        debugger;
         this.loadSeoProduct();
       }
       else {
@@ -111,7 +117,6 @@ export class ProductOptimizationComponent implements OnInit {
           this.hasProductThemes = true;
         }
 
-        product.Number = filteredProduct[0].Name;
         product.PrimaryImageUrl = filteredProduct[0].PrimaryImageUrl;
         this.currentProduct = product;
 
@@ -133,7 +138,12 @@ export class ProductOptimizationComponent implements OnInit {
   }
 
   loadSeoProduct() {
-    this.seoProduct.SeoKeywords = ["abc", "xyz", "123"]; // remove it once seo product is fetch from our api
+    if (!this.hasSeoProductData) {
+      this.seoProduct.SeoKeywords = this.currentProduct.ProductKeywords.filter(function (keyword) {
+        return keyword.Type == EnumKeywordType.SEO;
+      }).map((keywords) => keywords.Value);
+    }
+
     this.loadProductCategories(this.seoProduct);
 
     if (this.seoProduct.ProductCategories.length > 0) {
@@ -223,9 +233,17 @@ export class ProductOptimizationComponent implements OnInit {
   }
 
   getAllCategories() {
-    this.seoService.getProductCategories().subscribe(productCategories => {
-      if (productCategories) {
-        this.productCategories = productCategories.categories.map((category) => new ProductCategory(category));
+    this.seoService.getAllCategories().subscribe(categories => {
+      if (categories) {
+        this.productCategories = categories.categories.map((category) => new ProductCategory(category));
+      }
+    });
+  }
+
+  getAllThemes() {
+    this.seoService.getAllThemes().subscribe(response => {
+      if (response) {
+        this.themes = response.themes;
       }
     });
   }
@@ -245,7 +263,6 @@ export class ProductOptimizationComponent implements OnInit {
   removeCategory(categoryCode: string) {
     this.selectedCategories = this.categoryService.getCategories();
 
-    debugger;
     if (this.selectedCategories.find(x => x.Value == categoryCode)) {
       let selectedCategoryIndex = this.selectedCategories.findIndex(x => x.Value == categoryCode);
 
@@ -260,36 +277,64 @@ export class ProductOptimizationComponent implements OnInit {
     }
   }
 
-  cancelItem(seoKeword: string) {
-    for (var i = 0; i < this.seoProduct.SeoKeywords.length; i++) {
-      if (this.seoProduct.SeoKeywords[i] === seoKeword) {
-        this.seoProduct.SeoKeywords.splice(i, 1);
-        i--;
+  cancelItem(theme: string, isKeyword: boolean) {
+    if (isKeyword) {
+      for (var i = 0; i < this.seoProduct.SeoKeywords.length; i++) {
+        if (this.seoProduct.SeoKeywords[i] === theme) {
+          this.seoProduct.SeoKeywords.splice(i, 1);
+          i--;
+        }
+      }
+    } else {
+      for (var i = 0; i < this.seoProduct.ProductThemes.length; i++) {
+        if (this.seoProduct.ProductThemes[i] === theme) {
+          this.seoProduct.ProductThemes.splice(i, 1);
+          i--;
+        }
       }
     }
   }
 
-  enterKeyword(seoKeword: string) {
-    this.seoProduct.SeoKeywords.push(seoKeword);
+  enterKeyword(seoKewords: string) {
+    let seoKeywordArray = seoKewords.split(',');
+
+    seoKeywordArray.forEach((keyword) => (this.seoProduct.SeoKeywords.push(keyword)));
     this.seoKeyword = "";
   }
 
-  openClearAllKeywords() {
+  openClearAll(isClearKeyword: boolean) {
     let options: NgbModalOptions = { backdrop: 'static', size: 'lg', scrollable: true, centered: true };
-    const clearKeywordModal = this.modalService.open(ClearKeywordModalComponent, options);
+    const clearAllModal = this.modalService.open(ClearAllModalComponent, options);
+    const themeTitle = "Delete All Themes";
+    const keywordTitle = "Delete All Keywords";
+    const themeMessage = "Do you want to delete all themes?";
+    const keywordMessage = "Do you wish to delete all SEO keywords?";
 
-    clearKeywordModal.result.then((result) => {
+    if (isClearKeyword) {
+      clearAllModal.componentInstance.title = keywordTitle;
+      clearAllModal.componentInstance.message = keywordMessage;
+    } else {
+      clearAllModal.componentInstance.title = themeTitle;
+      clearAllModal.componentInstance.message = themeMessage;
+    }
+
+    clearAllModal.result.then((result) => {
       if (result === 'clear') {
-        this.seoProduct.SeoKeywords = [];
+        if (isClearKeyword) {
+          this.seoProduct.SeoKeywords = [];
+        } else {
+          this.seoProduct.ProductThemes = [];
+        }
       }
     }).catch(exc => { });
   }
 
   //https://stackoverflow.com/questions/40503667/how-to-show-a-loader-for-3-sec-and-hide-in-angular-2
+  //http://jsfiddle.net/SUBnz/1/
   //for implementing save successfully blur message
   saveSeoProduct() {
     this.isLoading = true;
-    this.seoService.saveSeoProduct(this.seoProduct).subscribe(saved => {
+    this.seoService.saveSeoProduct(this.seoProduct, !this.hasSeoProductData).subscribe(saved => {
       if (saved) {
         this.isLoading = false;
       }
@@ -298,5 +343,20 @@ export class ProductOptimizationComponent implements OnInit {
 
   onClick() {
     this.currentProduct.SEOStatus = this.seoStausEnum.IPRS;
+  }
+
+  formatter = (result: string) => result.toUpperCase();
+
+  search = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      map(theme => theme === '' ? []
+        : this.themeSearchFilter == 'Start With' ? this.themes.filter(v => v.toLowerCase().startsWith(theme.toLowerCase())).slice(0, 10) :
+          this.themes.filter(v => v.toLowerCase().indexOf(theme.toLowerCase()) > -1).slice(0, 10))
+    )
+
+  themeSelected($event) {
+    this.seoProduct.ProductThemes.push($event.item);
   }
 }
