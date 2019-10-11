@@ -82,7 +82,7 @@ export class SeoService {
 
   getCurrentProduct(externalProductId: string, companyId: number): Observable<OptimizeProduct> {
     let params = new HttpParams()
-    .set("companyId", companyId.toString());
+      .set("companyId", companyId.toString());
 
     return this.http
       .get(environment.apiBaseUrl + "SEOproducts/" + externalProductId, { params })
@@ -99,19 +99,33 @@ export class SeoService {
         return response;
       })
       );
-  }  
-
-  saveSeoProduct(seoProduct: OptimizeProduct): Observable<any> {
-    return this.http.post(environment.seoBaseUrl + "Product", seoProduct, this.httpOptions).pipe(
-      tap((seo: ISeoLogin) => this.log(`Login with username=${seo.Username}`)),
-      catchError(this.handleError<any>('loginSeo'))
-    );
   }
 
-  getProductCategories(): Observable<any> {
+  saveSeoProduct(seoProduct: OptimizeProduct, isNewProduct: boolean): Observable<any> {
+    if (isNewProduct) {
+      return this.http.post(environment.seoBaseUrl + "Product", seoProduct, this.httpOptions).pipe(
+        tap((product: OptimizeProduct) => this.log(`Insert product with ExternalProductId=${product.ExternalProductId}`)),
+        catchError(this.handleError<any>('insertProduct'))
+      );
+    } else {
+      return this.http.put(environment.seoBaseUrl + "Product", seoProduct, this.httpOptions).pipe(
+        tap((product: OptimizeProduct) => this.log(`Update product with ExternalProductId=${product.ExternalProductId}`)),
+        catchError(this.handleError<any>('updateProduct'))
+      );
+    }
+  }
+
+  getAllCategories(): Observable<any> {
     return this.http.get(environment.apiBaseUrl + "lookup/categoriesList")
       .pipe(map((response: Response) => {
         return <any>response;
       }));
-  }  
+  }
+
+  getAllThemes(): Observable<any> {
+    return this.http.get(environment.apiBaseUrl + "lookup/themes")
+      .pipe(map((response: Response) => {
+        return <any>response;
+      }));
+  }
 }

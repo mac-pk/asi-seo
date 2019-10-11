@@ -7,7 +7,7 @@
     </div>
     <div class="col text-lg-right text-md-left text-sm-left text-left">
         <div class="float-lg-left float-md-left"><label class="label-black">Adding Details for&nbsp;</label> <label
-                class="label-light"> <i>{{currentProduct.ExternalProductId}} / {{currentProduct.Name}} </i></label>
+                class="label-light"> <i>{{currentProduct.AsiProdNo}} {{currentProduct.AsiProdNo ? '/' : ''}} {{currentProduct.Name}} </i></label>
         </div>
         <div class=" float-lg-right float-md-left">
             <div class="col"> <a href="#/searchProduct" class="mr-3">Manage My Products</a>
@@ -87,7 +87,7 @@
                     <p *ngIf="hasProductThemes">{{ hasProductThemes ? currentProduct.ProductThemes : 'N/A'}}</p>
                 </div>
             </div>
-            <form (ngSubmit)="saveSeoProduct()" #optimizeForm="ngForm" class="h-100" autocomplete="off">
+            <form (ngSubmit)="saveSeoProduct()" #optimizeForm="ngForm" class="h-100" autocomplete="off" (keydown.enter)="$event.preventDefault()">
                 <div class="col-12 col-md-12 col-sm-12 col-lg-6 float-lg-left float-md-none float-sm-none ">
                     <div class="col-12 product-optimization-aside">
                         <h5 class="pt-3">SEO Data</h5>
@@ -134,7 +134,7 @@
                                     <td>{{category.Type}}</td>
                                     <td>
                                         <a class="remove-searched"><input (click)="removeCategory(category.Value)"
-                                            type="button" /> <i class="material-icons">close</i>
+                                                type="button" /> <i class="material-icons">close</i>
                                         </a>
                                     </td>
                                 </tr>
@@ -145,12 +145,12 @@
                             <span class="d-flex justify-content-between"><label class="label-light ">Seperate keyword
                                     with a
                                     comma</label>
-                                <button type="button" (click)="openClearAllKeywords()" class="btn btn-blue my-1">Clear
+                                <button type="button" [disabled]="seoProduct.SeoKeywords.length == 0" (click)="openClearAll(true)" class="btn btn-blue my-1">Clear
                                     All</button>
                             </span>
                             <span *ngFor="let keyword of seoProduct.SeoKeywords">
                                 <a class="remove-searched">{{keyword}}
-                                    <input (click)="cancelItem(keyword)" type="text" />
+                                    <input (click)="cancelItem(keyword, true)" type="text" />
                                     <i class="material-icons">close</i>
                                 </a>
                             </span>
@@ -158,23 +158,34 @@
                                 (keyup.enter)="enterKeyword(seoKeyword)" class="form-control" />
                         </div>
                         <p class="label-black mb-0">Product Theme:</p>
-                        <div class="col-12 p-0 keytag mt-2">
-                            <a href="">Sports<span class="close-tag"><i class="material-icons">
-                                        close
-                                    </i></span></a>
+                        <div class="form-group">
+                            <span class="d-flex justify-content-between">
+                                <button type="button" [disabled]="seoProduct.ProductThemes.length == 0" (click)="openClearAll(false)" class="btn btn-blue my-1">Clear
+                                    All</button>
+                            </span>
+                            <span *ngFor="let theme of seoProduct.ProductThemes">
+                                <a class="remove-searched">{{theme}}
+                                    <input (click)="cancelItem(theme, false)" type="text" />
+                                    <i class="material-icons">close</i>
+                                </a>
+                            </span>
+                            <input name="searchtxt" id="typeahead-format" type="text" class="form-control"
+                                [(ngModel)]="model" [ngbTypeahead]="search" [resultFormatter]="formatter"
+                                (selectItem)="itemSelected($event)" />
                         </div>
-                        <div class="form-group mt-2">
-                            <input type="text" class="form-control" />
-                        </div>
+                        <hr>
                         <div class="form-group mt-2 col-2 p-0">
-                            <select class="form-control">
+                            <select name="themeddl" class="form-control" [(ngModel)]='optionSelected'
+                                (ngModelChange)='onOptionsSelected($event)'>
+                                <option disabled>Search Filter Options</option>
                                 <option>Start With</option>
+                                <option>Contains</option>
                             </select>
                         </div>
                     </div>
                 </div>
                 <div class="clearfix"></div>
-                <div class="col-12 text-lg-right text-md-right text-sm-right text-center   mt-1 ">
+                <div class="col-12 text-lg-right text-md-right text-sm-right text-center mt-1 ">
                     <button type="button" class="btn btn-blue cancel my-1 mr-2">Cancel</button>
                     <button type="button" class="btn btn-blue my-1 mr-2">Done</button>
                     <button type="submit" class="btn btn-blue my-1">Save</button>

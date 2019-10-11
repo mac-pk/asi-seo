@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ClearKeywordModalComponent } from './clear-keyword-modal.component';
+import { ClearAllModalComponent } from './clear-all-modal.component';
 
 describe('ClearKeywordModalComponent', () => {
-  let component: ClearKeywordModalComponent;
-  let fixture: ComponentFixture<ClearKeywordModalComponent>;
+  let component: ClearAllModalComponent;
+  let fixture: ComponentFixture<ClearAllModalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ClearKeywordModalComponent ]
+      declarations: [ ClearAllModalComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ClearKeywordModalComponent);
+    fixture = TestBed.createComponent(ClearAllModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

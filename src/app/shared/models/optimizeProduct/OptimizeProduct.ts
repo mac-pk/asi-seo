@@ -2,7 +2,8 @@ import { IProductKeywords } from './IProductKeywords';
 import { ProductCategory } from './ProductCategory';
 
 export class OptimizeProduct {
-    constructor(externalProductId: string,
+    constructor(
+        externalProductId: string,
         companyId: number,
         name: string,
         description: string,
@@ -20,11 +21,11 @@ export class OptimizeProduct {
     Name: string;
     Description: string;
     Summary: string;
-    ProductThemes: string[];
+    ProductThemes: string[] = [];
     ProductKeywords: IProductKeywords[];
     ProductCategories: ProductCategory[];
     SeoKeywords: string[] = [];
     SEOStatus: string;
-    Number: string = "";
     PrimaryImageUrl: string = "";
+    AsiProdNo: string;
 }

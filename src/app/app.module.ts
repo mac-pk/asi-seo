@@ -20,7 +20,7 @@ import { EmailSupplierModalComponent } from './modals/email-supplier-modal/email
 import { ProductOptimizationComponent } from './product-optimization/product-optimization.component';
 import { ProductCategoryModalComponent } from './modals/product-category-modal/product-category-modal.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
-import { ClearKeywordModalComponent } from './modals/clear-keyword-modal/clear-keyword-modal.component';
+import { ClearAllModalComponent } from './modals/clear-all-modal/clear-all-modal.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,7 @@ import { ClearKeywordModalComponent } from './modals/clear-keyword-modal/clear-k
     ProductOptimizationComponent,
     EmailSupplierModalComponent,
     ProductCategoryModalComponent,
-    ClearKeywordModalComponent
+    ClearAllModalComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +62,7 @@ import { ClearKeywordModalComponent } from './modals/clear-keyword-modal/clear-k
     BulkEditModalComponent, 
     EmailSupplierModalComponent, 
     ProductCategoryModalComponent, 
-    ClearKeywordModalComponent],
+    ClearAllModalComponent],
   exports: [DigitOnlyDirective]
 })
 export class AppModule { }
