@@ -174,10 +174,10 @@
                                     <i class="material-icons">close</i>
                                 </a>
                             </span>
-                            <input data-bind="hasFocus: isSelected" name="searchtxt" id="searchtxt" type="text" class="form-control keyword-sel-text-bx"
+                            <input name="searchtxt" id="searchtxt" type="text" class="form-control keyword-sel-text-bx"
                                 [(ngModel)]="searchTheme" [ngbTypeahead]="search" [resultFormatter]="formatter"
                                 (selectItem)="themeSelected($event)" />
-                                <span data-bind="visible: isSelected">The textbox has focus</span>
+                            
                         </div>
                         <hr>
                         <div class="form-group mt-2 col-2 p-0">
