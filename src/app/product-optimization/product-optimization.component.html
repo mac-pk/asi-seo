@@ -151,7 +151,7 @@
                                     (click)="openClearAll(true)" class="btn btn-blue my-1">Clear
                                     All</button>
                             </span>
-                            <span *ngFor="let keyword of seoProduct.SeoKeywords">
+                            <span class=" e-keyword" *ngFor="let keyword of seoProduct.SeoKeywords">
                                 <a class="remove-searched">{{keyword}}
                                     <input (click)="cancelItem(keyword, true)" type="text" />
                                     <i class="material-icons">close</i>
@@ -162,12 +162,12 @@
                         </div>
                         <p class="label-black mb-0">Product Theme:</p>
                         <div class="form-group">
-                            <span class="d-flex justify-content-between">
+                            <span class="d-flex justify-content-between float-right">
                                 <button type="button" [disabled]="seoProduct.ProductThemes.length == 0"
                                     (click)="openClearAll(false)" class="btn btn-blue my-1">Clear
                                     All</button>
                             </span>
-                            <span *ngFor="let theme of seoProduct.ProductThemes">
+                            <span class=" e-keyword" *ngFor="let theme of seoProduct.ProductThemes">
                                 <a class="remove-searched">{{theme}}
                                     <input (click)="cancelItem(theme, false)" type="text" />
                                     <i class="material-icons">close</i>

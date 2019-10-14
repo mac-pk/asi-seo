@@ -50,7 +50,7 @@ border: 1px solid #004ACC;
 box-sizing: border-box;
 border-radius: 4px;
   color: #fff;
-  min-width: 120px;
+     min-width: 74px;
 height: 30px;
 line-height: 0px;
 
@@ -510,7 +510,7 @@ button:focus{
     left: 0px;
   }
   .remove-searched i {
-    color: #0E9AFF;
+    color: #d20145;
     font-size: 14px;
     margin-top: 5px;
     float: left;
@@ -582,6 +582,25 @@ border-radius: 4px;
   top: 1px;
 
 }
+.e-keyword {
+   display: inline-block;
+   background: linear-gradient(180deg, #FFFFFF 0%, #F0F0F0 100%);
+border: 1px solid #E1E1E3;
+box-sizing: border-box;
+border-radius: 4px;
+margin-right: 5px;
+margin-bottom: 2px;
+}
+.e-keyword .remove-searched{
+  display: inline-block;
+  margin-left: 0px !important;
+  
+}
+.product-optimization-aside .e-keyword .remove-searched i{
+      color: #d20145;
+          top: -1px;
+
+}
 
 @media only screen
 and (max-width: 1050px) {
@@ -599,7 +618,8 @@ and (max-width: 1050px) {
   font-size: 11px;
 }
 .result-box .esp-btn-white{
-  max-width: 62px;
+  max-width: 116px !important;
+    min-width: 64px;
 }
 .esp-sub-header{
   height: auto;
@@ -678,6 +698,12 @@ and (max-width: 850px) {
             max-width: none;
     flex-basis: auto;
     width: 100%;
+      }
+      .side-nav-toolbar{
+          max-width:100% !important;
+    flex-basis: auto;
+    width: 100%;
+
       }
     
 }
