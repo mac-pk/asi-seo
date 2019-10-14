@@ -174,10 +174,10 @@
                                     <i class="material-icons">close</i>
                                 </a>
                             </span>
-                            <input name="searchtxt" id="searchtxt" type="text" class="form-control keyword-sel-text-bx"
+                            <input  name="searchtxt" id="searchtxt" type="text" class="form-control keyword-sel-text-bx"
                                 [(ngModel)]="searchTheme" [ngbTypeahead]="search" [resultFormatter]="formatter"
                                 (selectItem)="themeSelected($event)" />
-                            
+                                
                         </div>
                         <hr>
                         <div class="form-group mt-2 col-2 p-0">
@@ -200,7 +200,7 @@
         </div>
     </div>
 </div>
-<div class="toast esp-toast pr-3 " id="myToast">
+<div class="toast esp-toast pr-3" id="myToast">
 
         <div class="toast-body p-1">
       <i class="material-icons esp-save-sucess-ico float-left mr-2">
