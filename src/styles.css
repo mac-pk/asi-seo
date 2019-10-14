@@ -601,6 +601,9 @@ margin-bottom: 2px;
           top: -1px;
 
 }
+.keyword-sel-text-bx{
+   color: #fff;
+}
 
 @media only screen
 and (max-width: 1050px) {
