@@ -344,6 +344,9 @@ export class ProductOptimizationComponent implements OnInit {
   onClick() {
     this.currentProduct.SEOStatus = this.seoStausEnum.IPRS;
   }
+  testpopup(){
+    alert("test");
+  }
 
   formatter = (result: string) => result.toUpperCase();
 

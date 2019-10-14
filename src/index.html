@@ -42,6 +42,10 @@
         $(".esp-breadcrumb").click(function () {
             $(".side-nav-toolbar").toggle();
         });
+            $(".show-toast").click(function(){
+        $("#myToast").toast({ delay: 3000 });
+        $("#myToast").toast('show');
+    });
     });
 
 

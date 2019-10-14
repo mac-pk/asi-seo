@@ -1,3 +1,4 @@
+
 <div class="row esp-sub-header pt-2">
     <div *ngIf="isLoading" class="progress-img d-flex text-center">
         <img src="assets/images/esp-loader-genreal.gif" class="justify-content-center align-self-center mx-auto">
@@ -173,9 +174,10 @@
                                     <i class="material-icons">close</i>
                                 </a>
                             </span>
-                            <input name="searchtxt" id="searchtxt" type="text" class="form-control keyword-sel-text-bx"
+                            <input data-bind="hasFocus: isSelected" name="searchtxt" id="searchtxt" type="text" class="form-control keyword-sel-text-bx"
                                 [(ngModel)]="searchTheme" [ngbTypeahead]="search" [resultFormatter]="formatter"
                                 (selectItem)="themeSelected($event)" />
+                                <span data-bind="visible: isSelected">The textbox has focus</span>
                         </div>
                         <hr>
                         <div class="form-group mt-2 col-2 p-0">
@@ -191,10 +193,19 @@
                 <div class="col-12 text-lg-right text-md-right text-sm-right text-center mt-1 ">
                     <button type="button" class="btn btn-blue cancel my-1 mr-2">Cancel</button>
                     <button type="button" class="btn btn-blue my-1 mr-2">Done</button>
-                    <button type="submit" class="btn btn-blue my-1">Save</button>
+                    <button type="submit" class="btn btn-blue my-1 show-toast">Save</button>
                 </div>
                 <div class="clearfix"></div>
             </form>
         </div>
     </div>
 </div>
+<div class="toast esp-toast pr-3 " id="myToast">
+
+        <div class="toast-body p-1">
+      <i class="material-icons esp-save-sucess-ico float-left mr-2">
+done
+</i>
+            Product is saved
+        </div>
+    </div>

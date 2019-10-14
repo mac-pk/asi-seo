@@ -604,6 +604,19 @@ margin-bottom: 2px;
 .keyword-sel-text-bx{
    color: #fff;
 }
+.esp-toast{
+  position: fixed;
+  top:10px;
+  right: 10px;
+  z-index: 9;
+  background: #73b573;
+  color: #fff;
+
+}
+.esp-save-sucess-ico{
+  font-size:26px !important;
+  color: #fff;
+}
 
 @media only screen
 and (max-width: 1050px) {
