@@ -502,12 +502,13 @@ button:focus{
   .remove-searched input {
     background: none;
     border: none;
-    position: absolute;
+    position: relative;
     z-index: 1;
     width: 14px;
     height: 14px;
-    top: 8px;
-    left: 0px;
+    top: 0;
+    float: right;
+    right: 0px;
   }
   .remove-searched i {
     color: #d20145;
@@ -516,7 +517,6 @@ button:focus{
     float: left;
     font-weight: 700;
     position:absolute;
-    left:0px;
     top:4px;
   }
 .no-products h5 {
@@ -590,6 +590,15 @@ box-sizing: border-box;
 border-radius: 4px;
 margin-right: 5px;
 margin-bottom: 2px;
+
+}
+.e-keyword:hover {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+
+}
+.e-keyword a:hover{
+   text-decoration: none !important;
+     
 }
 .e-keyword .remove-searched{
   display: inline-block;
@@ -599,6 +608,9 @@ margin-bottom: 2px;
 .product-optimization-aside .e-keyword .remove-searched i{
       color: #d20145;
           top: -1px;
+             position: absolute;
+    right: 3px !important;
+          float: right;
 
 }
 .keyword-sel-text-bx{

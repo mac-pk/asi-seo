@@ -154,8 +154,10 @@
                             </span>
                             <span class=" e-keyword" *ngFor="let keyword of seoProduct.SeoKeywords">
                                 <a class="remove-searched">{{keyword}}
+                                     
                                     <input (click)="cancelItem(keyword, true)" type="text" />
                                     <i class="material-icons">close</i>
+                                   
                                 </a>
                             </span>
                             <input type="text" [(ngModel)]="seoKeyword" name="seoKeyword"
@@ -171,7 +173,9 @@
                             <span class=" e-keyword" *ngFor="let theme of seoProduct.ProductThemes">
                                 <a class="remove-searched">{{theme}}
                                     <input (click)="cancelItem(theme, false)" type="text" />
-                                    <i class="material-icons">close</i>
+                                     <i class="material-icons">close</i>
+                                    
+                                   
                                 </a>
                             </span>
                             <input  name="searchtxt" id="searchtxt" type="text" class="form-control keyword-sel-text-bx"
