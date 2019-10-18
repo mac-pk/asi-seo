@@ -519,6 +519,13 @@ button:focus{
     position:absolute;
     top:4px;
   }
+
+.remove-cat-01 input{
+  position: absolute;
+  top: 5px;
+  right:unset;
+}
+
 .no-products h5 {
   color: #344986;
 }
