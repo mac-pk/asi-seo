@@ -570,10 +570,22 @@ border-radius: 4px;
 .sort-by-list{
   display: inline-block;
 }
-
-.remove-searched:hover
-{
-  text-decoration:underline !important;
+.product-count {
+  width: auto;
+  display:inline-block;
+  font-size: 14px;
+  font-family: 'Open Sans', sans-serif !important;
+  font-weight: 500;
+  color: #212529;
+  margin-left:40px;
+  margin-top:2px;
+}
+  .product-count span {
+    font-weight: 700;
+    color: #0088cc;
+  }
+.remove-searched:hover {
+  text-decoration: underline !important;
 }
 .remove-searched input:hover{
   cursor: pointer;

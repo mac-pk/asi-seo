@@ -8,28 +8,33 @@
         </figure>
     </div>
     <div class="col has-bulkedit text-center text-lg-left text-md-right text-sm-right pt-1  pl-0">
-        <button type="submit" class="btn btn-blue with-btn-gray my-1 mr-2" (click)="openBulkEdit()">
-            <i class="material-icons">edit
-            </i>Bulk Edit</button>
+      <button type="submit" class="btn btn-blue with-btn-gray my-1 mr-2" (click)="openBulkEdit()">
+        <i class="material-icons">
+          edit
+        </i>Bulk Edit
+      </button>
 
-        <div class="dropdown sort-by-list">
-            <button class="btn esp-btn-white my-1 mr-2 p-1 dropdown-toggle" type="button" id="dropdownMenuButton"
+      <div class="dropdown sort-by-list">
+        <button class="btn esp-btn-white my-1 mr-2 p-1 dropdown-toggle" type="button" id="dropdownMenuButton"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Sort By
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" [routerLink]="" (click)="changeSort('Last Updated')">Last Updated</a>
-                <a class="dropdown-item" [routerLink]="" (click)="changeSort('Product Name')">Product Name</a>
-                <a class="dropdown-item" [routerLink]="" (click)="changeSort('Product Number')">Product Number</a>
-                <a class="dropdown-item" [routerLink]="" (click)="changeSort('Catalog')">Catalog</a>
-            </div>
+          Sort By
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" [routerLink]="" (click)="changeSort('Last Updated')">Last Updated</a>
+          <a class="dropdown-item" [routerLink]="" (click)="changeSort('Product Name')">Product Name</a>
+          <a class="dropdown-item" [routerLink]="" (click)="changeSort('Product Number')">Product Number</a>
+          <a class="dropdown-item" [routerLink]="" (click)="changeSort('Catalog')">Catalog</a>
         </div>
-        <!-- (click)="openEmailSupplier()" -->
-        <button type="submit" (click)="openEmailSupplier()" class="btn btn-blue with-btn-gray my-1 pl-3">
-            <i class="material-icons">email
-            </i>Email Supplier</button>
-
+      </div>
+      <!-- (click)="openEmailSupplier()" -->
+      <button type="submit" (click)="openEmailSupplier()" class="btn btn-blue with-btn-gray my-1 pl-3">
+        <i class="material-icons">
+          email
+        </i>Email Supplier
+      </button>
+      <div class="product-count">You have <span>376</span> Products in your Search</div>
     </div>
+    
     <app-page *ngIf='products && products.length > 0' [totalCount]='totalCount' [currPage]='currPage'
         (navigate)="navigatePage($event)">
     </app-page>
