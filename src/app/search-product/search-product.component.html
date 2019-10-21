@@ -8,33 +8,33 @@
         </figure>
     </div>
     <div class="col has-bulkedit text-center text-lg-left text-md-right text-sm-right pt-1  pl-0">
-      <button type="submit" class="btn btn-blue with-btn-gray my-1 mr-2" (click)="openBulkEdit()">
-        <i class="material-icons">
-          edit
-        </i>Bulk Edit
-      </button>
-
-      <div class="dropdown sort-by-list">
-        <button class="btn esp-btn-white my-1 mr-2 p-1 dropdown-toggle" type="button" id="dropdownMenuButton"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Sort By
+        <button type="submit" class="btn btn-blue with-btn-gray my-1 mr-2" (click)="openBulkEdit()">
+            <i class="material-icons">
+                edit
+            </i>Bulk Edit
         </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" [routerLink]="" (click)="changeSort('Last Updated')">Last Updated</a>
-          <a class="dropdown-item" [routerLink]="" (click)="changeSort('Product Name')">Product Name</a>
-          <a class="dropdown-item" [routerLink]="" (click)="changeSort('Product Number')">Product Number</a>
-          <a class="dropdown-item" [routerLink]="" (click)="changeSort('Catalog')">Catalog</a>
+
+        <div class="dropdown sort-by-list">
+            <button class="btn esp-btn-white my-1 mr-2 p-1 dropdown-toggle" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Sort By
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" [routerLink]="" (click)="changeSort('Last Updated')">Last Updated</a>
+                <a class="dropdown-item" [routerLink]="" (click)="changeSort('Product Name')">Product Name</a>
+                <a class="dropdown-item" [routerLink]="" (click)="changeSort('Product Number')">Product Number</a>
+                <a class="dropdown-item" [routerLink]="" (click)="changeSort('Catalog')">Catalog</a>
+            </div>
         </div>
-      </div>
-      <!-- (click)="openEmailSupplier()" -->
-      <button type="submit" (click)="openEmailSupplier()" class="btn btn-blue with-btn-gray my-1 pl-3">
-        <i class="material-icons">
-          email
-        </i>Email Supplier
-      </button>
-      <div class="product-count">You have <span>376</span> Products in your Search</div>
+        <!-- (click)="openEmailSupplier()" -->
+        <button type="submit" (click)="openEmailSupplier()" class="btn btn-blue with-btn-gray my-1 pl-3">
+            <i class="material-icons">
+                email
+            </i>Email Supplier
+        </button>
+        <div class="product-count">You have <span>{{ totalCount }}</span> {{ totalCount <= 1 ? 'Product' : 'Products' }} in your Search</div>
     </div>
-    
+
     <app-page *ngIf='products && products.length > 0' [totalCount]='totalCount' [currPage]='currPage'
         (navigate)="navigatePage($event)">
     </app-page>
@@ -68,13 +68,13 @@
                     <a>Your Search Terms</a>
                     <ul class="side-sub-nav-list">
                         <li *ngIf="showhideSearch" class="pl-3">
-                            <a class="remove-searched">{{searchtxt}} <input (click)="cancelSearch()" type="button" /> <i
-                                    class="material-icons">close</i>
+                            <a [routerLink]="" class="remove-searched" (click)="cancelSearch()">{{searchtxt}} <input
+                                    type="button" /> <i class="material-icons">close</i>
                             </a>
                         </li>
                         <li *ngFor="let selected of selectedFacetTerms" class="pl-3">
-                            <a class="remove-searched">{{selected.Term}} <input (click)="cancelItem(selected)"
-                                    type="button" /> <i class="material-icons">close</i>
+                            <a [routerLink]="" class="remove-searched" (click)="cancelItem(selected)">{{selected.Term}}
+                                <input type="button" /> <i class="material-icons">close</i>
                             </a>
                         </li>
                     </ul>
@@ -183,7 +183,7 @@
                         <p>
                             <span class="label-black">Last updated by: </span>{{product.LastUpdatedBy}} on
                             {{product.LastUpdateDateUtc | date}}</p>
-                            <br>
+                        <br>
                         <p>
                             {{product.Description}}</p>
 
@@ -197,7 +197,8 @@
                     <label>{{ seoStausEnum[product.SEOStatus] ? seoStausEnum[product.SEOStatus] : seoStausEnum.REDY }}</label>
                 </div>
                 <div class="col-2 p-lg-3 p-0 d-flex align-content-center flex-wrap">
-                    <button class="btn esp-btn-white my-1 mr-2 p-1" (click)="viewProduct(product.ExternalProductId)">Start
+                    <button class="btn esp-btn-white my-1 mr-2 p-1"
+                        (click)="viewProduct(product.ExternalProductId)">Start
                         SEO</button>
                     <!-- (click)="viewProduct(product.ExternalProductId)" -->
                 </div>
