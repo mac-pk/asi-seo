@@ -179,8 +179,8 @@
                                 </a>
                             </span>
                             <input  name="searchtxt" id="searchtxt" type="text" class="form-control keyword-sel-text-bx"
-                                [(ngModel)]="searchTheme" [ngbTypeahead]="search" [resultFormatter]="formatter"
-                                (selectItem)="themeSelected($event)" />
+                                [(ngModel)]="searchTheme" #input [ngbTypeahead]="search" [resultFormatter]="formatter"
+                                (selectItem)="themeSelected($event, input)" />
                                 
                         </div>
                         <hr>

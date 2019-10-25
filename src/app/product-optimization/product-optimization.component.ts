@@ -359,7 +359,10 @@ export class ProductOptimizationComponent implements OnInit {
           this.themes.filter(v => v.toLowerCase().indexOf(theme.toLowerCase()) > -1).slice(0, 10))
     )
 
-  themeSelected($event) {
+  themeSelected($event, input) {
+    $event.preventDefault();
     this.seoProduct.ProductThemes.push($event.item);
+    input.value = '';
   }
 }
+ 
