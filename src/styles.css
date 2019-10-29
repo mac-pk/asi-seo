@@ -649,6 +649,17 @@ margin-bottom: 2px;
   color: #fff;
 }
 
+.sticky{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9;
+  background: #fff;
+}
+.sticky + .content {
+  padding-top: 102px;
+}
+
 @media only screen
 and (max-width: 1050px) {
   .action-tool-bar label

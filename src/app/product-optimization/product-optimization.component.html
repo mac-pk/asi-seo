@@ -1,12 +1,13 @@
 
-<div class="row esp-sub-header pt-2">
+
+<div class="row esp-sub-header pt-2 sticky" id="myHeader">
     <div *ngIf="isLoading" class="progress-img d-flex text-center">
         <img src="assets/images/esp-loader-genreal.gif" class="justify-content-center align-self-center mx-auto">
     </div>
     <div class="col-md-2 col-sm-12">
         <figure><img src="./assets/images/image.png"></figure>
     </div>
-    <div class="col text-lg-right text-md-left text-sm-left text-left">
+    <div class="col text-lg-right text-md-left text-sm-left text-left ">
         <div class="float-lg-left float-md-left"><label class="label-black">Adding Details for&nbsp;</label> <label
                 class="label-light"> <i>{{currentProduct.AsiProdNo}} {{currentProduct.AsiProdNo ? '/' : ''}}
                     {{currentProduct.Name}} </i></label>
@@ -34,7 +35,7 @@
         </div>
     </div>
 </div>
-<div class="row h-100">
+<div class="row h-100 content">
     <div class="col-12">
         <div class="d-block border mb-4 pb-4 h-100">
             <div class="col-12 col-md-6 col-lg-3">
