@@ -437,10 +437,10 @@ border-radius: 0px 4px 4px 0px;
      
 }
 .product-summary{
-    min-height: 213px;
+    min-height: 124px;
 }
 .product-supplier{
-        min-height: 165px;
+        min-height:  131px;
         word-break: break-all;
 }
 .product-approval .product-optimization-aside{
