@@ -95,7 +95,7 @@
                 <div class="col-12 col-md-12 col-sm-12 col-lg-6 float-lg-left float-md-none float-sm-none ">
                     <div class="col-12 product-optimization-aside">
                         <h5 class="pt-3">SEO Data</h5>
-                        <p class="label-black mb-0">Optimized Description</p>
+                        <p class="label-black mb-0">Optimized Description<span class="required">Required</span></p>
                         <div class="form-group">
                             <textarea [(ngModel)]="seoProduct.Description" #description="ngModel" name="description"
                                 required class="form-control" rows="4" maxlength="800" (click)="onClick()"></textarea>
@@ -107,7 +107,7 @@
                                 </div>
                             </div>
                         </div>
-                        <p class="label-black mb-0">Optimized Summary</p>
+                        <p class="label-black mb-0">Optimized Summary <span class="required">Required</span></p>
                         <p>Enter an abridged description for quick view and other short description areas</p>
                         <div class="form-group">
                             <textarea [(ngModel)]="seoProduct.Summary" #summary="ngModel" name="summary" required
