@@ -64,7 +64,8 @@
                     <p class="label-black mb-0">Summary</p>
                     <p class="product-summary">{{currentProduct.Summary}}</p>
                     <p class="label-black mb-0">Category</p>
-                    <table class="table category-table">
+                    <div class="table-scroll">
+                           <table class="table category-table">
                         <thead>
                             <tr>
                                 <td>Categories</td>
@@ -80,6 +81,8 @@
                             </ng-container>
                         </tbody>
                     </table>
+                    </div>
+                 
                     <p class="label-black mb-0">Product Keywords:</p>
                     <p>{{productKeywords ? productKeywords : 'N/A'}}</p>
                     <p class="label-black mb-0">SEO Keywords:</p>
@@ -121,10 +124,10 @@
                             </div>
                         </div>
                         <p class="label-black mb-0">Categories</p>
-                        <p>Choose up to 2 categories that describe your product.</p>
-                        <button type="button" (click)="openProductCategories()"
-                            class="btn esp-btn-white my-1 mr-2">Choose a Category</button>
-                        <table class="table category-table">
+                        <p class="m-0">Choose up to 2 categories that describe your product.</p>
+                       
+                               <div class="table-scroll">
+                                         <table class="table category-table">
                             <thead>
                                 <tr>
                                     <td>Categories</td>
@@ -144,6 +147,11 @@
                                 </tr>
                             </tbody>
                         </table>
+                         <button type="button" (click)="openProductCategories()"
+                            class="btn esp-btn-white my-1 mr-2">Choose a Category</button>
+                               </div>
+                  <p class="label-black mb-0">Product Keywords:</p>
+                    <p>Lorum ipsum</p>
                         <p class="label-black mb-0">SEO Keywords:</p>
                         <div class="form-group">
                             <span class="d-flex justify-content-between"><label class="label-light ">Seperate keyword

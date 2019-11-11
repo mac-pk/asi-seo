@@ -388,7 +388,10 @@ table.category-table thead{
     padding: 5px !important;   
     border-bottom: 0px !important;
 }
-
+.table-scroll{
+  height: 179px;
+  overflow-y:auto;
+}
 .category-table i{
     color: #d80000;
     font-size: 19px;
@@ -442,7 +445,8 @@ border-radius: 0px 4px 4px 0px;
      
 }
 .product-summary{
-    min-height: 124px;
+    min-height: 129px;
+    max-height: 129px;
 }
 .product-supplier{
         min-height:  131px;
@@ -662,7 +666,7 @@ margin-bottom: 2px;
   background: #fff;
 }
 .sticky + .content {
-  padding-top: 102px;
+  padding-top: 25px;
 }
 
 @media only screen
