@@ -389,7 +389,7 @@ table.category-table thead{
     border-bottom: 0px !important;
 }
 .table-scroll{
-  height: 179px;
+  max-height:246px;
   overflow-y:auto;
 }
 .category-table i{
@@ -445,12 +445,14 @@ border-radius: 0px 4px 4px 0px;
      
 }
 .product-summary{
-    min-height: 129px;
-    max-height: 129px;
+    min-height: 123px;
+    max-height: 123px;
+    overflow: hidden;
 }
 .product-supplier{
         min-height:  131px;
         word-break: break-all;
+        height: 181px;
 }
 .product-approval .product-optimization-aside{
         min-height: 842px;

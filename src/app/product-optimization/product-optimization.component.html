@@ -63,9 +63,9 @@
                     <p class="product-supplier">{{currentProduct.Description}}</p>
                     <p class="label-black mb-0">Summary</p>
                     <p class="product-summary">{{currentProduct.Summary}}</p>
-                    <p class="label-black mb-0">Category</p>
-                    <div class="table-scroll">
-                           <table class="table category-table">
+                    <p class="label-black mb-0 mt-5">Category</p>
+                    <div class="table-scroll mt-1">
+                           <table class="table category-table mt-1">
                         <thead>
                             <tr>
                                 <td>Categories</td>
@@ -83,7 +83,7 @@
                     </table>
                     </div>
                  
-                    <p class="label-black mb-0">Product Keywords:</p>
+                    <p class="label-black mb-0 mt-5">Product Keywords:</p>
                     <p>{{productKeywords ? productKeywords : 'N/A'}}</p>
                     <p class="label-black mb-0">SEO Keywords:</p>
                     <p>{{seoKeywords ? seoKeywords : 'N/A'}}</p>
@@ -101,7 +101,7 @@
                         <p class="label-black mb-0">Optimized Description<span class="required">Required</span></p>
                         <div class="form-group">
                             <textarea [(ngModel)]="seoProduct.Description" #description="ngModel" name="description"
-                                required class="form-control" rows="4" maxlength="800" (click)="onClick()"></textarea>
+                                required class="form-control" rows="7" maxlength="800" (click)="onClick()"></textarea>
                             <label class="label-light">{{seoProduct.Description.length}} of 800 characters</label>
                             <div *ngIf="description.invalid && (description.dirty || description.touched)"
                                 class="error text-danger">
@@ -147,9 +147,10 @@
                                 </tr>
                             </tbody>
                         </table>
-                         <button type="button" (click)="openProductCategories()"
-                            class="btn esp-btn-white my-1 mr-2">Choose a Category</button>
+                      
                                </div>
+                                  <button type="button" (click)="openProductCategories()"
+                            class="btn esp-btn-white my-1 mr-2">Choose a Category</button>
                   <p class="label-black mb-0">Product Keywords:</p>
                     <p>Lorum ipsum</p>
                         <p class="label-black mb-0">SEO Keywords:</p>
@@ -172,7 +173,7 @@
                             <input type="text" [(ngModel)]="seoKeyword" name="seoKeyword"
                                 (keyup.enter)="enterKeyword(seoKeyword)" class="form-control keyword-sel-text-bx" />
                         </div>
-                        <p class="label-black mb-0">Product Theme:</p>
+                        <p class="label-black mb-0 mt-5">Product Theme:</p>
                         <div class="form-group">
                             <span class="d-flex justify-content-between float-right">
                                 <button type="button" [disabled]="seoProduct.ProductThemes.length == 0"
