@@ -100,8 +100,8 @@
                         <h5 class="pt-3">SEO Data</h5>
                         <p class="label-black mb-0">Optimized Description<span class="required">Required</span></p>
                         <div class="form-group">
-                            <textarea [(ngModel)]="seoProduct.Description" #description="ngModel" name="description"
-                                required class="form-control" rows="7" maxlength="800" (click)="onClick()"></textarea>
+                            <textarea  [(ngModel)]="seoProduct.Description" #description="ngModel" name="description"
+                                required class="form-control optimization-description-area " rows="7" maxlength="800" (click)="onClick()"></textarea>
                             <label class="label-light">{{seoProduct.Description.length}} of 800 characters</label>
                             <div *ngIf="description.invalid && (description.dirty || description.touched)"
                                 class="error text-danger">

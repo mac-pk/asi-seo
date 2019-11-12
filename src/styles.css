@@ -671,7 +671,24 @@ margin-bottom: 2px;
 .sticky + .content {
   padding-top: 25px;
 }
+.optimization-description-area{
+   resize: none
+}
 
+@media only screen
+and (max-width: 1440px) {
+
+  .optimization-description-area{
+     height: 230px !important;
+     resize: none;
+  }
+  .product-supplier{
+        height: 242px !important;
+         resize: none;
+  }
+  
+
+}
 @media only screen
 and (max-width: 1050px) {
   .action-tool-bar label
