@@ -452,7 +452,8 @@ border-radius: 0px 4px 4px 0px;
 .product-supplier{
         min-height:  131px;
         word-break: break-all;
-        height: 181px;
+       height: 173px;
+        overflow: hidden;
 }
 .product-approval .product-optimization-aside{
         min-height: 842px;
