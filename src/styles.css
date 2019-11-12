@@ -671,7 +671,8 @@ margin-bottom: 2px;
 .sticky + .content {
   padding-top: 25px;
 }
-.optimization-description-area{
+.optimization-description-area, .product-optimization-aside textarea
+{
    resize: none
 }
 
